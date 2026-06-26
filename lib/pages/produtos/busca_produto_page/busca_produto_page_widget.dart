@@ -236,7 +236,10 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              itemItem.codigo,
+                                              valueOrDefault<String>(
+                                                itemItem.codigo,
+                                                '0',
+                                              ),
                                               style: FlutterFlowTheme.of(
                                                       context)
                                                   .bodySmall
@@ -270,7 +273,10 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                                                   ),
                                             ),
                                             Text(
-                                              itemItem.descricao,
+                                              valueOrDefault<String>(
+                                                itemItem.descricao,
+                                                'descricao',
+                                              ),
                                               maxLines: 2,
                                               style: FlutterFlowTheme.of(
                                                       context)
@@ -316,8 +322,11 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                                             CrossAxisAlignment.end,
                                         children: [
                                           Text(
-                                            functions
-                                                .formatPreco(itemItem.preco)!,
+                                            valueOrDefault<String>(
+                                              functions
+                                                  .formatPreco(itemItem.preco),
+                                              '0,00',
+                                            ),
                                             style: FlutterFlowTheme.of(context)
                                                 .titleMedium
                                                 .override(
@@ -350,9 +359,12 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                                                 ),
                                           ),
                                           Text(
-                                            functions.formatSaldo(
-                                                itemItem.saldoEstoque,
-                                                itemItem.unidade)!,
+                                            valueOrDefault<String>(
+                                              functions.formatSaldo(
+                                                  itemItem.saldoEstoque,
+                                                  itemItem.unidade),
+                                              '01 UN',
+                                            ),
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(

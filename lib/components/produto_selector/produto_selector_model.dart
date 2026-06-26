@@ -10,8 +10,6 @@ class ProdutoSelectorModel extends FlutterFlowModel<ProdutoSelectorWidget> {
   TextEditingController? selectorPesquisaFieldTextController;
   String? Function(BuildContext, String?)?
       selectorPesquisaFieldTextControllerValidator;
-  // Stores action output result for [Custom Action - PesquisaProduto] action in SelectorBuscarButton widget.
-  String? produtosEncontrados;
 
   @override
   void initState(BuildContext context) {}
