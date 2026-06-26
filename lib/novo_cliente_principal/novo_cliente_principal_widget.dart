@@ -1,4 +1,4 @@
-import '/components/form_field_widget.dart';
+import '/components/form_field/form_field_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';

@@ -1,11 +1,33 @@
+import '/components/botao_menu_home_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'home_page_widget.dart' show HomePageWidget;
 import 'package:flutter/material.dart';
 
 class HomePageModel extends FlutterFlowModel<HomePageWidget> {
-  @override
-  void initState(BuildContext context) {}
+  ///  State fields for stateful widgets in this page.
+
+  // Model for botaoMenuHome component.
+  late BotaoMenuHomeModel botaoMenuHomeModel1;
+  // Model for botaoMenuHome component.
+  late BotaoMenuHomeModel botaoMenuHomeModel2;
+  // Model for botaoMenuHome component.
+  late BotaoMenuHomeModel botaoMenuHomeModel3;
+  // Model for botaoMenuHome component.
+  late BotaoMenuHomeModel botaoMenuHomeModel4;
 
   @override
-  void dispose() {}
+  void initState(BuildContext context) {
+    botaoMenuHomeModel1 = createModel(context, () => BotaoMenuHomeModel());
+    botaoMenuHomeModel2 = createModel(context, () => BotaoMenuHomeModel());
+    botaoMenuHomeModel3 = createModel(context, () => BotaoMenuHomeModel());
+    botaoMenuHomeModel4 = createModel(context, () => BotaoMenuHomeModel());
+  }
+
+  @override
+  void dispose() {
+    botaoMenuHomeModel1.dispose();
+    botaoMenuHomeModel2.dispose();
+    botaoMenuHomeModel3.dispose();
+    botaoMenuHomeModel4.dispose();
+  }
 }

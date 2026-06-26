@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import '/backend/schema/structs/index.dart';
 
+import '/main.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
 import '/index.dart';
@@ -45,7 +46,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: HomePageWidget.routeName,
           path: HomePageWidget.routePath,
-          builder: (context, params) => HomePageWidget(),
+          builder: (context, params) => params.isEmpty
+              ? NavBarPage(initialPage: 'HomePage')
+              : HomePageWidget(),
         ),
         FFRoute(
           name: LoginPageWidget.routeName,
@@ -106,6 +109,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: NovoClienteBancosEObsWidget.routeName,
           path: NovoClienteBancosEObsWidget.routePath,
           builder: (context, params) => NovoClienteBancosEObsWidget(),
+        ),
+        FFRoute(
+          name: ConfiguracaoPageWidget.routeName,
+          path: ConfiguracaoPageWidget.routePath,
+          builder: (context, params) => params.isEmpty
+              ? NavBarPage(initialPage: 'ConfiguracaoPage')
+              : ConfiguracaoPageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

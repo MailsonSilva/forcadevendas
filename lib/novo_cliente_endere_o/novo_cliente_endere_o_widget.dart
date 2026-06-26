@@ -1,5 +1,5 @@
-import '/components/button_widget.dart';
-import '/components/checkbox_widget.dart';
+import '/components/button/button_widget.dart';
+import '/components/checkbox/checkbox_widget.dart';
 import '/components/tab_item_widget.dart';
 import '/components/text_field_widget.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';

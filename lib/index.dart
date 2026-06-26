@@ -19,3 +19,5 @@ export '/novo_cliente_propriet_rio5/novo_cliente_propriet_rio5_widget.dart'
     show NovoClienteProprietRio5Widget;
 export '/novo_cliente_bancos_e_obs/novo_cliente_bancos_e_obs_widget.dart'
     show NovoClienteBancosEObsWidget;
+export '/pages/configuracao_page/configuracao_page_widget.dart'
+    show ConfiguracaoPageWidget;

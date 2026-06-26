@@ -1,3 +1,4 @@
+import '/components/botao_menu_home_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
@@ -50,7 +51,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
           backgroundColor: FlutterFlowTheme.of(context).primary,
           automaticallyImplyLeading: false,
           title: Text(
-            'Page Title',
+            'SWR - Força de Vendas',
             style: FlutterFlowTheme.of(context).headlineMedium.override(
                   font: GoogleFonts.roboto(
                     fontWeight:
@@ -123,6 +124,80 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             ),
                       ),
                     ],
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(),
+                  child: Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            wrapWithModel(
+                              model: _model.botaoMenuHomeModel1,
+                              updateCallback: () => safeSetState(() {}),
+                              child: BotaoMenuHomeWidget(
+                                description: 'Pedidos',
+                                icon: Icon(
+                                  Icons.shopping_cart_outlined,
+                                  color: FlutterFlowTheme.of(context).primary,
+                                  size: 32.0,
+                                ),
+                              ),
+                            ),
+                            wrapWithModel(
+                              model: _model.botaoMenuHomeModel2,
+                              updateCallback: () => safeSetState(() {}),
+                              child: BotaoMenuHomeWidget(
+                                description: 'Clientes',
+                                icon: Icon(
+                                  Icons.people_outline_rounded,
+                                  color: FlutterFlowTheme.of(context).primary,
+                                  size: 32.0,
+                                ),
+                              ),
+                            ),
+                          ].divide(SizedBox(width: 16.0)),
+                        ),
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            wrapWithModel(
+                              model: _model.botaoMenuHomeModel3,
+                              updateCallback: () => safeSetState(() {}),
+                              child: BotaoMenuHomeWidget(
+                                description: 'Estoque',
+                                icon: Icon(
+                                  Icons.storage_rounded,
+                                  color: FlutterFlowTheme.of(context).primary,
+                                  size: 32.0,
+                                ),
+                              ),
+                            ),
+                            wrapWithModel(
+                              model: _model.botaoMenuHomeModel4,
+                              updateCallback: () => safeSetState(() {}),
+                              child: BotaoMenuHomeWidget(
+                                description: 'Ferramentas',
+                                icon: Icon(
+                                  Icons.tune_rounded,
+                                  color: FlutterFlowTheme.of(context).primary,
+                                  size: 32.0,
+                                ),
+                              ),
+                            ),
+                          ].divide(SizedBox(width: 16.0)),
+                        ),
+                      ].divide(SizedBox(height: 16.0)),
+                    ),
                   ),
                 ),
               ),
