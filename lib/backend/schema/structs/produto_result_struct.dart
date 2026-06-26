@@ -1,0 +1,203 @@
+// ignore_for_file: unnecessary_getters_setters
+
+import '/backend/schema/util/schema_util.dart';
+
+import 'index.dart';
+import '/flutter_flow/flutter_flow_util.dart';
+
+/// DSL struct ProdutoResult
+class ProdutoResultStruct extends BaseStruct {
+  ProdutoResultStruct({
+    /// ProdutoResult.codigo
+    String? codigo,
+
+    /// ProdutoResult.descricao
+    String? descricao,
+
+    /// ProdutoResult.unidade
+    String? unidade,
+
+    /// ProdutoResult.preco
+    double? preco,
+
+    /// ProdutoResult.saldo_estoque
+    double? saldoEstoque,
+
+    /// ProdutoResult.preco_custo
+    double? precoCusto,
+  })  : _codigo = codigo,
+        _descricao = descricao,
+        _unidade = unidade,
+        _preco = preco,
+        _saldoEstoque = saldoEstoque,
+        _precoCusto = precoCusto;
+
+  // "codigo" field.
+  String? _codigo;
+  String get codigo => _codigo ?? '';
+  set codigo(String? val) => _codigo = val;
+
+  bool hasCodigo() => _codigo != null;
+
+  // "descricao" field.
+  String? _descricao;
+  String get descricao => _descricao ?? '';
+  set descricao(String? val) => _descricao = val;
+
+  bool hasDescricao() => _descricao != null;
+
+  // "unidade" field.
+  String? _unidade;
+  String get unidade => _unidade ?? '';
+  set unidade(String? val) => _unidade = val;
+
+  bool hasUnidade() => _unidade != null;
+
+  // "preco" field.
+  double? _preco;
+  double get preco => _preco ?? 0.0;
+  set preco(double? val) => _preco = val;
+
+  void incrementPreco(double amount) => preco = preco + amount;
+
+  bool hasPreco() => _preco != null;
+
+  // "saldo_estoque" field.
+  double? _saldoEstoque;
+  double get saldoEstoque => _saldoEstoque ?? 0.0;
+  set saldoEstoque(double? val) => _saldoEstoque = val;
+
+  void incrementSaldoEstoque(double amount) =>
+      saldoEstoque = saldoEstoque + amount;
+
+  bool hasSaldoEstoque() => _saldoEstoque != null;
+
+  // "preco_custo" field.
+  double? _precoCusto;
+  double get precoCusto => _precoCusto ?? 0.0;
+  set precoCusto(double? val) => _precoCusto = val;
+
+  void incrementPrecoCusto(double amount) => precoCusto = precoCusto + amount;
+
+  bool hasPrecoCusto() => _precoCusto != null;
+
+  static ProdutoResultStruct fromMap(Map<String, dynamic> data) =>
+      ProdutoResultStruct(
+        codigo: data['codigo'] as String?,
+        descricao: data['descricao'] as String?,
+        unidade: data['unidade'] as String?,
+        preco: castToType<double>(data['preco']),
+        saldoEstoque: castToType<double>(data['saldo_estoque']),
+        precoCusto: castToType<double>(data['preco_custo']),
+      );
+
+  static ProdutoResultStruct? maybeFromMap(dynamic data) => data is Map
+      ? ProdutoResultStruct.fromMap(data.cast<String, dynamic>())
+      : null;
+
+  Map<String, dynamic> toMap() => {
+        'codigo': _codigo,
+        'descricao': _descricao,
+        'unidade': _unidade,
+        'preco': _preco,
+        'saldo_estoque': _saldoEstoque,
+        'preco_custo': _precoCusto,
+      }.withoutNulls;
+
+  @override
+  Map<String, dynamic> toSerializableMap() => {
+        'codigo': serializeParam(
+          _codigo,
+          ParamType.String,
+        ),
+        'descricao': serializeParam(
+          _descricao,
+          ParamType.String,
+        ),
+        'unidade': serializeParam(
+          _unidade,
+          ParamType.String,
+        ),
+        'preco': serializeParam(
+          _preco,
+          ParamType.double,
+        ),
+        'saldo_estoque': serializeParam(
+          _saldoEstoque,
+          ParamType.double,
+        ),
+        'preco_custo': serializeParam(
+          _precoCusto,
+          ParamType.double,
+        ),
+      }.withoutNulls;
+
+  static ProdutoResultStruct fromSerializableMap(Map<String, dynamic> data) =>
+      ProdutoResultStruct(
+        codigo: deserializeParam(
+          data['codigo'],
+          ParamType.String,
+          false,
+        ),
+        descricao: deserializeParam(
+          data['descricao'],
+          ParamType.String,
+          false,
+        ),
+        unidade: deserializeParam(
+          data['unidade'],
+          ParamType.String,
+          false,
+        ),
+        preco: deserializeParam(
+          data['preco'],
+          ParamType.double,
+          false,
+        ),
+        saldoEstoque: deserializeParam(
+          data['saldo_estoque'],
+          ParamType.double,
+          false,
+        ),
+        precoCusto: deserializeParam(
+          data['preco_custo'],
+          ParamType.double,
+          false,
+        ),
+      );
+
+  @override
+  String toString() => 'ProdutoResultStruct(${toMap()})';
+
+  @override
+  bool operator ==(Object other) {
+    return other is ProdutoResultStruct &&
+        codigo == other.codigo &&
+        descricao == other.descricao &&
+        unidade == other.unidade &&
+        preco == other.preco &&
+        saldoEstoque == other.saldoEstoque &&
+        precoCusto == other.precoCusto;
+  }
+
+  @override
+  int get hashCode => const ListEquality()
+      .hash([codigo, descricao, unidade, preco, saldoEstoque, precoCusto]);
+}
+
+ProdutoResultStruct createProdutoResultStruct({
+  String? codigo,
+  String? descricao,
+  String? unidade,
+  double? preco,
+  double? saldoEstoque,
+  double? precoCusto,
+}) =>
+    ProdutoResultStruct(
+      codigo: codigo,
+      descricao: descricao,
+      unidade: unidade,
+      preco: preco,
+      saldoEstoque: saldoEstoque,
+      precoCusto: precoCusto,
+    );
