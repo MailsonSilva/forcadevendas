@@ -194,16 +194,16 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                     flex: 1,
                     child: Builder(
                       builder: (context) {
-                        final item = _model.resultadoInicial!.toList();
+                        final listaPro = _model.listaProdutos.toList();
 
                         return ListView.separated(
                           padding: EdgeInsets.zero,
                           primary: false,
                           scrollDirection: Axis.vertical,
-                          itemCount: item.length,
+                          itemCount: listaPro.length,
                           separatorBuilder: (_, __) => SizedBox(height: 16.0),
-                          itemBuilder: (context, itemIndex) {
-                            final itemItem = item[itemIndex];
+                          itemBuilder: (context, listaProIndex) {
+                            final listaProItem = listaPro[listaProIndex];
                             return InkWell(
                               splashColor: Colors.transparent,
                               focusColor: Colors.transparent,
@@ -253,86 +253,65 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Expanded(
-                                              flex: 1,
-                                              child: Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        0.0, 0.0, 0.0, 12.0),
-                                                child: Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.end,
-                                                  children: [
-                                                    Text(
-                                                      valueOrDefault<String>(
-                                                        _model
-                                                            .listaProdutos
-                                                            .firstOrNull
-                                                            ?.codigo,
-                                                        '0000',
-                                                      ),
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodySmall
-                                                              .override(
-                                                                font:
-                                                                    GoogleFonts
-                                                                        .roboto(
-                                                                  fontWeight: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodySmall
-                                                                      .fontWeight,
-                                                                  fontStyle: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodySmall
-                                                                      .fontStyle,
-                                                                ),
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .secondaryText,
-                                                                letterSpacing:
-                                                                    0.0,
-                                                                fontWeight: FlutterFlowTheme.of(
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      0.0, 0.0, 0.0, 12.0),
+                                              child: Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.end,
+                                                children: [
+                                                  Text(
+                                                    valueOrDefault<String>(
+                                                      listaProItem.codigo,
+                                                      '000',
+                                                    ),
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodySmall
+                                                        .override(
+                                                          font: GoogleFonts
+                                                              .roboto(
+                                                            fontWeight:
+                                                                FlutterFlowTheme.of(
                                                                         context)
                                                                     .bodySmall
                                                                     .fontWeight,
-                                                                fontStyle: FlutterFlowTheme.of(
+                                                            fontStyle:
+                                                                FlutterFlowTheme.of(
                                                                         context)
                                                                     .bodySmall
                                                                     .fontStyle,
-                                                              ),
+                                                          ),
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryText,
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodySmall
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodySmall
+                                                                  .fontStyle,
+                                                        ),
+                                                  ),
+                                                  Text(
+                                                    valueOrDefault<String>(
+                                                      listaProItem.descricao,
+                                                      'descrição',
                                                     ),
-                                                    Text(
-                                                      valueOrDefault<String>(
-                                                        _model
-                                                            .listaProdutos
-                                                            .firstOrNull
-                                                            ?.descricao,
-                                                        'descricao',
-                                                      ),
-                                                      maxLines: 1,
-                                                      style: FlutterFlowTheme
-                                                              .of(context)
-                                                          .bodyLarge
-                                                          .override(
-                                                            font: GoogleFonts
-                                                                .roboto(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500,
-                                                              fontStyle:
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyLarge
-                                                                      .fontStyle,
-                                                            ),
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .primaryText,
-                                                            letterSpacing: 0.0,
+                                                    maxLines: 1,
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyLarge
+                                                        .override(
+                                                          font: GoogleFonts
+                                                              .roboto(
                                                             fontWeight:
                                                                 FontWeight.w500,
                                                             fontStyle:
@@ -341,12 +320,22 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                                                                     .bodyLarge
                                                                     .fontStyle,
                                                           ),
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                    ),
-                                                  ].divide(
-                                                      SizedBox(width: 12.0)),
-                                                ),
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryText,
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyLarge
+                                                                  .fontStyle,
+                                                        ),
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                  ),
+                                                ].divide(SizedBox(width: 12.0)),
                                               ),
                                             ),
                                             Row(
@@ -476,8 +465,7 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                                               children: [
                                                 Text(
                                                   valueOrDefault<String>(
-                                                    _model.listaProdutos
-                                                        .firstOrNull?.unidade,
+                                                    listaProItem.unidade,
                                                     'UN',
                                                   ),
                                                   style: FlutterFlowTheme.of(
@@ -520,12 +508,9 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                                                           0.0, 0.0, 16.0, 0.0),
                                                   child: Text(
                                                     valueOrDefault<String>(
-                                                      _model
-                                                          .listaProdutos
-                                                          .firstOrNull
-                                                          ?.saldoEstoque
+                                                      listaProItem.saldoEstoque
                                                           .toString(),
-                                                      '0000',
+                                                      '00',
                                                     ),
                                                     style: FlutterFlowTheme.of(
                                                             context)
@@ -565,11 +550,8 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                                                   valueOrDefault<String>(
                                                     functions.formatPreco(
                                                         valueOrDefault<double>(
-                                                      _model
-                                                          .listaProdutos
-                                                          .firstOrNull
-                                                          ?.precoCusto,
-                                                      0.0,
+                                                      listaProItem.preco,
+                                                      00.0,
                                                     )),
                                                     '0,00',
                                                   ),
