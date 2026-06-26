@@ -25,24 +25,25 @@ Future<List<ProdutoResultStruct>> buscaProduto(
 
     if (filtro.trim().isNotEmpty) {
       final filtroLike = '%${filtro.toUpperCase()}%';
-      // Ajustado para os campos corretos da cadpro00
       whereClause =
-          'WHERE UPPER(pro00_codigo) LIKE ? OR UPPER(pro00_descri) LIKE ?';
+          'WHERE UPPER(p.pro00_codigo) LIKE ? OR UPPER(p.pro00_descri) LIKE ?';
       whereArgs = [filtroLike, filtroLike];
     }
 
-    // Query atualizada: Tabela cadpro00 e valores zerados provisórios para preço/estoque
+    // Query unindo cadpro00 (p), estpcopro00 (t) e estpro00 (e)
     final String query = '''
       SELECT 
-        pro00_codigo, 
-        pro00_descri, 
-        pro00_unidad, 
-        0 AS preco_venda, 
-        0 AS saldo_disponivel, 
-        0 AS preco_custo 
-      FROM cadpro00 
+        p.pro00_codigo, 
+        p.pro00_descri, 
+        p.pro00_unidad, 
+        COALESCE(t.pro00_pcosub, 0) AS preco_venda, 
+        (COALESCE(e.pro00_qtdest, 0) - COALESCE(e.pro00_qtdpen, 0)) AS saldo_disponivel, 
+        COALESCE(t.pro00_pcocus, 0) AS preco_custo 
+      FROM cadpro00 p
+      LEFT JOIN estpcopro00 t ON p.pro00_codigo = t.pro00_codpro
+      LEFT JOIN estpro00 e ON p.pro00_codigo = e.pro00_codpro
       $whereClause
-      ORDER BY pro00_descri 
+      ORDER BY p.pro00_descri 
       LIMIT 100 OFFSET ?
     ''';
 
@@ -51,7 +52,7 @@ Future<List<ProdutoResultStruct>> buscaProduto(
     final List<Map<String, dynamic>> maps = await db.rawQuery(query, whereArgs);
     await db.close();
 
-    // Converte os resultados para o DataType da sua tela
+    // Converte para o seu DataType
     final results = maps
         .map((m) => ProdutoResultStruct(
               codigo: m['pro00_codigo']?.toString() ?? '',
