@@ -1,0 +1,111 @@
+import '/backend/schema/structs/index.dart';
+import '/flutter_flow/flutter_flow_drop_down.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/form_field_controller.dart';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'drop_down_model.dart';
+export 'drop_down_model.dart';
+
+class DropDownWidget extends StatefulWidget {
+  const DropDownWidget({
+    super.key,
+    required this.titulo,
+    required this.placeHolder,
+    required this.lista,
+  });
+
+  final String? titulo;
+  final String? placeHolder;
+  final List<ListaPadraoStruct>? lista;
+
+  @override
+  State<DropDownWidget> createState() => _DropDownWidgetState();
+}
+
+class _DropDownWidgetState extends State<DropDownWidget> {
+  late DropDownModel _model;
+
+  @override
+  void setState(VoidCallback callback) {
+    super.setState(callback);
+    _model.onUpdate();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _model = createModel(context, () => DropDownModel());
+  }
+
+  @override
+  void dispose() {
+    _model.maybeDispose();
+
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Text(
+          valueOrDefault<String>(
+            widget.titulo,
+            'titulo',
+          ),
+          style: FlutterFlowTheme.of(context).labelMedium.override(
+                font: GoogleFonts.roboto(
+                  fontWeight:
+                      FlutterFlowTheme.of(context).labelMedium.fontWeight,
+                  fontStyle: FlutterFlowTheme.of(context).labelMedium.fontStyle,
+                ),
+                color: FlutterFlowTheme.of(context).secondaryText,
+                letterSpacing: 0.0,
+                fontWeight: FlutterFlowTheme.of(context).labelMedium.fontWeight,
+                fontStyle: FlutterFlowTheme.of(context).labelMedium.fontStyle,
+                lineHeight: 1.38,
+              ),
+        ),
+        FlutterFlowDropDown<int>(
+          controller: _model.dropDownValueController ??=
+              FormFieldController<int>(null),
+          options: List<int>.from(widget.lista!.map((e) => e.codigo).toList()),
+          optionLabels: widget.lista!.map((e) => e.descricao).toList(),
+          onChanged: (val) => safeSetState(() => _model.dropDownValue = val),
+          width: 250.0,
+          height: 40.0,
+          textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
+                font: GoogleFonts.roboto(
+                  fontWeight:
+                      FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                  fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                ),
+                letterSpacing: 0.0,
+                fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+              ),
+          hintText: widget.placeHolder,
+          icon: Icon(
+            Icons.keyboard_arrow_down_rounded,
+            color: FlutterFlowTheme.of(context).secondaryText,
+            size: 24.0,
+          ),
+          fillColor: FlutterFlowTheme.of(context).secondaryBackground,
+          elevation: 2.0,
+          borderColor: FlutterFlowTheme.of(context).secondaryText,
+          borderWidth: 1.0,
+          borderRadius: 8.0,
+          margin: EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
+          hidesUnderline: true,
+          isOverButton: false,
+          isSearchable: false,
+          isMultiSelect: false,
+        ),
+      ].divide(SizedBox(height: 4.0)),
+    );
+  }
+}

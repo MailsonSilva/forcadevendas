@@ -11,62 +11,93 @@ import '/backend/schema/structs/index.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
+// Adicione estes argumentos na sua Action:
+// filtro (String), offset (int), linha (String), grupo (String),
+// fabricante (String), marca (String), apenasEstoque (bool), apenasPromocao (bool)
+
 Future<List<ProdutoResultStruct>> buscaProduto(
   String filtro,
   int offset,
+  String filtroLinha,
+  String filtroGrupo,
+  String filtroFabricante,
+  String filtroMarca,
+  bool apenasEstoque,
+  bool apenasPromocao,
+  int codFilial,
 ) async {
   try {
-    final databasesPath = await getDatabasesPath();
-    final path = join(databasesPath, 'dbforcacad001.db');
-    final Database db = await openDatabase(path, readOnly: true);
+    final db =
+        await openDatabase(join(await getDatabasesPath(), 'dbforcacad001.db'));
 
-    String whereClause = '';
-    List<dynamic> whereArgs = [];
+    List<String> condicoes = [];
+    List<dynamic> binds = [];
 
+    // 1. Filtro de Busca (Nome/Código)
     if (filtro.trim().isNotEmpty) {
-      final filtroLike = '%${filtro.toUpperCase()}%';
-      whereClause =
-          'WHERE UPPER(p.pro00_codigo) LIKE ? OR UPPER(p.pro00_descri) LIKE ?';
-      whereArgs = [filtroLike, filtroLike];
+      final termo = '%${filtro.toUpperCase()}%';
+      condicoes.add(
+          '(UPPER(p.pro00_codigo) LIKE ? OR UPPER(p.pro00_descri) LIKE ?)');
+      binds.addAll([termo, termo]);
     }
 
-    // Query unindo cadpro00 (p), estpcopro00 (t) e estpro00 (e)
+    // 2. Filtros Selecionados na Tela
+    if (filtroLinha.isNotEmpty) {
+      condicoes.add('p.pro00_codlin = ?');
+      binds.add(int.parse(filtroLinha));
+    }
+    if (filtroGrupo.isNotEmpty) {
+      condicoes.add('p.pro00_codgrp = ?');
+      binds.add(int.parse(filtroGrupo));
+    }
+    if (filtroFabricante.isNotEmpty) {
+      condicoes.add('p.pro00_codfab = ?');
+      binds.add(int.parse(filtroFabricante));
+    }
+    if (filtroMarca.isNotEmpty) {
+      condicoes.add('p.pro00_codmar = ?');
+      binds.add(int.parse(filtroMarca));
+    }
+
+    // 3. Filtros Lógicos (Estoque e Promoção)
+    if (apenasEstoque) {
+      condicoes.add(
+          '(COALESCE(e.pro00_qtdest, 0) - COALESCE(e.pro00_qtdpen, 0)) > 0');
+    }
+
+    // Filtro de Filial para o Estoque
+    String estoqueJoin =
+        "LEFT JOIN estpro00 e ON e.pro00_codpro = p.pro00_codigo AND e.pro00_codfil = ?";
+    binds.add(codFilial);
+
+    String whereClause =
+        condicoes.isNotEmpty ? 'WHERE ' + condicoes.join(' AND ') : '';
+
     final String query = '''
-      SELECT 
-        p.pro00_codigo, 
-        p.pro00_descri, 
-        p.pro00_unidad, 
-        COALESCE(t.pro00_pcosub, 0) AS preco_venda, 
-        (COALESCE(e.pro00_qtdest, 0) - COALESCE(e.pro00_qtdpen, 0)) AS saldo_disponivel, 
-        COALESCE(t.pro00_pcocus, 0) AS preco_custo 
+      SELECT DISTINCT p.pro00_codigo, p.pro00_descri, p.pro00_unidad,
+             COALESCE(t.pro00_pcosub, 0) AS preco_venda,
+             (COALESCE(e.pro00_qtdest, 0) - COALESCE(e.pro00_qtdpen, 0)) AS saldo
       FROM cadpro00 p
-      LEFT JOIN estpcopro00 t ON p.pro00_codigo = t.pro00_codpro
-      LEFT JOIN estpro00 e ON p.pro00_codigo = e.pro00_codpro
+      LEFT JOIN estpcopro00 t ON t.pro00_codpro = p.pro00_codigo
+      $estoqueJoin
       $whereClause
-      ORDER BY p.pro00_descri 
+      ORDER BY p.pro00_descri
       LIMIT 100 OFFSET ?
     ''';
 
-    whereArgs.add(offset);
-
-    final List<Map<String, dynamic>> maps = await db.rawQuery(query, whereArgs);
+    binds.add(offset);
+    final results = await db.rawQuery(query, binds);
     await db.close();
 
-    // Converte para o seu DataType
-    final results = maps
+    return results
         .map((m) => ProdutoResultStruct(
-              codigo: m['pro00_codigo']?.toString() ?? '',
-              descricao: m['pro00_descri']?.toString() ?? '',
-              unidade: m['pro00_unidad']?.toString() ?? '',
-              preco: (m['preco_venda'] as num?)?.toDouble() ?? 0.0,
-              saldoEstoque: (m['saldo_disponivel'] as num?)?.toDouble() ?? 0.0,
-              precoCusto: (m['preco_custo'] as num?)?.toDouble() ?? 0.0,
+              codigo: m['pro00_codigo'].toString(),
+              descricao: m['pro00_descri'].toString(),
+              preco: (m['preco_venda'] as num).toDouble(),
+              saldoEstoque: (m['saldo'] as num).toDouble(),
             ))
         .toList();
-
-    return results;
   } catch (e) {
-    print('Erro ao pesquisar produto: $e');
     return [];
   }
 }
