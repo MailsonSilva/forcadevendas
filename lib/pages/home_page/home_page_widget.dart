@@ -1,6 +1,7 @@
 import '/components/botao_menu_home_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -69,7 +70,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                 ),
           ),
           actions: [],
-          centerTitle: false,
+          centerTitle: true,
           elevation: 2.0,
         ),
         body: SafeArea(
@@ -138,7 +139,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       children: [
                         Row(
                           mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             wrapWithModel(
                               model: _model.botaoMenuHomeModel1,
@@ -168,17 +169,27 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         ),
                         Row(
                           mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            wrapWithModel(
-                              model: _model.botaoMenuHomeModel3,
-                              updateCallback: () => safeSetState(() {}),
-                              child: BotaoMenuHomeWidget(
-                                description: 'Estoque',
-                                icon: Icon(
-                                  Icons.storage_rounded,
-                                  color: FlutterFlowTheme.of(context).primary,
-                                  size: 32.0,
+                            InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                context.pushNamed(
+                                    BuscaProdutoPageWidget.routeName);
+                              },
+                              child: wrapWithModel(
+                                model: _model.botaoMenuHomeModel3,
+                                updateCallback: () => safeSetState(() {}),
+                                child: BotaoMenuHomeWidget(
+                                  description: 'Estoque',
+                                  icon: Icon(
+                                    Icons.storage_rounded,
+                                    color: FlutterFlowTheme.of(context).primary,
+                                    size: 32.0,
+                                  ),
                                 ),
                               ),
                             ),

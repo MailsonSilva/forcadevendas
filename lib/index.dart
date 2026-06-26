@@ -6,7 +6,8 @@ export '/pages/sincronizacao_page/sincronizacao_page_widget.dart'
     show SincronizacaoPageWidget;
 export '/pages/pedidos_rascunhos_page/pedidos_rascunhos_page_widget.dart'
     show PedidosRascunhosPageWidget;
-export '/pages/estoque_page/estoque_page_widget.dart' show EstoquePageWidget;
+export '/pages/produtos/busca_produto_page/busca_produto_page_widget.dart'
+    show BuscaProdutoPageWidget;
 export '/pages/form_clientes_page/form_clientes_page_widget.dart'
     show FormClientesPageWidget;
 export '/novo_cliente_principal/novo_cliente_principal_widget.dart'

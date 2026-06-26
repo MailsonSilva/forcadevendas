@@ -1,3 +1,4 @@
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/custom_code/actions/index.dart' as actions;
@@ -5,29 +6,29 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'estoque_page_model.dart';
-export 'estoque_page_model.dart';
+import 'busca_produto_page_model.dart';
+export 'busca_produto_page_model.dart';
 
 /// Consulta de estoque e catalogo de produtos com busca SQLite.
-class EstoquePageWidget extends StatefulWidget {
-  const EstoquePageWidget({super.key});
+class BuscaProdutoPageWidget extends StatefulWidget {
+  const BuscaProdutoPageWidget({super.key});
 
-  static String routeName = 'EstoquePage';
+  static String routeName = 'BuscaProdutoPage';
   static String routePath = '/estoque';
 
   @override
-  State<EstoquePageWidget> createState() => _EstoquePageWidgetState();
+  State<BuscaProdutoPageWidget> createState() => _BuscaProdutoPageWidgetState();
 }
 
-class _EstoquePageWidgetState extends State<EstoquePageWidget> {
-  late EstoquePageModel _model;
+class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
+  late BuscaProdutoPageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => EstoquePageModel());
+    _model = createModel(context, () => BuscaProdutoPageModel());
 
     _model.buscaProdutoFieldTextController ??= TextEditingController();
     _model.buscaProdutoFieldFocusNode ??= FocusNode();
@@ -51,16 +52,31 @@ class _EstoquePageWidgetState extends State<EstoquePageWidget> {
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-          automaticallyImplyLeading: true,
+          backgroundColor: FlutterFlowTheme.of(context).primary,
+          automaticallyImplyLeading: false,
+          leading: FlutterFlowIconButton(
+            borderColor: Colors.transparent,
+            borderRadius: 30.0,
+            borderWidth: 1.0,
+            buttonSize: 60.0,
+            icon: Icon(
+              Icons.arrow_back_rounded,
+              color: Colors.white,
+              size: 30.0,
+            ),
+            onPressed: () async {
+              context.pop();
+            },
+          ),
           title: Text(
-            'Estoque / Catálogo',
+            'Pesquisa de Produtos',
             style: FlutterFlowTheme.of(context).titleLarge.override(
                   font: GoogleFonts.roboto(
                     fontWeight: FontWeight.w600,
                     fontStyle:
                         FlutterFlowTheme.of(context).titleLarge.fontStyle,
                   ),
+                  color: FlutterFlowTheme.of(context).secondaryBackground,
                   fontSize: 22.0,
                   letterSpacing: 0.0,
                   fontWeight: FontWeight.w600,
@@ -69,7 +85,7 @@ class _EstoquePageWidgetState extends State<EstoquePageWidget> {
           ),
           actions: [],
           centerTitle: true,
-          elevation: 0.0,
+          elevation: 2.0,
         ),
         body: SafeArea(
           top: true,

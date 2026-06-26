@@ -71,9 +71,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => PedidosRascunhosPageWidget(),
         ),
         FFRoute(
-          name: EstoquePageWidget.routeName,
-          path: EstoquePageWidget.routePath,
-          builder: (context, params) => EstoquePageWidget(),
+          name: BuscaProdutoPageWidget.routeName,
+          path: BuscaProdutoPageWidget.routePath,
+          builder: (context, params) => BuscaProdutoPageWidget(),
         ),
         FFRoute(
           name: FormClientesPageWidget.routeName,

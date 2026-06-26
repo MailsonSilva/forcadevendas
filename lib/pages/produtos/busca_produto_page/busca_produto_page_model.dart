@@ -1,8 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'estoque_page_widget.dart' show EstoquePageWidget;
+import 'busca_produto_page_widget.dart' show BuscaProdutoPageWidget;
 import 'package:flutter/material.dart';
 
-class EstoquePageModel extends FlutterFlowModel<EstoquePageWidget> {
+class BuscaProdutoPageModel extends FlutterFlowModel<BuscaProdutoPageWidget> {
   ///  Local state fields for this page.
 
   String? resultadosJson = '[]';
