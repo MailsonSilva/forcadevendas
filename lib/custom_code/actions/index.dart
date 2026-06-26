@@ -11,3 +11,4 @@ export '/action_code/salvar_cliente_offline.dart' show salvarClienteOffline;
 export '/action_code/pesquisa_cliente.dart' show pesquisaCliente;
 export '/action_code/clean_doc.dart' show cleanDoc;
 export '/action_code/first_access_login.dart' show firstAccessLogin;
+export '/custom_code/actions/busca_produto.dart' show buscaProduto;

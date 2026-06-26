@@ -1,4 +1,4 @@
-import '/components/text_field_widget.dart';
+import '/components/text_field/text_field_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
 import 'novo_cliente_propriet_rio4_widget.dart'

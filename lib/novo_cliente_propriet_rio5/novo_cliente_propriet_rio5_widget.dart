@@ -1,5 +1,5 @@
-import '/components/tab_item_widget.dart';
-import '/components/text_field_widget.dart';
+import '/components/tab_item/tab_item_widget.dart';
+import '/components/text_field/text_field_widget.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';

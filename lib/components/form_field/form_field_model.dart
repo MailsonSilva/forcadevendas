@@ -1,4 +1,4 @@
-import '/components/text_field_widget.dart';
+import '/components/text_field/text_field_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'form_field_widget.dart' show FormFieldWidget;
 import 'package:flutter/material.dart';

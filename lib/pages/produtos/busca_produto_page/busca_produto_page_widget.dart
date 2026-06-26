@@ -1,3 +1,4 @@
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -5,6 +6,7 @@ import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'busca_produto_page_model.dart';
 export 'busca_produto_page_model.dart';
@@ -29,6 +31,20 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => BuscaProdutoPageModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      _model.offsetAtual = 0;
+      safeSetState(() {});
+      _model.resultadoInicial = await actions.buscaProduto(
+        ' ',
+        _model.offsetAtual!,
+      );
+      _model.listaProdutos =
+          _model.resultadoInicial!.toList().cast<ProdutoResultStruct>();
+      _model.offsetAtual = _model.offsetAtual! + 100;
+      safeSetState(() {});
+    });
 
     _model.buscaProdutoFieldTextController ??= TextEditingController();
     _model.buscaProdutoFieldFocusNode ??= FocusNode();
@@ -107,18 +123,22 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                       '_model.buscaProdutoFieldTextController',
                       Duration(milliseconds: 2000),
                       () async {
-                        _model.resultadosBusca = await actions.pesquisaProduto(
+                        _model.resultadosBusca = await actions.buscaProduto(
                           _model.buscaProdutoFieldTextController.text,
+                          0,
                         );
-                        _model.resultadosJson = _model.resultadosBusca;
+                        _model.listaProdutos = _model.resultadosBusca!
+                            .toList()
+                            .cast<ProdutoResultStruct>();
                         safeSetState(() {});
 
                         safeSetState(() {});
                       },
                     ),
+                    textInputAction: TextInputAction.search,
                     obscureText: false,
                     decoration: InputDecoration(
-                      labelText: 'Pesquisar Produto',
+                      labelText: 'Produto',
                       hintText: 'Pesquise por código ou descrição...',
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
@@ -174,10 +194,7 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                     flex: 1,
                     child: Builder(
                       builder: (context) {
-                        final item = functions
-                                .parseProdutos(_model.resultadosJson)
-                                ?.toList() ??
-                            [];
+                        final item = _model.resultadoInicial!.toList();
 
                         return ListView.builder(
                           padding: EdgeInsets.zero,

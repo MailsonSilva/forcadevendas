@@ -1,5 +1,5 @@
-import '/components/tab_item_widget.dart';
-import '/components/text_field_widget.dart';
+import '/components/tab_item/tab_item_widget.dart';
+import '/components/text_field/text_field_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
 import 'novo_cliente_propriet_rio5_widget.dart'
