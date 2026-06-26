@@ -230,7 +230,7 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                                   borderRadius: BorderRadius.circular(8.0),
                                 ),
                                 child: Padding(
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: EdgeInsets.all(12.0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
                                     mainAxisAlignment: MainAxisAlignment.start,
@@ -240,8 +240,8 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                                       ClipRRect(
                                         borderRadius:
                                             BorderRadius.circular(8.0),
-                                        child: Image.network(
-                                          'https://picsum.photos/seed/496/600',
+                                        child: Image.asset(
+                                          'assets/images/fijek_4.png',
                                           width: 70.0,
                                           height: 70.0,
                                           fit: BoxFit.cover,
@@ -267,8 +267,11 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                                                   children: [
                                                     Text(
                                                       valueOrDefault<String>(
-                                                        itemItem.codigo,
-                                                        '0',
+                                                        _model
+                                                            .listaProdutos
+                                                            .firstOrNull
+                                                            ?.codigo,
+                                                        '0000',
                                                       ),
                                                       style:
                                                           FlutterFlowTheme.of(
@@ -304,7 +307,10 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                                                     ),
                                                     Text(
                                                       valueOrDefault<String>(
-                                                        itemItem.descricao,
+                                                        _model
+                                                            .listaProdutos
+                                                            .firstOrNull
+                                                            ?.descricao,
                                                         'descricao',
                                                       ),
                                                       maxLines: 1,
@@ -470,7 +476,8 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                                               children: [
                                                 Text(
                                                   valueOrDefault<String>(
-                                                    itemItem.unidade,
+                                                    _model.listaProdutos
+                                                        .firstOrNull?.unidade,
                                                     'UN',
                                                   ),
                                                   style: FlutterFlowTheme.of(
@@ -513,9 +520,12 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                                                           0.0, 0.0, 16.0, 0.0),
                                                   child: Text(
                                                     valueOrDefault<String>(
-                                                      itemItem.saldoEstoque
+                                                      _model
+                                                          .listaProdutos
+                                                          .firstOrNull
+                                                          ?.saldoEstoque
                                                           .toString(),
-                                                      '0,00',
+                                                      '0000',
                                                     ),
                                                     style: FlutterFlowTheme.of(
                                                             context)
@@ -554,7 +564,13 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                                                 Text(
                                                   valueOrDefault<String>(
                                                     functions.formatPreco(
-                                                        itemItem.preco),
+                                                        valueOrDefault<double>(
+                                                      _model
+                                                          .listaProdutos
+                                                          .firstOrNull
+                                                          ?.precoCusto,
+                                                      0.0,
+                                                    )),
                                                     '0,00',
                                                   ),
                                                   style: FlutterFlowTheme.of(
