@@ -80,9 +80,7 @@ class _DropDownWidgetState extends State<DropDownWidget> {
         ),
         FlutterFlowDropDown<String>(
           controller: _model.dropDownValueController ??=
-              FormFieldController<String>(
-            _model.dropDownValue ??= '',
-          ),
+              FormFieldController<String>(null),
           options: List<String>.from(
               _model.retornoFiltro!.map((e) => e.codigo).toList()),
           optionLabels: _model.retornoFiltro!.map((e) => e.descricao).toList(),
