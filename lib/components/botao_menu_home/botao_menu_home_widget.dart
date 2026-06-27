@@ -43,7 +43,9 @@ class _BotaoMenuHomeWidgetState extends State<BotaoMenuHomeWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return AnimatedContainer(
+      duration: Duration(milliseconds: 100),
+      curve: Curves.easeIn,
       width: 160.0,
       height: 120.0,
       decoration: BoxDecoration(

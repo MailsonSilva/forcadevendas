@@ -7,17 +7,15 @@ import '/flutter_flow/flutter_flow_util.dart';
 
 class ListaPadraoStruct extends BaseStruct {
   ListaPadraoStruct({
-    int? codigo,
+    String? codigo,
     String? descricao,
   })  : _codigo = codigo,
         _descricao = descricao;
 
   // "codigo" field.
-  int? _codigo;
-  int get codigo => _codigo ?? 0;
-  set codigo(int? val) => _codigo = val;
-
-  void incrementCodigo(int amount) => codigo = codigo + amount;
+  String? _codigo;
+  String get codigo => _codigo ?? '';
+  set codigo(String? val) => _codigo = val;
 
   bool hasCodigo() => _codigo != null;
 
@@ -30,7 +28,7 @@ class ListaPadraoStruct extends BaseStruct {
 
   static ListaPadraoStruct fromMap(Map<String, dynamic> data) =>
       ListaPadraoStruct(
-        codigo: castToType<int>(data['codigo']),
+        codigo: data['codigo'] as String?,
         descricao: data['descricao'] as String?,
       );
 
@@ -47,7 +45,7 @@ class ListaPadraoStruct extends BaseStruct {
   Map<String, dynamic> toSerializableMap() => {
         'codigo': serializeParam(
           _codigo,
-          ParamType.int,
+          ParamType.String,
         ),
         'descricao': serializeParam(
           _descricao,
@@ -59,7 +57,7 @@ class ListaPadraoStruct extends BaseStruct {
       ListaPadraoStruct(
         codigo: deserializeParam(
           data['codigo'],
-          ParamType.int,
+          ParamType.String,
           false,
         ),
         descricao: deserializeParam(
@@ -84,7 +82,7 @@ class ListaPadraoStruct extends BaseStruct {
 }
 
 ListaPadraoStruct createListaPadraoStruct({
-  int? codigo,
+  String? codigo,
   String? descricao,
 }) =>
     ListaPadraoStruct(

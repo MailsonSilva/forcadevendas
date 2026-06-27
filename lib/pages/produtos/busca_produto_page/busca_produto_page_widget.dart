@@ -339,6 +339,7 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                                       child: DropDownWidget(
                                         titulo: 'Linha',
                                         placeHolder: 'Todas as linhas',
+                                        nomeFiltro: 'cadlin00',
                                       ),
                                     ),
                                   ],
