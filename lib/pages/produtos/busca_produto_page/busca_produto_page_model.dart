@@ -21,13 +21,13 @@ class BuscaProdutoPageModel extends FlutterFlowModel<BuscaProdutoPageWidget> {
 
   int? offsetAtual = 0;
 
-  String filtroLinha = ' ';
+  String filtroLinha = '';
 
-  String filtroGrupo = ' ';
+  String filtroGrupo = '';
 
-  String filtroMarca = ' ';
+  String filtroMarca = '';
 
-  String filtroFabricante = ' ';
+  String filtroFabricante = '';
 
   bool filtroEstoque = false;
 
