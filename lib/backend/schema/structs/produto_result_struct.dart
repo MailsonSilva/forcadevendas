@@ -25,12 +25,16 @@ class ProdutoResultStruct extends BaseStruct {
 
     /// ProdutoResult.preco_custo
     double? precoCusto,
+    double? estoqueAtual,
+    double? estoquePendente,
   })  : _codigo = codigo,
         _descricao = descricao,
         _unidade = unidade,
         _preco = preco,
         _saldoEstoque = saldoEstoque,
-        _precoCusto = precoCusto;
+        _precoCusto = precoCusto,
+        _estoqueAtual = estoqueAtual,
+        _estoquePendente = estoquePendente;
 
   // "codigo" field.
   String? _codigo;
@@ -81,6 +85,26 @@ class ProdutoResultStruct extends BaseStruct {
 
   bool hasPrecoCusto() => _precoCusto != null;
 
+  // "estoque_atual" field.
+  double? _estoqueAtual;
+  double get estoqueAtual => _estoqueAtual ?? 0.0;
+  set estoqueAtual(double? val) => _estoqueAtual = val;
+
+  void incrementEstoqueAtual(double amount) =>
+      estoqueAtual = estoqueAtual + amount;
+
+  bool hasEstoqueAtual() => _estoqueAtual != null;
+
+  // "estoque_pendente" field.
+  double? _estoquePendente;
+  double get estoquePendente => _estoquePendente ?? 0.0;
+  set estoquePendente(double? val) => _estoquePendente = val;
+
+  void incrementEstoquePendente(double amount) =>
+      estoquePendente = estoquePendente + amount;
+
+  bool hasEstoquePendente() => _estoquePendente != null;
+
   static ProdutoResultStruct fromMap(Map<String, dynamic> data) =>
       ProdutoResultStruct(
         codigo: data['codigo'] as String?,
@@ -89,6 +113,8 @@ class ProdutoResultStruct extends BaseStruct {
         preco: castToType<double>(data['preco']),
         saldoEstoque: castToType<double>(data['saldo_estoque']),
         precoCusto: castToType<double>(data['preco_custo']),
+        estoqueAtual: castToType<double>(data['estoque_atual']),
+        estoquePendente: castToType<double>(data['estoque_pendente']),
       );
 
   static ProdutoResultStruct? maybeFromMap(dynamic data) => data is Map
@@ -102,6 +128,8 @@ class ProdutoResultStruct extends BaseStruct {
         'preco': _preco,
         'saldo_estoque': _saldoEstoque,
         'preco_custo': _precoCusto,
+        'estoque_atual': _estoqueAtual,
+        'estoque_pendente': _estoquePendente,
       }.withoutNulls;
 
   @override
@@ -128,6 +156,14 @@ class ProdutoResultStruct extends BaseStruct {
         ),
         'preco_custo': serializeParam(
           _precoCusto,
+          ParamType.double,
+        ),
+        'estoque_atual': serializeParam(
+          _estoqueAtual,
+          ParamType.double,
+        ),
+        'estoque_pendente': serializeParam(
+          _estoquePendente,
           ParamType.double,
         ),
       }.withoutNulls;
@@ -164,6 +200,16 @@ class ProdutoResultStruct extends BaseStruct {
           ParamType.double,
           false,
         ),
+        estoqueAtual: deserializeParam(
+          data['estoque_atual'],
+          ParamType.double,
+          false,
+        ),
+        estoquePendente: deserializeParam(
+          data['estoque_pendente'],
+          ParamType.double,
+          false,
+        ),
       );
 
   @override
@@ -177,12 +223,22 @@ class ProdutoResultStruct extends BaseStruct {
         unidade == other.unidade &&
         preco == other.preco &&
         saldoEstoque == other.saldoEstoque &&
-        precoCusto == other.precoCusto;
+        precoCusto == other.precoCusto &&
+        estoqueAtual == other.estoqueAtual &&
+        estoquePendente == other.estoquePendente;
   }
 
   @override
-  int get hashCode => const ListEquality()
-      .hash([codigo, descricao, unidade, preco, saldoEstoque, precoCusto]);
+  int get hashCode => const ListEquality().hash([
+        codigo,
+        descricao,
+        unidade,
+        preco,
+        saldoEstoque,
+        precoCusto,
+        estoqueAtual,
+        estoquePendente
+      ]);
 }
 
 ProdutoResultStruct createProdutoResultStruct({
@@ -192,6 +248,8 @@ ProdutoResultStruct createProdutoResultStruct({
   double? preco,
   double? saldoEstoque,
   double? precoCusto,
+  double? estoqueAtual,
+  double? estoquePendente,
 }) =>
     ProdutoResultStruct(
       codigo: codigo,
@@ -200,4 +258,6 @@ ProdutoResultStruct createProdutoResultStruct({
       preco: preco,
       saldoEstoque: saldoEstoque,
       precoCusto: precoCusto,
+      estoqueAtual: estoqueAtual,
+      estoquePendente: estoquePendente,
     );

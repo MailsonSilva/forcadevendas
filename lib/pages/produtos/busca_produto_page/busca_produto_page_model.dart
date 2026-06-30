@@ -38,14 +38,14 @@ class BuscaProdutoPageModel extends FlutterFlowModel<BuscaProdutoPageWidget> {
   ///  State fields for stateful widgets in this page.
 
   // Stores action output result for [Custom Action - buscaProduto] action in BuscaProdutoPage widget.
-  List<ProdutoResultStruct>? resultadoInicial;
+  List<ProdutoResultStruct>? resultadoOnLoad;
   // State field(s) for BuscaProdutoField widget.
   FocusNode? buscaProdutoFieldFocusNode;
   TextEditingController? buscaProdutoFieldTextController;
   String? Function(BuildContext, String?)?
       buscaProdutoFieldTextControllerValidator;
   // Stores action output result for [Custom Action - buscaProduto] action in BuscaProdutoField widget.
-  List<ProdutoResultStruct>? resultadosBusca;
+  List<ProdutoResultStruct>? resultadoBusca;
   // Model for DropDown component.
   late DropDownModel dropDownModel;
 

@@ -10,6 +10,7 @@ import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'busca_produto_page_model.dart';
 export 'busca_produto_page_model.dart';
 
@@ -36,22 +37,19 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.offsetAtual = 0;
-      safeSetState(() {});
-      _model.resultadoInicial = await actions.buscaProduto(
-        _model.buscaProdutoFieldTextController.text,
-        _model.offsetAtual,
+      _model.resultadoOnLoad = await actions.buscaProduto(
+        '',
+        0,
         _model.filtroLinha,
         _model.filtroGrupo,
         _model.filtroFabricante,
         _model.filtroMarca,
         _model.filtroEstoque,
         _model.filtroPromocao,
-        0,
+        functions.resolverCodFilial(FFAppState().empresa_codigo),
       );
       _model.listaProdutos =
-          _model.resultadoInicial!.toList().cast<ProdutoResultStruct>();
-      _model.offsetAtual = _model.offsetAtual! + 100;
+          _model.resultadoOnLoad!.toList().cast<ProdutoResultStruct>();
       safeSetState(() {});
     });
 
@@ -68,6 +66,8 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -140,7 +140,7 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                               '_model.buscaProdutoFieldTextController',
                               Duration(milliseconds: 2000),
                               () async {
-                                _model.resultadosBusca =
+                                _model.resultadoBusca =
                                     await actions.buscaProduto(
                                   _model.buscaProdutoFieldTextController.text,
                                   0,
@@ -150,9 +150,10 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                                   _model.filtroMarca,
                                   _model.filtroEstoque,
                                   _model.filtroPromocao,
-                                  0,
+                                  functions.resolverCodFilial(
+                                      FFAppState().empresa_codigo),
                                 );
-                                _model.listaProdutos = _model.resultadosBusca!
+                                _model.listaProdutos = _model.resultadoBusca!
                                     .toList()
                                     .cast<ProdutoResultStruct>();
                                 safeSetState(() {});
@@ -653,13 +654,7 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                                                               ),
                                                         ),
                                                         Text(
-                                                          valueOrDefault<
-                                                              String>(
-                                                            listaProItem
-                                                                .saldoEstoque
-                                                                .toString(),
-                                                            '00',
-                                                          ),
+                                                          'CustomFunction(calcularEstoqueDisponivel)',
                                                           style: FlutterFlowTheme
                                                                   .of(context)
                                                               .bodyMedium
@@ -676,9 +671,23 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                                                                       .bodyMedium
                                                                       .fontStyle,
                                                                 ),
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .secondaryText,
+                                                                color: (double?
+                                                                            estoqueAtual,
+                                                                        double?
+                                                                            estoquePendente) {
+                                                                  return calcularEstoqueDisponivel(
+                                                                              estoqueAtual,
+                                                                              estoquePendente) >
+                                                                          0
+                                                                      ? Color(
+                                                                          0xFF16A34A)
+                                                                      : Color(
+                                                                          0xFFDC2626);
+                                                                }(
+                                                                    listaProItem
+                                                                        .estoqueAtual,
+                                                                    listaProItem
+                                                                        .estoquePendente),
                                                                 letterSpacing:
                                                                     0.0,
                                                                 fontWeight: FlutterFlowTheme.of(
