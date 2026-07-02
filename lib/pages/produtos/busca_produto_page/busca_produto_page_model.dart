@@ -1,5 +1,6 @@
 import '/backend/schema/structs/index.dart';
 import '/components/drop_down/drop_down_widget.dart';
+import '/components/loading/loading_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'busca_produto_page_widget.dart' show BuscaProdutoPageWidget;
 import 'package:flutter/material.dart';
@@ -38,7 +39,7 @@ class BuscaProdutoPageModel extends FlutterFlowModel<BuscaProdutoPageWidget> {
   ///  State fields for stateful widgets in this page.
 
   // Stores action output result for [Custom Action - buscaProduto] action in BuscaProdutoPage widget.
-  List<ProdutoResultStruct>? resultadoOnLoad;
+  List<ProdutoResultStruct>? listaProdutosON;
   // State field(s) for BuscaProdutoField widget.
   FocusNode? buscaProdutoFieldFocusNode;
   TextEditingController? buscaProdutoFieldTextController;
@@ -48,10 +49,25 @@ class BuscaProdutoPageModel extends FlutterFlowModel<BuscaProdutoPageWidget> {
   List<ProdutoResultStruct>? resultadoBusca;
   // Model for DropDown component.
   late DropDownModel dropDownModel;
+  // Model for FiltroGrupo.
+  late DropDownModel filtroGrupoModel;
+  // Model for FiltroFabricante.
+  late DropDownModel filtroFabricanteModel;
+  // Model for FiltroMarca.
+  late DropDownModel filtroMarcaModel;
+  // Model for Loading component.
+  late LoadingModel loadingModel1;
+  // Model for Loading component.
+  late LoadingModel loadingModel2;
 
   @override
   void initState(BuildContext context) {
     dropDownModel = createModel(context, () => DropDownModel());
+    filtroGrupoModel = createModel(context, () => DropDownModel());
+    filtroFabricanteModel = createModel(context, () => DropDownModel());
+    filtroMarcaModel = createModel(context, () => DropDownModel());
+    loadingModel1 = createModel(context, () => LoadingModel());
+    loadingModel2 = createModel(context, () => LoadingModel());
   }
 
   @override
@@ -60,5 +76,10 @@ class BuscaProdutoPageModel extends FlutterFlowModel<BuscaProdutoPageWidget> {
     buscaProdutoFieldTextController?.dispose();
 
     dropDownModel.dispose();
+    filtroGrupoModel.dispose();
+    filtroFabricanteModel.dispose();
+    filtroMarcaModel.dispose();
+    loadingModel1.dispose();
+    loadingModel2.dispose();
   }
 }

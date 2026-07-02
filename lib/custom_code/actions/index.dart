@@ -11,4 +11,4 @@ export '/action_code/pesquisa_cliente.dart' show pesquisaCliente;
 export '/action_code/clean_doc.dart' show cleanDoc;
 export '/action_code/first_access_login.dart' show firstAccessLogin;
 export '/action_code/busca_produto.dart' show buscaProduto;
-export '/custom_code/actions/carregar_filtros.dart' show carregarFiltros;
+export '/action_code/carregar_filtros.dart' show carregarFiltros;

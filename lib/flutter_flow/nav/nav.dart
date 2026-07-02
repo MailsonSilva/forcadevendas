@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import '/backend/schema/structs/index.dart';
 
+
 import '/main.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
@@ -61,11 +62,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => ClientesPageWidget(),
         ),
         FFRoute(
-          name: SincronizacaoPageWidget.routeName,
-          path: SincronizacaoPageWidget.routePath,
-          builder: (context, params) => SincronizacaoPageWidget(),
-        ),
-        FFRoute(
           name: PedidosRascunhosPageWidget.routeName,
           path: PedidosRascunhosPageWidget.routePath,
           builder: (context, params) => PedidosRascunhosPageWidget(),
@@ -84,31 +80,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ParamType.String,
             ),
           ),
-        ),
-        FFRoute(
-          name: NovoClientePrincipalWidget.routeName,
-          path: NovoClientePrincipalWidget.routePath,
-          builder: (context, params) => NovoClientePrincipalWidget(),
-        ),
-        FFRoute(
-          name: NovoClienteEndereOWidget.routeName,
-          path: NovoClienteEndereOWidget.routePath,
-          builder: (context, params) => NovoClienteEndereOWidget(),
-        ),
-        FFRoute(
-          name: NovoClienteProprietRio4Widget.routeName,
-          path: NovoClienteProprietRio4Widget.routePath,
-          builder: (context, params) => NovoClienteProprietRio4Widget(),
-        ),
-        FFRoute(
-          name: NovoClienteProprietRio5Widget.routeName,
-          path: NovoClienteProprietRio5Widget.routePath,
-          builder: (context, params) => NovoClienteProprietRio5Widget(),
-        ),
-        FFRoute(
-          name: NovoClienteBancosEObsWidget.routeName,
-          path: NovoClienteBancosEObsWidget.routePath,
-          builder: (context, params) => NovoClienteBancosEObsWidget(),
         ),
         FFRoute(
           name: ConfiguracaoPageWidget.routeName,

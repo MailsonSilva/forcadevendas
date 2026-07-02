@@ -5,52 +5,100 @@ import '/backend/schema/structs/index.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
-import 'package:path/path.dart' as p;
 import 'package:sqflite/sqflite.dart';
+import 'package:path/path.dart';
 
-Future<ClienteResultStruct> carregarClienteOffline(String clienteCodigo) async {
+Future<ClienteResultStruct> carregarClienteOffline(String? codigo) async {
+  if (codigo == null || codigo.trim().isEmpty) {
+    return ClienteResultStruct.fromMap({
+      'success': false,
+      'message': 'Codigo invalido.',
+      'codigo': '',
+      'nome': '',
+      'tipo': '',
+      'cpfCnpj': '',
+      'ie': '',
+      'rg': '',
+      'endereco': '',
+      'numero': '',
+      'bairro': '',
+      'cidade': '',
+      'uf': '',
+      'cep': '',
+      'telefone': '',
+      'email': '',
+    });
+  }
+
   try {
-    final databasesPath = await getDatabasesPath();
-    final db = await openDatabase(
-      p.join(databasesPath, 'dbforcacad001.db'),
-      readOnly: true,
+    final db =
+        await openDatabase(join(await getDatabasesPath(), 'dbforcacad001.db'));
+    final results = await db.rawQuery(
+      'SELECT * FROM cadcli00 WHERE cli00_codigo = ?',
+      [int.tryParse(codigo.trim()) ?? 0],
     );
-    final rows = await db.rawQuery(
-      'SELECT cli00_codigo, cli00_nome, cli00_cpfcnpj, cli00_ie, cli00_rg, cli00_email, cli00_endere, cli00_numero, cli00_bairro, cli00_cidade, cli00_uf, cli00_cep, cli00_telefo, cli00_tipo FROM cadcli00 WHERE cli00_codigo = ?',
-      [clienteCodigo],
-    );
-    await db.close();
 
-    if (rows.isEmpty) {
-      return ClienteResultStruct(
-        success: false,
-        message: 'Cliente nao encontrado localmente.',
-      );
+    if (results.isEmpty) {
+      await db.close();
+      return ClienteResultStruct.fromMap({
+        'success': false,
+        'message': 'Cliente nao encontrado.',
+        'codigo': '',
+        'nome': '',
+        'tipo': '',
+        'cpfCnpj': '',
+        'ie': '',
+        'rg': '',
+        'endereco': '',
+        'numero': '',
+        'bairro': '',
+        'cidade': '',
+        'uf': '',
+        'cep': '',
+        'telefone': '',
+        'email': '',
+      });
     }
 
-    final row = rows.first;
-    return ClienteResultStruct(
-      success: true,
-      message: '',
-      codigo: row['cli00_codigo']?.toString() ?? '',
-      nome: row['cli00_nome']?.toString() ?? '',
-      cpfCnpj: row['cli00_cpfcnpj']?.toString() ?? '',
-      ie: row['cli00_ie']?.toString() ?? '',
-      rg: row['cli00_rg']?.toString() ?? '',
-      email: row['cli00_email']?.toString() ?? '',
-      endereco: row['cli00_endere']?.toString() ?? '',
-      numero: row['cli00_numero']?.toString() ?? '',
-      bairro: row['cli00_bairro']?.toString() ?? '',
-      cidade: row['cli00_cidade']?.toString() ?? '',
-      uf: row['cli00_uf']?.toString() ?? '',
-      cep: row['cli00_cep']?.toString() ?? '',
-      telefone: row['cli00_telefo']?.toString() ?? '',
-      tipo: row['cli00_tipo']?.toString() ?? 'F',
-    );
-  } catch (e) {
-    return ClienteResultStruct(
-      success: false,
-      message: 'Erro ao carregar cliente: $e',
-    );
+    final row = results.first;
+    await db.close();
+    return ClienteResultStruct.fromMap({
+      'success': true,
+      'message': 'Cliente carregado com sucesso.',
+      'codigo': row['cli00_codigo'].toString(),
+      'nome': row['cli00_descri']?.toString() ?? '',
+      'tipo': row['cli00_pessoa']?.toString() ?? 'F',
+      'cpfCnpj': row['cli00_cpfcnp']?.toString() ?? '',
+      'ie': row['cli00_insest']?.toString() ?? '',
+      'rg': row['cli00_rg']?.toString() ?? '',
+      'endereco': row['cli00_endere']?.toString() ?? '',
+      'numero': row['cli00_endnum']?.toString() ?? '',
+      'bairro': row['cli00_bairro']?.toString() ?? '',
+      'cidade': row['cli00_ciddes']?.toString() ?? '',
+      'uf': row['cli00_estsgl']?.toString() ?? '',
+      'cep': row['cli00_endcep']?.toString() ?? '',
+      'telefone': row['cli00_fonnum']?.toString() ?? '',
+      'email': row['cli00_observ']?.toString() ?? '',
+    });
+  } catch (err) {
+    print('Erro CarregarClienteOffline: ' + err.toString());
+    return ClienteResultStruct.fromMap({
+      'success': false,
+      'message': 'Erro ao carregar: ' + err.toString(),
+      'codigo': '',
+      'nome': '',
+      'tipo': '',
+      'cpfCnpj': '',
+      'ie': '',
+      'rg': '',
+      'endereco': '',
+      'numero': '',
+      'bairro': '',
+      'cidade': '',
+      'uf': '',
+      'cep': '',
+      'telefone': '',
+      'email': '',
+    });
   }
 }

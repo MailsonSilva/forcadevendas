@@ -1,45 +1,74 @@
 // Automatic FlutterFlow imports
-import '/flutter_flow/flutter_flow_util.dart';
+import '/backend/schema/structs/index.dart';
 // Imports other custom actions
 // Imports custom functions
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
-import 'package:path/path.dart' as p;
 import 'package:sqflite/sqflite.dart';
-import 'dart:convert';
+import 'package:path/path.dart';
 
-Future<String> pesquisaCliente(String filtro) async {
+Future<List<ClienteResultStruct>> pesquisaCliente(
+  String? filtro,
+  int? offset,
+) async {
   try {
-    final databasesPath = await getDatabasesPath();
-    final db = await openDatabase(p.join(databasesPath, 'dbforcacad001.db'),
-        readOnly: true);
-    final query = filtro.trim();
-
-    List<Map<String, dynamic>> rows;
-    if (query.isEmpty) {
-      rows = await db.rawQuery(
-          'SELECT cli00_codigo, cli00_nome, cli00_cpfcnpj, cli00_cidade, cli00_uf FROM cadcli00 LIMIT 50');
+    final db =
+        await openDatabase(join(await getDatabasesPath(), 'dbforcacad001.db'));
+    final String busca = filtro?.trim() ?? '';
+    final int currentOffset = offset ?? 0;
+    String whereClause = '';
+    List<dynamic> binds = [];
+    if (busca.isNotEmpty) {
+      final String termo = '%' + busca.toUpperCase() + '%';
+      whereClause =
+          'WHERE UPPER(cli00_descri) LIKE ? OR UPPER(cli00_fantas) LIKE ?';
+      binds = [termo, termo];
     } else {
-      rows = await db.rawQuery(
-        'SELECT cli00_codigo, cli00_nome, cli00_cpfcnpj, cli00_cidade, cli00_uf FROM cadcli00 WHERE cli00_nome LIKE ? OR cli00_codigo LIKE ? OR cli00_cpfcnpj LIKE ? LIMIT 50',
-        ['%$query%', '%$query%', '%$query%'],
-      );
+      whereClause = 'WHERE cli00_active = 1';
     }
+    final String query = 'SELECT CAST(cli00_codigo AS TEXT) AS codigo, '
+            'TRIM(cli00_descri) AS nome, '
+            'TRIM(COALESCE(cli00_fantas, \'\')) AS tipo, '
+            'TRIM(COALESCE(cli00_cpfcnp, \'\')) AS cpfCnpj, '
+            'TRIM(COALESCE(cli00_insest, \'\')) AS ie, '
+            'TRIM(COALESCE(cli00_rg, \'\')) AS rg, '
+            'TRIM(COALESCE(cli00_endere, \'\')) AS endereco, '
+            'TRIM(COALESCE(cli00_endnum, \'\')) AS numero, '
+            'TRIM(COALESCE(cli00_bairro, \'\')) AS bairro, '
+            'TRIM(COALESCE(cli00_ciddes, \'\')) AS cidade, '
+            'TRIM(COALESCE(cli00_estsgl, \'\')) AS uf, '
+            'TRIM(COALESCE(cli00_endcep, \'\')) AS cep, '
+            'TRIM(COALESCE(cli00_fonnum, \'\')) AS telefone, '
+            'TRIM(COALESCE(cli00_observ, \'\')) AS email '
+            'FROM cadcli00 ' +
+        whereClause +
+        ' ORDER BY cli00_descri LIMIT 50 OFFSET ?';
+    binds.add(currentOffset);
+    final results = await db.rawQuery(query, binds);
     await db.close();
-
-    final mapped = rows
-        .map((row) => {
-              'codigo': row['cli00_codigo']?.toString() ?? '',
-              'nome': row['cli00_nome']?.toString() ?? '',
-              'cpfCnpj': row['cli00_cpfcnpj']?.toString() ?? '',
-              'cidade': row['cli00_cidade']?.toString() ?? '',
-              'uf': row['cli00_uf']?.toString() ?? '',
-            })
+    return results
+        .map((m) => ClienteResultStruct.fromMap({
+              'codigo': m['codigo']?.toString() ?? '',
+              'nome': m['nome']?.toString() ?? '',
+              'tipo': m['tipo']?.toString() ?? '',
+              'cpfCnpj': m['cpfCnpj']?.toString() ?? '',
+              'ie': m['ie']?.toString() ?? '',
+              'rg': m['rg']?.toString() ?? '',
+              'endereco': m['endereco']?.toString() ?? '',
+              'numero': m['numero']?.toString() ?? '',
+              'bairro': m['bairro']?.toString() ?? '',
+              'cidade': m['cidade']?.toString() ?? '',
+              'uf': m['uf']?.toString() ?? '',
+              'cep': m['cep']?.toString() ?? '',
+              'telefone': m['telefone']?.toString() ?? '',
+              'email': m['email']?.toString() ?? '',
+              'message': '',
+              'success': true,
+            }))
         .toList();
-
-    return jsonEncode(mapped);
   } catch (e) {
-    return '[]';
+    print('Erro PesquisaCliente: ' + e.toString());
+    return [];
   }
 }

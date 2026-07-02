@@ -7,6 +7,7 @@ import '/backend/schema/structs/index.dart';
 
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
+import 'dart:io';
 
 Future<List<ProdutoResultStruct>> buscaProduto(
   String? filtro,
@@ -20,8 +21,32 @@ Future<List<ProdutoResultStruct>> buscaProduto(
   int? codFilial,
 ) async {
   try {
-    final db =
-        await openDatabase(join(await getDatabasesPath(), 'dbforcacad001.db'));
+    final dbPath = join(await getDatabasesPath(), 'dbforcacad001.db');
+    print('DIAGNOSTICO: Caminho do banco: ' + dbPath);
+    final exists = await File(dbPath).exists();
+    print('DIAGNOSTICO: O arquivo do banco existe? ' + exists.toString());
+
+    if (!exists) {
+      print(
+          'DIAGNOSTICO: ERRO: O arquivo do banco de dados nao existe no caminho esperado.');
+      return [];
+    }
+
+    final db = await openDatabase(dbPath);
+
+    try {
+      final countPro = Sqflite.firstIntValue(
+          await db.rawQuery('SELECT COUNT(*) FROM cadpro00'));
+      print('DIAGNOSTICO: Registros em cadpro00 (produtos): ' +
+          countPro.toString());
+      final countEst = Sqflite.firstIntValue(
+          await db.rawQuery('SELECT COUNT(*) FROM estpro00'));
+      print('DIAGNOSTICO: Registros em estpro00 (estoque): ' +
+          countEst.toString());
+    } catch (dbErr) {
+      print(
+          'DIAGNOSTICO: ERRO ao ler tabelas estruturais: ' + dbErr.toString());
+    }
 
     final String busca = filtro ?? '';
     final int currentOffset = offset ?? 0;
@@ -32,6 +57,9 @@ Future<List<ProdutoResultStruct>> buscaProduto(
     final bool estoqueOpt = apenasEstoque ?? false;
 
     final int filial = (codFilial == null || codFilial == 0) ? 1 : codFilial;
+
+    print(
+        'DIAGNOSTICO: Parametros de busca -> busca: "$busca", linha: "$linha", grupo: "$grupo", filial: $filial');
 
     List<String> condicoes = [];
     List<dynamic> whereBinds = [];
@@ -88,22 +116,31 @@ Future<List<ProdutoResultStruct>> buscaProduto(
         "ORDER BY p.pro00_descri "
         "LIMIT 100 OFFSET ?";
 
+    print('DIAGNOSTICO: Executando query com binds: ' + finalBinds.toString());
     final results = await db.rawQuery(query, finalBinds);
+    print('DIAGNOSTICO: Query executada. Resultados encontrados: ' +
+        results.length.toString());
     await db.close();
+
+    double parseDouble(dynamic val) {
+      if (val == null) return 0.0;
+      if (val is num) return val.toDouble();
+      return double.tryParse(val.toString()) ?? 0.0;
+    }
 
     return results
         .map((m) => ProdutoResultStruct(
-              codigo: m['pro00_codigo'].toString(),
-              descricao: m['pro00_descri'].toString(),
+              codigo: m['pro00_codigo']?.toString() ?? '',
+              descricao: m['pro00_descri']?.toString() ?? '',
               unidade: m['pro00_unidad']?.toString() ?? '',
-              preco: (m['preco_venda'] as num).toDouble(),
-              saldoEstoque: (m['saldo'] as num).toDouble(),
-              estoqueAtual: (m['estoque_atual'] as num).toDouble(),
-              estoquePendente: (m['estoque_pendente'] as num).toDouble(),
+              preco: parseDouble(m['preco_venda']),
+              saldoEstoque: parseDouble(m['saldo']),
+              estoqueAtual: parseDouble(m['estoque_atual']),
+              estoquePendente: parseDouble(m['estoque_pendente']),
             ))
         .toList();
   } catch (e) {
-    print('Erro fatal na busca do SQLite: $e');
+    print('DIAGNOSTICO: Erro fatal na busca do SQLite: ' + e.toString());
     return [];
   }
 }

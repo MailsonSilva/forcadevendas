@@ -153,15 +153,24 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                 ),
                               ),
                             ),
-                            wrapWithModel(
-                              model: _model.botaoMenuHomeModel2,
-                              updateCallback: () => safeSetState(() {}),
-                              child: BotaoMenuHomeWidget(
-                                description: 'Clientes',
-                                icon: Icon(
-                                  Icons.people_outline_rounded,
-                                  color: FlutterFlowTheme.of(context).primary,
-                                  size: 32.0,
+                            InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                context.pushNamed(ClientesPageWidget.routeName);
+                              },
+                              child: wrapWithModel(
+                                model: _model.botaoMenuHomeModel2,
+                                updateCallback: () => safeSetState(() {}),
+                                child: BotaoMenuHomeWidget(
+                                  description: 'Clientes',
+                                  icon: Icon(
+                                    Icons.people_outline_rounded,
+                                    color: FlutterFlowTheme.of(context).primary,
+                                    size: 32.0,
+                                  ),
                                 ),
                               ),
                             ),
