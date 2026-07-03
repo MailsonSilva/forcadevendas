@@ -65,6 +65,8 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
       _model.listaProdutos =
           _model.resultadoOnLoad!.toList().cast<ProdutoResultStruct>();
       safeSetState(() {});
+      _model.dadosCarregados = true;
+      safeSetState(() {});
     });
 
     _model.buscaProdutoFieldTextController ??= TextEditingController();
