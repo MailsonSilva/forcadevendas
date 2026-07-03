@@ -42,9 +42,8 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                 color: Colors.transparent,
                 child: Center(
                   child: Image.asset(
-                    'assets/images/2emqy_5.png',
-                    width: 150.0,
-                    height: 120.0,
+                    'assets/images/DentixIA_Logo_(500_x_500_px).png',
+                    width: 200.0,
                     fit: BoxFit.contain,
                   ),
                 ),
@@ -61,9 +60,8 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                     color: Colors.transparent,
                     child: Center(
                       child: Image.asset(
-                        'assets/images/2emqy_5.png',
-                        width: 150.0,
-                        height: 120.0,
+                        'assets/images/DentixIA_Logo_(500_x_500_px).png',
+                        width: 200.0,
                         fit: BoxFit.contain,
                       ),
                     ),
