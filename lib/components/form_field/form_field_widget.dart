@@ -59,7 +59,7 @@ class _FormFieldWidgetState extends State<FormFieldWidget> {
             'Razão Social',
           ),
           style: FlutterFlowTheme.of(context).labelMedium.override(
-                font: GoogleFonts.roboto(
+                font: GoogleFonts.inter(
                   fontWeight:
                       FlutterFlowTheme.of(context).labelMedium.fontWeight,
                   fontStyle: FlutterFlowTheme.of(context).labelMedium.fontStyle,

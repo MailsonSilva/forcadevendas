@@ -78,7 +78,7 @@ class _BotaoMenuHomeWidgetState extends State<BotaoMenuHomeWidget> {
             Text(
               widget.description,
               style: FlutterFlowTheme.of(context).bodyMedium.override(
-                    font: GoogleFonts.roboto(
+                    font: GoogleFonts.inter(
                       fontWeight: FontWeight.w500,
                       fontStyle:
                           FlutterFlowTheme.of(context).bodyMedium.fontStyle,

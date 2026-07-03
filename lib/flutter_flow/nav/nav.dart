@@ -112,6 +112,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => params.isEmpty
               ? NavBarPage(initialPage: 'ConfiguracaoPage')
               : ConfiguracaoPageWidget(),
+        ),
+        FFRoute(
+          name: DetalheProdutoPageWidget.routeName,
+          path: DetalheProdutoPageWidget.routePath,
+          builder: (context, params) => DetalheProdutoPageWidget(
+            produtoRef: params.getParam(
+              'produtoRef',
+              ParamType.String,
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

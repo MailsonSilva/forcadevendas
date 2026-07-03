@@ -114,7 +114,7 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
           title: Text(
             'Pesquisa de Produtos',
             style: FlutterFlowTheme.of(context).titleLarge.override(
-                  font: GoogleFonts.roboto(
+                  font: GoogleFonts.plusJakartaSans(
                     fontWeight: FontWeight.w600,
                     fontStyle:
                         FlutterFlowTheme.of(context).titleLarge.fontStyle,
@@ -289,7 +289,7 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium
                                               .override(
-                                                font: GoogleFonts.roboto(
+                                                font: GoogleFonts.inter(
                                                   fontWeight: FontWeight.w500,
                                                   fontStyle:
                                                       FlutterFlowTheme.of(
@@ -462,7 +462,7 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .labelMedium
                                               .override(
-                                                font: GoogleFonts.roboto(
+                                                font: GoogleFonts.inter(
                                                   fontWeight:
                                                       FlutterFlowTheme.of(
                                                               context)
@@ -512,7 +512,7 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                                                   context)
                                               .bodyMedium
                                               .override(
-                                                font: GoogleFonts.roboto(
+                                                font: GoogleFonts.inter(
                                                   fontWeight:
                                                       FlutterFlowTheme.of(
                                                               context)
@@ -908,7 +908,7 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                                                               .override(
                                                                 font:
                                                                     GoogleFonts
-                                                                        .roboto(
+                                                                        .inter(
                                                                   fontWeight: FlutterFlowTheme.of(
                                                                           context)
                                                                       .bodySmall
@@ -947,8 +947,9 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                                                                     .of(context)
                                                                 .bodyLarge
                                                                 .override(
-                                                                  font: GoogleFonts
-                                                                      .roboto(
+                                                                  font:
+                                                                      GoogleFonts
+                                                                          .inter(
                                                                     fontWeight: FlutterFlowTheme.of(
                                                                             context)
                                                                         .bodyLarge
@@ -1004,7 +1005,7 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                                                                   .bodySmall
                                                                   .override(
                                                                     font: GoogleFonts
-                                                                        .roboto(
+                                                                        .inter(
                                                                       fontWeight: FlutterFlowTheme.of(
                                                                               context)
                                                                           .bodySmall
@@ -1041,7 +1042,7 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                                                                   .bodyMedium
                                                                   .override(
                                                                     font: GoogleFonts
-                                                                        .roboto(
+                                                                        .inter(
                                                                       fontWeight:
                                                                           FontWeight
                                                                               .w500,
@@ -1080,7 +1081,7 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                                                                   .bodySmall
                                                                   .override(
                                                                     font: GoogleFonts
-                                                                        .roboto(
+                                                                        .inter(
                                                                       fontWeight: FlutterFlowTheme.of(
                                                                               context)
                                                                           .bodySmall
@@ -1118,7 +1119,7 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                                                                   .bodyMedium
                                                                   .override(
                                                                     font: GoogleFonts
-                                                                        .roboto(
+                                                                        .inter(
                                                                       fontWeight:
                                                                           FontWeight
                                                                               .w500,
@@ -1157,7 +1158,7 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                                                                   .bodySmall
                                                                   .override(
                                                                     font: GoogleFonts
-                                                                        .roboto(
+                                                                        .inter(
                                                                       fontWeight: FlutterFlowTheme.of(
                                                                               context)
                                                                           .bodySmall
@@ -1195,7 +1196,7 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                                                                   .bodyMedium
                                                                   .override(
                                                                     font: GoogleFonts
-                                                                        .roboto(
+                                                                        .inter(
                                                                       fontWeight:
                                                                           FontWeight
                                                                               .w500,

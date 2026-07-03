@@ -54,7 +54,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
           title: Text(
             'SWR - Força de Vendas',
             style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  font: GoogleFonts.roboto(
+                  font: GoogleFonts.plusJakartaSans(
                     fontWeight:
                         FlutterFlowTheme.of(context).headlineMedium.fontWeight,
                     fontStyle:
@@ -92,7 +92,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       Text(
                         'Painel Admnistrativo',
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              font: GoogleFonts.roboto(
+                              font: GoogleFonts.inter(
                                 fontWeight: FontWeight.w600,
                                 fontStyle: FlutterFlowTheme.of(context)
                                     .bodyMedium
@@ -109,7 +109,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       Text(
                         'Bem vindo, ${FFAppState().vendedor_nome}',
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              font: GoogleFonts.roboto(
+                              font: GoogleFonts.inter(
                                 fontWeight: FontWeight.w500,
                                 fontStyle: FlutterFlowTheme.of(context)
                                     .bodyMedium

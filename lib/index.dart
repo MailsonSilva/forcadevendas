@@ -11,3 +11,5 @@ export '/pages/cliente/form_clientes_page/form_clientes_page_widget.dart'
     show FormClientesPageWidget;
 export '/pages/configuracao_page/configuracao_page_widget.dart'
     show ConfiguracaoPageWidget;
+export '/pages/produtos/detalhe_produto_page/detalhe_produto_page_widget.dart'
+    show DetalheProdutoPageWidget;

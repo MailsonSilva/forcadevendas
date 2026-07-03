@@ -70,7 +70,7 @@ class _ClientesPageWidgetState extends State<ClientesPageWidget> {
           title: Text(
             'Clientes',
             style: FlutterFlowTheme.of(context).titleLarge.override(
-                  font: GoogleFonts.roboto(
+                  font: GoogleFonts.plusJakartaSans(
                     fontWeight: FontWeight.w600,
                     fontStyle:
                         FlutterFlowTheme.of(context).titleLarge.fontStyle,
@@ -225,7 +225,7 @@ class _ClientesPageWidgetState extends State<ClientesPageWidget> {
                                       style: FlutterFlowTheme.of(context)
                                           .bodyLarge
                                           .override(
-                                            font: GoogleFonts.roboto(
+                                            font: GoogleFonts.inter(
                                               fontWeight:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyLarge
@@ -265,7 +265,7 @@ class _ClientesPageWidgetState extends State<ClientesPageWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .bodySmall
                                               .override(
-                                                font: GoogleFonts.roboto(
+                                                font: GoogleFonts.inter(
                                                   fontWeight:
                                                       FlutterFlowTheme.of(
                                                               context)
@@ -303,7 +303,7 @@ class _ClientesPageWidgetState extends State<ClientesPageWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .bodySmall
                                               .override(
-                                                font: GoogleFonts.roboto(
+                                                font: GoogleFonts.inter(
                                                   fontWeight:
                                                       FlutterFlowTheme.of(
                                                               context)

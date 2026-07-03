@@ -27,6 +27,10 @@ class ProdutoResultStruct extends BaseStruct {
     double? precoCusto,
     double? estoqueAtual,
     double? estoquePendente,
+    String? linha,
+    String? grupo,
+    String? fabricante,
+    String? marca,
   })  : _codigo = codigo,
         _descricao = descricao,
         _unidade = unidade,
@@ -34,7 +38,11 @@ class ProdutoResultStruct extends BaseStruct {
         _saldoEstoque = saldoEstoque,
         _precoCusto = precoCusto,
         _estoqueAtual = estoqueAtual,
-        _estoquePendente = estoquePendente;
+        _estoquePendente = estoquePendente,
+        _linha = linha,
+        _grupo = grupo,
+        _fabricante = fabricante,
+        _marca = marca;
 
   // "codigo" field.
   String? _codigo;
@@ -105,6 +113,34 @@ class ProdutoResultStruct extends BaseStruct {
 
   bool hasEstoquePendente() => _estoquePendente != null;
 
+  // "linha" field.
+  String? _linha;
+  String get linha => _linha ?? '';
+  set linha(String? val) => _linha = val;
+
+  bool hasLinha() => _linha != null;
+
+  // "grupo" field.
+  String? _grupo;
+  String get grupo => _grupo ?? '';
+  set grupo(String? val) => _grupo = val;
+
+  bool hasGrupo() => _grupo != null;
+
+  // "fabricante" field.
+  String? _fabricante;
+  String get fabricante => _fabricante ?? '';
+  set fabricante(String? val) => _fabricante = val;
+
+  bool hasFabricante() => _fabricante != null;
+
+  // "marca" field.
+  String? _marca;
+  String get marca => _marca ?? '';
+  set marca(String? val) => _marca = val;
+
+  bool hasMarca() => _marca != null;
+
   static ProdutoResultStruct fromMap(Map<String, dynamic> data) =>
       ProdutoResultStruct(
         codigo: data['codigo'] as String?,
@@ -115,6 +151,10 @@ class ProdutoResultStruct extends BaseStruct {
         precoCusto: castToType<double>(data['preco_custo']),
         estoqueAtual: castToType<double>(data['estoque_atual']),
         estoquePendente: castToType<double>(data['estoque_pendente']),
+        linha: data['linha'] as String?,
+        grupo: data['grupo'] as String?,
+        fabricante: data['fabricante'] as String?,
+        marca: data['marca'] as String?,
       );
 
   static ProdutoResultStruct? maybeFromMap(dynamic data) => data is Map
@@ -130,6 +170,10 @@ class ProdutoResultStruct extends BaseStruct {
         'preco_custo': _precoCusto,
         'estoque_atual': _estoqueAtual,
         'estoque_pendente': _estoquePendente,
+        'linha': _linha,
+        'grupo': _grupo,
+        'fabricante': _fabricante,
+        'marca': _marca,
       }.withoutNulls;
 
   @override
@@ -165,6 +209,22 @@ class ProdutoResultStruct extends BaseStruct {
         'estoque_pendente': serializeParam(
           _estoquePendente,
           ParamType.double,
+        ),
+        'linha': serializeParam(
+          _linha,
+          ParamType.String,
+        ),
+        'grupo': serializeParam(
+          _grupo,
+          ParamType.String,
+        ),
+        'fabricante': serializeParam(
+          _fabricante,
+          ParamType.String,
+        ),
+        'marca': serializeParam(
+          _marca,
+          ParamType.String,
         ),
       }.withoutNulls;
 
@@ -210,6 +270,26 @@ class ProdutoResultStruct extends BaseStruct {
           ParamType.double,
           false,
         ),
+        linha: deserializeParam(
+          data['linha'],
+          ParamType.String,
+          false,
+        ),
+        grupo: deserializeParam(
+          data['grupo'],
+          ParamType.String,
+          false,
+        ),
+        fabricante: deserializeParam(
+          data['fabricante'],
+          ParamType.String,
+          false,
+        ),
+        marca: deserializeParam(
+          data['marca'],
+          ParamType.String,
+          false,
+        ),
       );
 
   @override
@@ -225,7 +305,11 @@ class ProdutoResultStruct extends BaseStruct {
         saldoEstoque == other.saldoEstoque &&
         precoCusto == other.precoCusto &&
         estoqueAtual == other.estoqueAtual &&
-        estoquePendente == other.estoquePendente;
+        estoquePendente == other.estoquePendente &&
+        linha == other.linha &&
+        grupo == other.grupo &&
+        fabricante == other.fabricante &&
+        marca == other.marca;
   }
 
   @override
@@ -237,7 +321,11 @@ class ProdutoResultStruct extends BaseStruct {
         saldoEstoque,
         precoCusto,
         estoqueAtual,
-        estoquePendente
+        estoquePendente,
+        linha,
+        grupo,
+        fabricante,
+        marca
       ]);
 }
 
@@ -250,6 +338,10 @@ ProdutoResultStruct createProdutoResultStruct({
   double? precoCusto,
   double? estoqueAtual,
   double? estoquePendente,
+  String? linha,
+  String? grupo,
+  String? fabricante,
+  String? marca,
 }) =>
     ProdutoResultStruct(
       codigo: codigo,
@@ -260,4 +352,8 @@ ProdutoResultStruct createProdutoResultStruct({
       precoCusto: precoCusto,
       estoqueAtual: estoqueAtual,
       estoquePendente: estoquePendente,
+      linha: linha,
+      grupo: grupo,
+      fabricante: fabricante,
+      marca: marca,
     );

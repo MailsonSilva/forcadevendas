@@ -52,7 +52,7 @@ class _PedidosRascunhosPageWidgetState
           title: Text(
             'Pedidos / Rascunhos',
             style: FlutterFlowTheme.of(context).titleLarge.override(
-                  font: GoogleFonts.roboto(
+                  font: GoogleFonts.plusJakartaSans(
                     fontWeight: FontWeight.w600,
                     fontStyle:
                         FlutterFlowTheme.of(context).titleLarge.fontStyle,
@@ -97,7 +97,7 @@ class _PedidosRascunhosPageWidgetState
                       Text(
                         'Pedidos / Rascunhos',
                         style: FlutterFlowTheme.of(context).titleLarge.override(
-                              font: GoogleFonts.roboto(
+                              font: GoogleFonts.plusJakartaSans(
                                 fontWeight: FlutterFlowTheme.of(context)
                                     .titleLarge
                                     .fontWeight,
@@ -119,7 +119,7 @@ class _PedidosRascunhosPageWidgetState
                         'Pedidos em andamento',
                         textAlign: TextAlign.center,
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              font: GoogleFonts.roboto(
+                              font: GoogleFonts.inter(
                                 fontWeight: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .fontWeight,

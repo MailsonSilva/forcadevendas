@@ -88,7 +88,7 @@ class _QuantityModalWidgetState extends State<QuantityModalWidget> {
                   widget.descricaoProduto!,
                   maxLines: 2,
                   style: FlutterFlowTheme.of(context).titleMedium.override(
-                        font: GoogleFonts.roboto(
+                        font: GoogleFonts.plusJakartaSans(
                           fontWeight: FlutterFlowTheme.of(context)
                               .titleMedium
                               .fontWeight,
@@ -113,7 +113,7 @@ class _QuantityModalWidgetState extends State<QuantityModalWidget> {
                     Text(
                       'Cód: ',
                       style: FlutterFlowTheme.of(context).bodySmall.override(
-                            font: GoogleFonts.roboto(
+                            font: GoogleFonts.inter(
                               fontWeight: FlutterFlowTheme.of(context)
                                   .bodySmall
                                   .fontWeight,
@@ -134,7 +134,7 @@ class _QuantityModalWidgetState extends State<QuantityModalWidget> {
                     Text(
                       widget.codigoProduto!,
                       style: FlutterFlowTheme.of(context).bodySmall.override(
-                            font: GoogleFonts.roboto(
+                            font: GoogleFonts.inter(
                               fontWeight: FlutterFlowTheme.of(context)
                                   .bodySmall
                                   .fontWeight,
@@ -155,7 +155,7 @@ class _QuantityModalWidgetState extends State<QuantityModalWidget> {
                     Text(
                       ' | Un: ',
                       style: FlutterFlowTheme.of(context).bodySmall.override(
-                            font: GoogleFonts.roboto(
+                            font: GoogleFonts.inter(
                               fontWeight: FlutterFlowTheme.of(context)
                                   .bodySmall
                                   .fontWeight,
@@ -176,7 +176,7 @@ class _QuantityModalWidgetState extends State<QuantityModalWidget> {
                     Text(
                       widget.unidadeProduto!,
                       style: FlutterFlowTheme.of(context).bodySmall.override(
-                            font: GoogleFonts.roboto(
+                            font: GoogleFonts.inter(
                               fontWeight: FlutterFlowTheme.of(context)
                                   .bodySmall
                                   .fontWeight,
@@ -220,7 +220,7 @@ class _QuantityModalWidgetState extends State<QuantityModalWidget> {
                           style: FlutterFlowTheme.of(context)
                               .bodyMedium
                               .override(
-                                font: GoogleFonts.roboto(
+                                font: GoogleFonts.inter(
                                   fontWeight: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .fontWeight,
@@ -243,7 +243,7 @@ class _QuantityModalWidgetState extends State<QuantityModalWidget> {
                           widget.precoUnitario!.toString(),
                           style:
                               FlutterFlowTheme.of(context).titleMedium.override(
-                                    font: GoogleFonts.roboto(
+                                    font: GoogleFonts.plusJakartaSans(
                                       fontWeight: FlutterFlowTheme.of(context)
                                           .titleMedium
                                           .fontWeight,
@@ -273,7 +273,7 @@ class _QuantityModalWidgetState extends State<QuantityModalWidget> {
                           style: FlutterFlowTheme.of(context)
                               .bodySmall
                               .override(
-                                font: GoogleFonts.roboto(
+                                font: GoogleFonts.inter(
                                   fontWeight: FlutterFlowTheme.of(context)
                                       .bodySmall
                                       .fontWeight,
@@ -297,7 +297,7 @@ class _QuantityModalWidgetState extends State<QuantityModalWidget> {
                           style: FlutterFlowTheme.of(context)
                               .bodyMedium
                               .override(
-                                font: GoogleFonts.roboto(
+                                font: GoogleFonts.inter(
                                   fontWeight: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .fontWeight,
@@ -335,7 +335,7 @@ class _QuantityModalWidgetState extends State<QuantityModalWidget> {
                 Text(
                   'Quantidade',
                   style: FlutterFlowTheme.of(context).labelMedium.override(
-                        font: GoogleFonts.roboto(
+                        font: GoogleFonts.inter(
                           fontWeight: FlutterFlowTheme.of(context)
                               .labelMedium
                               .fontWeight,
@@ -391,7 +391,7 @@ class _QuantityModalWidgetState extends State<QuantityModalWidget> {
                           style: FlutterFlowTheme.of(context)
                               .headlineMedium
                               .override(
-                                font: GoogleFonts.roboto(
+                                font: GoogleFonts.plusJakartaSans(
                                   fontWeight: FlutterFlowTheme.of(context)
                                       .headlineMedium
                                       .fontWeight,

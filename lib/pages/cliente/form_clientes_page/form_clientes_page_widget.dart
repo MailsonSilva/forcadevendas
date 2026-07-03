@@ -140,7 +140,7 @@ class _FormClientesPageWidgetState extends State<FormClientesPageWidget> {
           title: Text(
             _model.pageTitle!,
             style: FlutterFlowTheme.of(context).titleLarge.override(
-                  font: GoogleFonts.roboto(
+                  font: GoogleFonts.plusJakartaSans(
                     fontWeight:
                         FlutterFlowTheme.of(context).titleLarge.fontWeight,
                     fontStyle:
@@ -179,7 +179,7 @@ class _FormClientesPageWidgetState extends State<FormClientesPageWidget> {
                           'Tipo de Pessoa',
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
-                                    font: GoogleFonts.roboto(
+                                    font: GoogleFonts.inter(
                                       fontWeight: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .fontWeight,
@@ -1001,7 +1001,7 @@ class _FormClientesPageWidgetState extends State<FormClientesPageWidget> {
                             textStyle: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
-                                  font: GoogleFonts.roboto(
+                                  font: GoogleFonts.inter(
                                     fontWeight: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .fontWeight,

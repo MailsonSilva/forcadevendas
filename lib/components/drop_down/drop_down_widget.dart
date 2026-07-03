@@ -58,7 +58,7 @@ class _DropDownWidgetState extends State<DropDownWidget> {
             'titulo',
           ),
           style: FlutterFlowTheme.of(context).labelMedium.override(
-                font: GoogleFonts.roboto(
+                font: GoogleFonts.inter(
                   fontWeight:
                       FlutterFlowTheme.of(context).labelMedium.fontWeight,
                   fontStyle: FlutterFlowTheme.of(context).labelMedium.fontStyle,
@@ -73,14 +73,19 @@ class _DropDownWidgetState extends State<DropDownWidget> {
         FlutterFlowDropDown<String>(
           controller: _model.dropDownValueController ??=
               FormFieldController<String>(
-            _model.dropDownValue ??= widget.placeHolder,
+            _model.dropDownValue ??=
+                widget.listaFiltro != null && (widget.listaFiltro)!.isNotEmpty
+                    ? widget.placeHolder
+                    : '\"\"',
           ),
-          options: ['Todas', 'Hoje', 'Ontem', 'Últimos 7 dias'],
+          options: List<String>.from(
+              widget.listaFiltro!.map((e) => e.codigo).toList()),
+          optionLabels: widget.listaFiltro!.map((e) => e.descricao).toList(),
           onChanged: (val) => safeSetState(() => _model.dropDownValue = val),
           width: 250.0,
           height: 40.0,
           textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
-                font: GoogleFonts.roboto(
+                font: GoogleFonts.inter(
                   fontWeight:
                       FlutterFlowTheme.of(context).bodyMedium.fontWeight,
                   fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
