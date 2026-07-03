@@ -12,5 +12,3 @@ export '/action_code/clean_doc.dart' show cleanDoc;
 export '/action_code/first_access_login.dart' show firstAccessLogin;
 export '/action_code/busca_produto.dart' show buscaProduto;
 export '/action_code/carregar_filtros.dart' show carregarFiltros;
-export '/custom_code/actions/filtrar_produtos.dart' show filtrarProdutos;
-export '/custom_code/actions/limpar_filtros.dart' show limparFiltros;

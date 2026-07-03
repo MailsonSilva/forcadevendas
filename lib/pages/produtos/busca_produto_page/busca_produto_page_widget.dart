@@ -38,7 +38,19 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.listaProdutosON = await actions.buscaProduto(
+      _model.listaLinha = await actions.carregarFiltros(
+        'linha',
+      );
+      _model.listaGrupo = await actions.carregarFiltros(
+        'grupo',
+      );
+      _model.listaFab = await actions.carregarFiltros(
+        'fornecedor',
+      );
+      _model.listaMarca = await actions.carregarFiltros(
+        'marca',
+      );
+      _model.resultadoOnLoad = await actions.buscaProduto(
         '',
         0,
         _model.filtroLinha,
@@ -48,27 +60,10 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
         _model.filtroEstoque,
         _model.filtroPromocao,
         functions.resolverCodFilial(FFAppState().empresa_codigo),
+        _model.filtroDataEntrada,
       );
       _model.listaProdutos =
-          _model.listaProdutosON!.toList().cast<ProdutoResultStruct>();
-      safeSetState(() {});
-      // FiltroLinha
-      _model.listaLinha = await actions.carregarFiltros(
-        'Linha',
-      );
-      // FiltroGrupo
-      _model.listaGrupo = await actions.carregarFiltros(
-        'Grupo',
-      );
-      // FiltroFabricante
-      _model.listaFab = await actions.carregarFiltros(
-        'Fabricante',
-      );
-      // FiltroMarca
-      _model.listaMarca = await actions.carregarFiltros(
-        'Marca',
-      );
-      _model.dadosCarregados = true;
+          _model.resultadoOnLoad!.toList().cast<ProdutoResultStruct>();
       safeSetState(() {});
     });
 
@@ -171,6 +166,7 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                                   _model.filtroPromocao,
                                   functions.resolverCodFilial(
                                       FFAppState().empresa_codigo),
+                                  _model.filtroDataEntrada,
                                 );
                                 _model.listaProdutos = _model.resultadoBusca!
                                     .toList()
@@ -267,8 +263,8 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                                 hoverColor: Colors.transparent,
                                 highlightColor: Colors.transparent,
                                 onTap: () async {
-                                  _model.isFiltroExpanded = true;
-                                  _model.dadosCarregados = true;
+                                  _model.isFiltroExpanded =
+                                      !_model.isFiltroExpanded;
                                   safeSetState(() {});
                                 },
                                 child: Row(
@@ -337,406 +333,409 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                             ),
                           ),
                         ),
-                        Builder(
-                          builder: (context) {
-                            if (_model.isFiltroExpanded &&
-                                _model.dadosCarregados) {
-                              return Padding(
+                        if (_model.isFiltroExpanded && _model.dadosCarregados)
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                16.0, 0.0, 16.0, 0.0),
+                            child: Container(
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                                boxShadow: [
+                                  BoxShadow(
+                                    blurRadius: 4.0,
+                                    color: Color(0x33000000),
+                                    offset: Offset(
+                                      0.0,
+                                      2.0,
+                                    ),
+                                  )
+                                ],
+                                borderRadius: BorderRadius.circular(12.0),
+                              ),
+                              child: Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     16.0, 0.0, 16.0, 0.0),
-                                child: Container(
-                                  width: double.infinity,
-                                  decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryBackground,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        blurRadius: 4.0,
-                                        color: Color(0x33000000),
-                                        offset: Offset(
-                                          0.0,
-                                          2.0,
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
+                                  children: [
+                                    InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        _model.filtroLinha = _model
+                                            .filtroLinhaModel.dropDownValue!;
+                                        safeSetState(() {});
+                                      },
+                                      child: wrapWithModel(
+                                        model: _model.filtroLinhaModel,
+                                        updateCallback: () =>
+                                            safeSetState(() {}),
+                                        child: DropDownWidget(
+                                          placeHolder: 'Todas as linhas',
+                                          titulo: 'Linha',
+                                          listaFiltro: _model.listaLinha,
                                         ),
-                                      )
-                                    ],
-                                    borderRadius: BorderRadius.circular(12.0),
-                                  ),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        16.0, 0.0, 16.0, 0.0),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
+                                      ),
+                                    ),
+                                    InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        _model.filtroGrupo = _model
+                                            .filtroGrupoModel.dropDownValue!;
+                                        safeSetState(() {});
+                                      },
+                                      child: wrapWithModel(
+                                        model: _model.filtroGrupoModel,
+                                        updateCallback: () =>
+                                            safeSetState(() {}),
+                                        child: DropDownWidget(
+                                          placeHolder: 'Todos os grupos',
+                                          titulo: 'Grupo',
+                                          listaFiltro: _model.listaGrupo,
+                                        ),
+                                      ),
+                                    ),
+                                    InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        _model.filtroFabricante = _model
+                                            .filtroFabricanteModel
+                                            .dropDownValue!;
+                                        safeSetState(() {});
+                                      },
+                                      child: wrapWithModel(
+                                        model: _model.filtroFabricanteModel,
+                                        updateCallback: () =>
+                                            safeSetState(() {}),
+                                        child: DropDownWidget(
+                                          placeHolder: 'Todos os fabricantes',
+                                          titulo: 'Fabricante',
+                                          listaFiltro: _model.listaFab,
+                                        ),
+                                      ),
+                                    ),
+                                    InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        _model.filtroMarca = _model
+                                            .filtroMarcaModel.dropDownValue!;
+                                        safeSetState(() {});
+                                      },
+                                      child: wrapWithModel(
+                                        model: _model.filtroMarcaModel,
+                                        updateCallback: () =>
+                                            safeSetState(() {}),
+                                        child: DropDownWidget(
+                                          placeHolder: 'Todas as marcas',
+                                          titulo: 'Marca',
+                                          listaFiltro: _model.listaMarca,
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () async {
+                                          _model.filtroDataEntrada = _model
+                                              .filtroDataEntModel.dropDownValue;
+                                          safeSetState(() {});
+                                        },
+                                        child: wrapWithModel(
+                                          model: _model.filtroDataEntModel,
+                                          updateCallback: () =>
+                                              safeSetState(() {}),
+                                          child: DropDownWidget(
+                                            placeHolder: 'Todas',
+                                            titulo: 'Data de entrada',
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Row(
+                                      mainAxisSize: MainAxisSize.max,
                                       mainAxisAlignment:
-                                          MainAxisAlignment.start,
+                                          MainAxisAlignment.spaceBetween,
                                       crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
+                                          CrossAxisAlignment.center,
                                       children: [
-                                        InkWell(
-                                          splashColor: Colors.transparent,
-                                          focusColor: Colors.transparent,
-                                          hoverColor: Colors.transparent,
-                                          highlightColor: Colors.transparent,
-                                          onTap: () async {
-                                            _model.filtroLinha = _model
-                                                .filtroLinhaModel
-                                                .dropDownValue!;
-                                            safeSetState(() {});
-                                          },
-                                          child: wrapWithModel(
-                                            model: _model.filtroLinhaModel,
-                                            updateCallback: () =>
-                                                safeSetState(() {}),
-                                            child: DropDownWidget(
-                                              placeHolder: 'Todas as linhas',
-                                              titulo: 'Linha',
-                                              listaFiltro: _model.listaLinha,
-                                            ),
-                                          ),
-                                        ),
-                                        InkWell(
-                                          splashColor: Colors.transparent,
-                                          focusColor: Colors.transparent,
-                                          hoverColor: Colors.transparent,
-                                          highlightColor: Colors.transparent,
-                                          onTap: () async {
-                                            _model.filtroGrupo = _model
-                                                .filtroGrupoModel
-                                                .dropDownValue!;
-                                            safeSetState(() {});
-                                          },
-                                          child: wrapWithModel(
-                                            model: _model.filtroGrupoModel,
-                                            updateCallback: () =>
-                                                safeSetState(() {}),
-                                            child: DropDownWidget(
-                                              placeHolder: 'Todos os grupos',
-                                              titulo: 'Grupo',
-                                              listaFiltro: _model.listaGrupo,
-                                            ),
-                                          ),
-                                        ),
-                                        InkWell(
-                                          splashColor: Colors.transparent,
-                                          focusColor: Colors.transparent,
-                                          hoverColor: Colors.transparent,
-                                          highlightColor: Colors.transparent,
-                                          onTap: () async {
-                                            _model.filtroFabricante = _model
-                                                .filtroFabricanteModel
-                                                .dropDownValue!;
-                                            safeSetState(() {});
-                                          },
-                                          child: wrapWithModel(
-                                            model: _model.filtroFabricanteModel,
-                                            updateCallback: () =>
-                                                safeSetState(() {}),
-                                            child: DropDownWidget(
-                                              placeHolder:
-                                                  'Todos os fabricantes',
-                                              titulo: 'Fabricante',
-                                              listaFiltro: _model.listaFab,
-                                            ),
-                                          ),
-                                        ),
-                                        InkWell(
-                                          splashColor: Colors.transparent,
-                                          focusColor: Colors.transparent,
-                                          hoverColor: Colors.transparent,
-                                          highlightColor: Colors.transparent,
-                                          onTap: () async {
-                                            _model.filtroMarca = _model
-                                                .filtroMarcaModel
-                                                .dropDownValue!;
-                                            safeSetState(() {});
-                                          },
-                                          child: wrapWithModel(
-                                            model: _model.filtroMarcaModel,
-                                            updateCallback: () =>
-                                                safeSetState(() {}),
-                                            child: DropDownWidget(
-                                              placeHolder: 'Todas as marcas',
-                                              titulo: 'Marca',
-                                              listaFiltro: _model.listaMarca,
-                                            ),
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: InkWell(
-                                            splashColor: Colors.transparent,
-                                            focusColor: Colors.transparent,
-                                            hoverColor: Colors.transparent,
-                                            highlightColor: Colors.transparent,
-                                            onTap: () async {
-                                              _model.filtroDataEntrada = _model
-                                                  .filtroDataEntModel
-                                                  .dropDownValue;
-                                              safeSetState(() {});
-                                            },
-                                            child: wrapWithModel(
-                                              model: _model.filtroDataEntModel,
-                                              updateCallback: () =>
-                                                  safeSetState(() {}),
-                                              child: DropDownWidget(
-                                                placeHolder: 'Todas',
-                                                titulo: 'Data de entrada',
-                                              ),
-                                            ),
-                                          ),
-                                        ),
                                         Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
+                                          mainAxisSize: MainAxisSize.min,
                                           crossAxisAlignment:
                                               CrossAxisAlignment.center,
                                           children: [
-                                            Row(
-                                              mainAxisSize: MainAxisSize.min,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              children: [
-                                                Theme(
-                                                  data: ThemeData(
-                                                    checkboxTheme:
-                                                        CheckboxThemeData(
-                                                      shape:
-                                                          RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(4.0),
-                                                      ),
-                                                    ),
-                                                    unselectedWidgetColor:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .secondaryText,
-                                                  ),
-                                                  child: Checkbox(
-                                                    value: _model
-                                                            .checkboxPromoValue ??=
-                                                        _model.filtroPromocao,
-                                                    onChanged:
-                                                        (newValue) async {
-                                                      safeSetState(() => _model
-                                                              .checkboxPromoValue =
-                                                          newValue!);
-                                                      if (newValue!) {
-                                                        _model.filtroPromocao =
-                                                            _model
-                                                                .checkboxPromoValue!;
-                                                        safeSetState(() {});
-                                                      } else {
-                                                        _model.filtroPromocao =
-                                                            _model
-                                                                .checkboxPromoValue!;
-                                                        safeSetState(() {});
-                                                      }
-                                                    },
-                                                    side: (FlutterFlowTheme.of(
-                                                                    context)
-                                                                .secondaryText !=
-                                                            null)
-                                                        ? BorderSide(
-                                                            width: 2,
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .secondaryText,
-                                                          )
-                                                        : null,
-                                                    activeColor:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .primary,
-                                                    checkColor:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .primaryBackground,
-                                                  ),
-                                                ),
-                                                Container(
-                                                  width: 8.0,
-                                                ),
-                                                Text(
-                                                  'Só promoções',
-                                                  style: TextStyle(),
-                                                ),
-                                              ],
-                                            ),
-                                            Row(
-                                              mainAxisSize: MainAxisSize.min,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              children: [
-                                                Theme(
-                                                  data: ThemeData(
-                                                    checkboxTheme:
-                                                        CheckboxThemeData(
-                                                      shape:
-                                                          RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(4.0),
-                                                      ),
-                                                    ),
-                                                    unselectedWidgetColor:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .secondaryText,
-                                                  ),
-                                                  child: Checkbox(
-                                                    value: _model
-                                                            .checkboxEstoqueValue ??=
-                                                        _model.filtroEstoque,
-                                                    onChanged:
-                                                        (newValue) async {
-                                                      safeSetState(() => _model
-                                                              .checkboxEstoqueValue =
-                                                          newValue!);
-                                                      if (newValue!) {
-                                                        _model.filtroEstoque =
-                                                            _model
-                                                                .checkboxEstoqueValue!;
-                                                        safeSetState(() {});
-                                                      } else {
-                                                        _model.filtroEstoque =
-                                                            _model
-                                                                .checkboxEstoqueValue!;
-                                                        safeSetState(() {});
-                                                      }
-                                                    },
-                                                    side: (FlutterFlowTheme.of(
-                                                                    context)
-                                                                .secondaryText !=
-                                                            null)
-                                                        ? BorderSide(
-                                                            width: 2,
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .secondaryText,
-                                                          )
-                                                        : null,
-                                                    activeColor:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .primary,
-                                                    checkColor:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .primaryBackground,
-                                                  ),
-                                                ),
-                                                Container(
-                                                  width: 8.0,
-                                                ),
-                                                Text(
-                                                  'Com estoque',
-                                                  style: TextStyle(),
-                                                ),
-                                              ],
-                                            ),
-                                          ].divide(SizedBox(width: 12.0)),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 8.0, 0.0, 0.0),
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              Expanded(
-                                                flex: 1,
-                                                child: FFButtonWidget(
-                                                  onPressed: () async {
-                                                    await actions
-                                                        .limparFiltros();
-                                                  },
-                                                  text: 'Limpar',
-                                                  icon: Icon(
-                                                    Icons.clear,
-                                                    size: 20.0,
-                                                  ),
-                                                  options: FFButtonOptions(
-                                                    height: 42.0,
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 0.0,
-                                                                0.0, 0.0),
-                                                    iconPadding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 0.0,
-                                                                0.0, 0.0),
-                                                    iconColor: Colors.white,
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .alternate,
-                                                    textStyle: TextStyle(
-                                                      color: Colors.white,
-                                                    ),
+                                            Theme(
+                                              data: ThemeData(
+                                                checkboxTheme:
+                                                    CheckboxThemeData(
+                                                  shape: RoundedRectangleBorder(
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                            8.0),
+                                                            4.0),
                                                   ),
                                                 ),
+                                                unselectedWidgetColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryText,
                                               ),
-                                              Expanded(
-                                                flex: 2,
-                                                child: FFButtonWidget(
-                                                  onPressed: () async {
-                                                    await actions
-                                                        .filtrarProdutos();
-                                                  },
-                                                  text: 'Aplicar Filtros',
-                                                  icon: Icon(
-                                                    Icons.check,
-                                                    size: 20.0,
-                                                  ),
-                                                  options: FFButtonOptions(
-                                                    height: 42.0,
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 0.0,
-                                                                0.0, 0.0),
-                                                    iconPadding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 0.0,
-                                                                0.0, 0.0),
-                                                    iconColor: Colors.white,
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
+                                              child: Checkbox(
+                                                value: _model
+                                                        .checkboxPromoValue ??=
+                                                    _model.filtroPromocao,
+                                                onChanged: (newValue) async {
+                                                  safeSetState(() => _model
+                                                          .checkboxPromoValue =
+                                                      newValue!);
+                                                  if (newValue!) {
+                                                    _model.filtroPromocao =
+                                                        _model
+                                                            .checkboxPromoValue!;
+                                                    safeSetState(() {});
+                                                  } else {
+                                                    _model.filtroPromocao =
+                                                        _model
+                                                            .checkboxPromoValue!;
+                                                    safeSetState(() {});
+                                                  }
+                                                },
+                                                side: (FlutterFlowTheme.of(
+                                                                context)
+                                                            .secondaryText !=
+                                                        null)
+                                                    ? BorderSide(
+                                                        width: 2,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .secondaryText,
+                                                      )
+                                                    : null,
+                                                activeColor:
+                                                    FlutterFlowTheme.of(context)
                                                         .primary,
-                                                    textStyle: TextStyle(
-                                                      color: Colors.white,
-                                                    ),
+                                                checkColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryBackground,
+                                              ),
+                                            ),
+                                            Container(
+                                              width: 8.0,
+                                            ),
+                                            Text(
+                                              'Só promoções',
+                                              style: TextStyle(),
+                                            ),
+                                          ],
+                                        ),
+                                        Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Theme(
+                                              data: ThemeData(
+                                                checkboxTheme:
+                                                    CheckboxThemeData(
+                                                  shape: RoundedRectangleBorder(
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                            8.0),
+                                                            4.0),
                                                   ),
                                                 ),
+                                                unselectedWidgetColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryText,
                                               ),
-                                            ].divide(SizedBox(width: 12.0)),
-                                          ),
+                                              child: Checkbox(
+                                                value: _model
+                                                        .checkboxEstoqueValue ??=
+                                                    _model.filtroEstoque,
+                                                onChanged: (newValue) async {
+                                                  safeSetState(() => _model
+                                                          .checkboxEstoqueValue =
+                                                      newValue!);
+                                                  if (newValue!) {
+                                                    _model.filtroEstoque = _model
+                                                        .checkboxEstoqueValue!;
+                                                    safeSetState(() {});
+                                                  } else {
+                                                    _model.filtroEstoque = _model
+                                                        .checkboxEstoqueValue!;
+                                                    safeSetState(() {});
+                                                  }
+                                                },
+                                                side: (FlutterFlowTheme.of(
+                                                                context)
+                                                            .secondaryText !=
+                                                        null)
+                                                    ? BorderSide(
+                                                        width: 2,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .secondaryText,
+                                                      )
+                                                    : null,
+                                                activeColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primary,
+                                                checkColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryBackground,
+                                              ),
+                                            ),
+                                            Container(
+                                              width: 8.0,
+                                            ),
+                                            Text(
+                                              'Com estoque',
+                                              style: TextStyle(),
+                                            ),
+                                          ],
                                         ),
-                                      ]
-                                          .divide(SizedBox(height: 12.0))
-                                          .addToStart(SizedBox(height: 12.0))
-                                          .addToEnd(SizedBox(height: 12.0)),
+                                      ].divide(SizedBox(width: 12.0)),
                                     ),
-                                  ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 8.0, 0.0, 0.0),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Expanded(
+                                            flex: 1,
+                                            child: FFButtonWidget(
+                                              onPressed: () async {
+                                                _model.filtroLinha = '';
+                                                _model.filtroGrupo = '';
+                                                _model.filtroMarca = '';
+                                                _model.filtroFabricante = '';
+                                                _model.filtroEstoque = false;
+                                                _model.filtroPromocao = false;
+                                                _model.filtroDataEntrada =
+                                                    'Todas';
+                                                safeSetState(() {});
+                                                _model.listaProdutos = _model
+                                                    .resultadoOnLoad!
+                                                    .toList()
+                                                    .cast<
+                                                        ProdutoResultStruct>();
+                                                safeSetState(() {});
+                                              },
+                                              text: 'Limpar',
+                                              icon: Icon(
+                                                Icons.clear,
+                                                size: 20.0,
+                                              ),
+                                              options: FFButtonOptions(
+                                                height: 42.0,
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        0.0, 0.0, 0.0, 0.0),
+                                                iconPadding:
+                                                    EdgeInsetsDirectional
+                                                        .fromSTEB(
+                                                            0.0, 0.0, 0.0, 0.0),
+                                                iconColor: Colors.white,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .alternate,
+                                                textStyle: TextStyle(
+                                                  color: Colors.white,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                              ),
+                                            ),
+                                          ),
+                                          Expanded(
+                                            flex: 2,
+                                            child: FFButtonWidget(
+                                              onPressed: () async {
+                                                _model.resultadoOnLoadFiltro =
+                                                    await actions.buscaProduto(
+                                                  _model
+                                                      .buscaProdutoFieldTextController
+                                                      .text,
+                                                  0,
+                                                  _model.filtroLinha,
+                                                  _model.filtroGrupo,
+                                                  _model.filtroFabricante,
+                                                  _model.filtroMarca,
+                                                  _model.filtroEstoque,
+                                                  _model.filtroPromocao,
+                                                  functions.resolverCodFilial(
+                                                      FFAppState()
+                                                          .empresa_codigo),
+                                                  _model.filtroDataEntrada,
+                                                );
+                                                _model.listaProdutos = _model
+                                                    .resultadoOnLoadFiltro!
+                                                    .toList()
+                                                    .cast<
+                                                        ProdutoResultStruct>();
+                                                safeSetState(() {});
+
+                                                safeSetState(() {});
+                                              },
+                                              text: 'Aplicar Filtros',
+                                              icon: Icon(
+                                                Icons.check,
+                                                size: 20.0,
+                                              ),
+                                              options: FFButtonOptions(
+                                                height: 42.0,
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        0.0, 0.0, 0.0, 0.0),
+                                                iconPadding:
+                                                    EdgeInsetsDirectional
+                                                        .fromSTEB(
+                                                            0.0, 0.0, 0.0, 0.0),
+                                                iconColor: Colors.white,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primary,
+                                                textStyle: TextStyle(
+                                                  color: Colors.white,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                              ),
+                                            ),
+                                          ),
+                                        ].divide(SizedBox(width: 12.0)),
+                                      ),
+                                    ),
+                                  ]
+                                      .divide(SizedBox(height: 12.0))
+                                      .addToStart(SizedBox(height: 12.0))
+                                      .addToEnd(SizedBox(height: 12.0)),
                                 ),
-                              );
-                            } else {
-                              return wrapWithModel(
-                                model: _model.loadingModel1,
-                                updateCallback: () => safeSetState(() {}),
-                                child: LoadingWidget(),
-                              );
-                            }
-                          },
-                        ),
+                              ),
+                            ),
+                          ),
                       ].divide(SizedBox(height: 12.0)),
                     ),
                   ),
@@ -1151,7 +1150,7 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                             );
                           } else {
                             return wrapWithModel(
-                              model: _model.loadingModel2,
+                              model: _model.loadingModel,
                               updateCallback: () => safeSetState(() {}),
                               child: LoadingWidget(),
                             );

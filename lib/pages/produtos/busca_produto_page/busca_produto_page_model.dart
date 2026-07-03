@@ -42,8 +42,6 @@ class BuscaProdutoPageModel extends FlutterFlowModel<BuscaProdutoPageWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  // Stores action output result for [Custom Action - buscaProduto] action in BuscaProdutoPage widget.
-  List<ProdutoResultStruct>? listaProdutosON;
   // Stores action output result for [Custom Action - carregarFiltros] action in BuscaProdutoPage widget.
   List<ListaPadraoStruct>? listaLinha;
   // Stores action output result for [Custom Action - carregarFiltros] action in BuscaProdutoPage widget.
@@ -52,6 +50,8 @@ class BuscaProdutoPageModel extends FlutterFlowModel<BuscaProdutoPageWidget> {
   List<ListaPadraoStruct>? listaFab;
   // Stores action output result for [Custom Action - carregarFiltros] action in BuscaProdutoPage widget.
   List<ListaPadraoStruct>? listaMarca;
+  // Stores action output result for [Custom Action - buscaProduto] action in BuscaProdutoPage widget.
+  List<ProdutoResultStruct>? resultadoOnLoad;
   // State field(s) for BuscaProdutoField widget.
   FocusNode? buscaProdutoFieldFocusNode;
   TextEditingController? buscaProdutoFieldTextController;
@@ -73,10 +73,10 @@ class BuscaProdutoPageModel extends FlutterFlowModel<BuscaProdutoPageWidget> {
   bool? checkboxPromoValue;
   // State field(s) for CheckboxEstoque widget.
   bool? checkboxEstoqueValue;
+  // Stores action output result for [Custom Action - buscaProduto] action in BotaoAplicar widget.
+  List<ProdutoResultStruct>? resultadoOnLoadFiltro;
   // Model for Loading component.
-  late LoadingModel loadingModel1;
-  // Model for Loading component.
-  late LoadingModel loadingModel2;
+  late LoadingModel loadingModel;
 
   @override
   void initState(BuildContext context) {
@@ -85,8 +85,7 @@ class BuscaProdutoPageModel extends FlutterFlowModel<BuscaProdutoPageWidget> {
     filtroFabricanteModel = createModel(context, () => DropDownModel());
     filtroMarcaModel = createModel(context, () => DropDownModel());
     filtroDataEntModel = createModel(context, () => DropDownModel());
-    loadingModel1 = createModel(context, () => LoadingModel());
-    loadingModel2 = createModel(context, () => LoadingModel());
+    loadingModel = createModel(context, () => LoadingModel());
   }
 
   @override
@@ -99,7 +98,6 @@ class BuscaProdutoPageModel extends FlutterFlowModel<BuscaProdutoPageWidget> {
     filtroFabricanteModel.dispose();
     filtroMarcaModel.dispose();
     filtroDataEntModel.dispose();
-    loadingModel1.dispose();
-    loadingModel2.dispose();
+    loadingModel.dispose();
   }
 }

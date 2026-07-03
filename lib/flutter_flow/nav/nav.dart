@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 
 import '/backend/schema/structs/index.dart';
 
-
 import '/main.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
@@ -37,12 +36,40 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       navigatorKey: appNavigatorKey,
-      errorBuilder: (context, state) => LoginPageWidget(),
+      errorBuilder: (context, state) => appStateNotifier.showSplashImage
+          ? Builder(
+              builder: (context) => Container(
+                color: Colors.transparent,
+                child: Center(
+                  child: Image.asset(
+                    'assets/images/2emqy_5.png',
+                    width: 150.0,
+                    height: 120.0,
+                    fit: BoxFit.contain,
+                  ),
+                ),
+              ),
+            )
+          : LoginPageWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => LoginPageWidget(),
+          builder: (context, _) => appStateNotifier.showSplashImage
+              ? Builder(
+                  builder: (context) => Container(
+                    color: Colors.transparent,
+                    child: Center(
+                      child: Image.asset(
+                        'assets/images/2emqy_5.png',
+                        width: 150.0,
+                        height: 120.0,
+                        fit: BoxFit.contain,
+                      ),
+                    ),
+                  ),
+                )
+              : LoginPageWidget(),
         ),
         FFRoute(
           name: HomePageWidget.routeName,
