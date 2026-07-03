@@ -4,6 +4,7 @@ import '/components/loading/loading_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:easy_debounce/easy_debounce.dart';
@@ -50,6 +51,24 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
       );
       _model.listaProdutos =
           _model.listaProdutosON!.toList().cast<ProdutoResultStruct>();
+      safeSetState(() {});
+      // FiltroLinha
+      _model.listaLinha = await actions.carregarFiltros(
+        'Linha',
+      );
+      // FiltroGrupo
+      _model.listaGrupo = await actions.carregarFiltros(
+        'Grupo',
+      );
+      // FiltroFabricante
+      _model.listaFab = await actions.carregarFiltros(
+        'Fabricante',
+      );
+      // FiltroMarca
+      _model.listaMarca = await actions.carregarFiltros(
+        'Marca',
+      );
+      _model.dadosCarregados = true;
       safeSetState(() {});
     });
 
@@ -248,8 +267,8 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                                 hoverColor: Colors.transparent,
                                 highlightColor: Colors.transparent,
                                 onTap: () async {
-                                  _model.isFiltroExpanded =
-                                      !_model.isFiltroExpanded;
+                                  _model.isFiltroExpanded = true;
+                                  _model.dadosCarregados = true;
                                   safeSetState(() {});
                                 },
                                 child: Row(
@@ -294,7 +313,8 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                                     ),
                                     Builder(
                                       builder: (context) {
-                                        if (!_model.isFiltroExpanded) {
+                                        if (_model.isFiltroExpanded &&
+                                            _model.dadosCarregados) {
                                           return Icon(
                                             Icons.keyboard_arrow_up,
                                             color: FlutterFlowTheme.of(context)
@@ -319,7 +339,8 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                         ),
                         Builder(
                           builder: (context) {
-                            if (_model.isFiltroExpanded) {
+                            if (_model.isFiltroExpanded &&
+                                _model.dadosCarregados) {
                               return Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     16.0, 0.0, 16.0, 0.0),
@@ -341,51 +362,368 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                                     borderRadius: BorderRadius.circular(12.0),
                                   ),
                                   child: Padding(
-                                    padding: EdgeInsets.all(12.0),
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        16.0, 0.0, 16.0, 0.0),
                                     child: Column(
-                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.stretch,
                                       children: [
-                                        wrapWithModel(
-                                          model: _model.dropDownModel,
-                                          updateCallback: () =>
-                                              safeSetState(() {}),
-                                          child: DropDownWidget(
-                                            titulo: 'Linha',
-                                            placeHolder: 'Todas as linhas',
-                                            nomeFiltro: 'cadlin00',
+                                        InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onTap: () async {
+                                            _model.filtroLinha = _model
+                                                .filtroLinhaModel
+                                                .dropDownValue!;
+                                            safeSetState(() {});
+                                          },
+                                          child: wrapWithModel(
+                                            model: _model.filtroLinhaModel,
+                                            updateCallback: () =>
+                                                safeSetState(() {}),
+                                            child: DropDownWidget(
+                                              placeHolder: 'Todas as linhas',
+                                              titulo: 'Linha',
+                                              listaFiltro: _model.listaLinha,
+                                            ),
                                           ),
                                         ),
-                                        wrapWithModel(
-                                          model: _model.filtroGrupoModel,
-                                          updateCallback: () =>
-                                              safeSetState(() {}),
-                                          child: DropDownWidget(
-                                            nomeFiltro: 'cadgrp00',
-                                            placeHolder: 'Todos os grupos',
-                                            titulo: 'Grupo',
+                                        InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onTap: () async {
+                                            _model.filtroGrupo = _model
+                                                .filtroGrupoModel
+                                                .dropDownValue!;
+                                            safeSetState(() {});
+                                          },
+                                          child: wrapWithModel(
+                                            model: _model.filtroGrupoModel,
+                                            updateCallback: () =>
+                                                safeSetState(() {}),
+                                            child: DropDownWidget(
+                                              placeHolder: 'Todos os grupos',
+                                              titulo: 'Grupo',
+                                              listaFiltro: _model.listaGrupo,
+                                            ),
                                           ),
                                         ),
-                                        wrapWithModel(
-                                          model: _model.filtroFabricanteModel,
-                                          updateCallback: () =>
-                                              safeSetState(() {}),
-                                          child: DropDownWidget(
-                                            nomeFiltro: 'cadfor00',
-                                            placeHolder: 'Todos os fabricantes',
-                                            titulo: 'Fabricante',
+                                        InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onTap: () async {
+                                            _model.filtroFabricante = _model
+                                                .filtroFabricanteModel
+                                                .dropDownValue!;
+                                            safeSetState(() {});
+                                          },
+                                          child: wrapWithModel(
+                                            model: _model.filtroFabricanteModel,
+                                            updateCallback: () =>
+                                                safeSetState(() {}),
+                                            child: DropDownWidget(
+                                              placeHolder:
+                                                  'Todos os fabricantes',
+                                              titulo: 'Fabricante',
+                                              listaFiltro: _model.listaFab,
+                                            ),
                                           ),
                                         ),
-                                        wrapWithModel(
-                                          model: _model.filtroMarcaModel,
-                                          updateCallback: () =>
-                                              safeSetState(() {}),
-                                          child: DropDownWidget(
-                                            nomeFiltro: 'cadmar00',
-                                            placeHolder: 'Todas as marcas',
-                                            titulo: 'Marca',
+                                        InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onTap: () async {
+                                            _model.filtroMarca = _model
+                                                .filtroMarcaModel
+                                                .dropDownValue!;
+                                            safeSetState(() {});
+                                          },
+                                          child: wrapWithModel(
+                                            model: _model.filtroMarcaModel,
+                                            updateCallback: () =>
+                                                safeSetState(() {}),
+                                            child: DropDownWidget(
+                                              placeHolder: 'Todas as marcas',
+                                              titulo: 'Marca',
+                                              listaFiltro: _model.listaMarca,
+                                            ),
                                           ),
                                         ),
-                                      ],
+                                        Expanded(
+                                          child: InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              _model.filtroDataEntrada = _model
+                                                  .filtroDataEntModel
+                                                  .dropDownValue;
+                                              safeSetState(() {});
+                                            },
+                                            child: wrapWithModel(
+                                              model: _model.filtroDataEntModel,
+                                              updateCallback: () =>
+                                                  safeSetState(() {}),
+                                              child: DropDownWidget(
+                                                placeHolder: 'Todas',
+                                                titulo: 'Data de entrada',
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                Theme(
+                                                  data: ThemeData(
+                                                    checkboxTheme:
+                                                        CheckboxThemeData(
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(4.0),
+                                                      ),
+                                                    ),
+                                                    unselectedWidgetColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .secondaryText,
+                                                  ),
+                                                  child: Checkbox(
+                                                    value: _model
+                                                            .checkboxPromoValue ??=
+                                                        _model.filtroPromocao,
+                                                    onChanged:
+                                                        (newValue) async {
+                                                      safeSetState(() => _model
+                                                              .checkboxPromoValue =
+                                                          newValue!);
+                                                      if (newValue!) {
+                                                        _model.filtroPromocao =
+                                                            _model
+                                                                .checkboxPromoValue!;
+                                                        safeSetState(() {});
+                                                      } else {
+                                                        _model.filtroPromocao =
+                                                            _model
+                                                                .checkboxPromoValue!;
+                                                        safeSetState(() {});
+                                                      }
+                                                    },
+                                                    side: (FlutterFlowTheme.of(
+                                                                    context)
+                                                                .secondaryText !=
+                                                            null)
+                                                        ? BorderSide(
+                                                            width: 2,
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .secondaryText,
+                                                          )
+                                                        : null,
+                                                    activeColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .primary,
+                                                    checkColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .primaryBackground,
+                                                  ),
+                                                ),
+                                                Container(
+                                                  width: 8.0,
+                                                ),
+                                                Text(
+                                                  'Só promoções',
+                                                  style: TextStyle(),
+                                                ),
+                                              ],
+                                            ),
+                                            Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                Theme(
+                                                  data: ThemeData(
+                                                    checkboxTheme:
+                                                        CheckboxThemeData(
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(4.0),
+                                                      ),
+                                                    ),
+                                                    unselectedWidgetColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .secondaryText,
+                                                  ),
+                                                  child: Checkbox(
+                                                    value: _model
+                                                            .checkboxEstoqueValue ??=
+                                                        _model.filtroEstoque,
+                                                    onChanged:
+                                                        (newValue) async {
+                                                      safeSetState(() => _model
+                                                              .checkboxEstoqueValue =
+                                                          newValue!);
+                                                      if (newValue!) {
+                                                        _model.filtroEstoque =
+                                                            _model
+                                                                .checkboxEstoqueValue!;
+                                                        safeSetState(() {});
+                                                      } else {
+                                                        _model.filtroEstoque =
+                                                            _model
+                                                                .checkboxEstoqueValue!;
+                                                        safeSetState(() {});
+                                                      }
+                                                    },
+                                                    side: (FlutterFlowTheme.of(
+                                                                    context)
+                                                                .secondaryText !=
+                                                            null)
+                                                        ? BorderSide(
+                                                            width: 2,
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .secondaryText,
+                                                          )
+                                                        : null,
+                                                    activeColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .primary,
+                                                    checkColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .primaryBackground,
+                                                  ),
+                                                ),
+                                                Container(
+                                                  width: 8.0,
+                                                ),
+                                                Text(
+                                                  'Com estoque',
+                                                  style: TextStyle(),
+                                                ),
+                                              ],
+                                            ),
+                                          ].divide(SizedBox(width: 12.0)),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 8.0, 0.0, 0.0),
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Expanded(
+                                                flex: 1,
+                                                child: FFButtonWidget(
+                                                  onPressed: () async {
+                                                    await actions
+                                                        .limparFiltros();
+                                                  },
+                                                  text: 'Limpar',
+                                                  icon: Icon(
+                                                    Icons.clear,
+                                                    size: 20.0,
+                                                  ),
+                                                  options: FFButtonOptions(
+                                                    height: 42.0,
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 0.0,
+                                                                0.0, 0.0),
+                                                    iconPadding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 0.0,
+                                                                0.0, 0.0),
+                                                    iconColor: Colors.white,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .alternate,
+                                                    textStyle: TextStyle(
+                                                      color: Colors.white,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
+                                                  ),
+                                                ),
+                                              ),
+                                              Expanded(
+                                                flex: 2,
+                                                child: FFButtonWidget(
+                                                  onPressed: () async {
+                                                    await actions
+                                                        .filtrarProdutos();
+                                                  },
+                                                  text: 'Aplicar Filtros',
+                                                  icon: Icon(
+                                                    Icons.check,
+                                                    size: 20.0,
+                                                  ),
+                                                  options: FFButtonOptions(
+                                                    height: 42.0,
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 0.0,
+                                                                0.0, 0.0),
+                                                    iconPadding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 0.0,
+                                                                0.0, 0.0),
+                                                    iconColor: Colors.white,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primary,
+                                                    textStyle: TextStyle(
+                                                      color: Colors.white,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
+                                                  ),
+                                                ),
+                                              ),
+                                            ].divide(SizedBox(width: 12.0)),
+                                          ),
+                                        ),
+                                      ]
+                                          .divide(SizedBox(height: 12.0))
+                                          .addToStart(SizedBox(height: 12.0))
+                                          .addToEnd(SizedBox(height: 12.0)),
                                     ),
                                   ),
                                 ),
@@ -469,8 +807,12 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                                                               .center,
                                                       children: [
                                                         Text(
-                                                          listaProdutoItem
-                                                              .codigo,
+                                                          valueOrDefault<
+                                                              String>(
+                                                            listaProdutoItem
+                                                                .codigo,
+                                                            '00000',
+                                                          ),
                                                           style: FlutterFlowTheme
                                                                   .of(context)
                                                               .bodySmall
@@ -505,8 +847,12 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                                                         Expanded(
                                                           flex: 1,
                                                           child: Text(
-                                                            listaProdutoItem
-                                                                .descricao,
+                                                            valueOrDefault<
+                                                                String>(
+                                                              listaProdutoItem
+                                                                  .descricao,
+                                                              'Descrição',
+                                                            ),
                                                             maxLines: 1,
                                                             style: FlutterFlowTheme
                                                                     .of(context)
@@ -547,11 +893,87 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                                                           MainAxisSize.max,
                                                       mainAxisAlignment:
                                                           MainAxisAlignment
-                                                              .start,
+                                                              .spaceBetween,
                                                       crossAxisAlignment:
                                                           CrossAxisAlignment
                                                               .center,
                                                       children: [
+                                                        Column(
+                                                          mainAxisSize:
+                                                              MainAxisSize.min,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .start,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Text(
+                                                              'UN',
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodySmall
+                                                                  .override(
+                                                                    font: GoogleFonts
+                                                                        .roboto(
+                                                                      fontWeight: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodySmall
+                                                                          .fontWeight,
+                                                                      fontStyle: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodySmall
+                                                                          .fontStyle,
+                                                                    ),
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .secondaryText,
+                                                                    letterSpacing:
+                                                                        0.0,
+                                                                    fontWeight: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodySmall
+                                                                        .fontWeight,
+                                                                    fontStyle: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodySmall
+                                                                        .fontStyle,
+                                                                  ),
+                                                            ),
+                                                            Text(
+                                                              valueOrDefault<
+                                                                  String>(
+                                                                listaProdutoItem
+                                                                    .unidade,
+                                                                'UN',
+                                                              ),
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMedium
+                                                                  .override(
+                                                                    font: GoogleFonts
+                                                                        .roboto(
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w500,
+                                                                      fontStyle: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyMedium
+                                                                          .fontStyle,
+                                                                    ),
+                                                                    letterSpacing:
+                                                                        0.0,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
+                                                                    fontStyle: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .fontStyle,
+                                                                  ),
+                                                            ),
+                                                          ],
+                                                        ),
                                                         Column(
                                                           mainAxisSize:
                                                               MainAxisSize.min,
@@ -595,19 +1017,22 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                                                                   ),
                                                             ),
                                                             Text(
-                                                              listaProdutoItem
-                                                                  .estoqueAtual
-                                                                  .toString(),
+                                                              valueOrDefault<
+                                                                  String>(
+                                                                listaProdutoItem
+                                                                    .estoqueAtual
+                                                                    .toString(),
+                                                                '0,00',
+                                                              ),
                                                               style: FlutterFlowTheme
                                                                       .of(context)
                                                                   .bodyMedium
                                                                   .override(
                                                                     font: GoogleFonts
                                                                         .roboto(
-                                                                      fontWeight: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyMedium
-                                                                          .fontWeight,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w500,
                                                                       fontStyle: FlutterFlowTheme.of(
                                                                               context)
                                                                           .bodyMedium
@@ -615,10 +1040,9 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                                                                     ),
                                                                     letterSpacing:
                                                                         0.0,
-                                                                    fontWeight: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyMedium
-                                                                        .fontWeight,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
                                                                     fontStyle: FlutterFlowTheme.of(
                                                                             context)
                                                                         .bodyMedium
@@ -670,30 +1094,37 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                                                                   ),
                                                             ),
                                                             Text(
-                                                              listaProdutoItem
-                                                                  .preco
-                                                                  .toString(),
+                                                              valueOrDefault<
+                                                                  String>(
+                                                                listaProdutoItem
+                                                                    .preco
+                                                                    .toString(),
+                                                                '0,00',
+                                                              ),
                                                               style: FlutterFlowTheme
                                                                       .of(context)
                                                                   .bodyMedium
                                                                   .override(
                                                                     font: GoogleFonts
                                                                         .roboto(
-                                                                      fontWeight: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyMedium
-                                                                          .fontWeight,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w500,
                                                                       fontStyle: FlutterFlowTheme.of(
                                                                               context)
                                                                           .bodyMedium
                                                                           .fontStyle,
                                                                     ),
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .tertiary,
+                                                                    fontSize:
+                                                                        16.0,
                                                                     letterSpacing:
                                                                         0.0,
-                                                                    fontWeight: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyMedium
-                                                                        .fontWeight,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
                                                                     fontStyle: FlutterFlowTheme.of(
                                                                             context)
                                                                         .bodyMedium

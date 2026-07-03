@@ -1,10 +1,9 @@
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
-import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'drop_down_model.dart';
 export 'drop_down_model.dart';
@@ -14,12 +13,12 @@ class DropDownWidget extends StatefulWidget {
     super.key,
     required this.titulo,
     required this.placeHolder,
-    required this.nomeFiltro,
+    this.listaFiltro,
   });
 
   final String? titulo;
   final String? placeHolder;
-  final String? nomeFiltro;
+  final List<ListaPadraoStruct>? listaFiltro;
 
   @override
   State<DropDownWidget> createState() => _DropDownWidgetState();
@@ -38,13 +37,6 @@ class _DropDownWidgetState extends State<DropDownWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => DropDownModel());
-
-    // On component load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.retornoFiltro = await actions.carregarFiltros(
-        widget.nomeFiltro!,
-      );
-    });
   }
 
   @override
@@ -80,10 +72,10 @@ class _DropDownWidgetState extends State<DropDownWidget> {
         ),
         FlutterFlowDropDown<String>(
           controller: _model.dropDownValueController ??=
-              FormFieldController<String>(null),
-          options: List<String>.from(
-              _model.retornoFiltro!.map((e) => e.codigo).toList()),
-          optionLabels: _model.retornoFiltro!.map((e) => e.descricao).toList(),
+              FormFieldController<String>(
+            _model.dropDownValue ??= widget.placeHolder,
+          ),
+          options: ['Todas', 'Hoje', 'Ontem', 'Últimos 7 dias'],
           onChanged: (val) => safeSetState(() => _model.dropDownValue = val),
           width: 250.0,
           height: 40.0,

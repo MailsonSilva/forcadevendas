@@ -36,10 +36,22 @@ class BuscaProdutoPageModel extends FlutterFlowModel<BuscaProdutoPageWidget> {
 
   bool isFiltroExpanded = false;
 
+  String? filtroDataEntrada = 'Todas';
+
+  bool dadosCarregados = false;
+
   ///  State fields for stateful widgets in this page.
 
   // Stores action output result for [Custom Action - buscaProduto] action in BuscaProdutoPage widget.
   List<ProdutoResultStruct>? listaProdutosON;
+  // Stores action output result for [Custom Action - carregarFiltros] action in BuscaProdutoPage widget.
+  List<ListaPadraoStruct>? listaLinha;
+  // Stores action output result for [Custom Action - carregarFiltros] action in BuscaProdutoPage widget.
+  List<ListaPadraoStruct>? listaGrupo;
+  // Stores action output result for [Custom Action - carregarFiltros] action in BuscaProdutoPage widget.
+  List<ListaPadraoStruct>? listaFab;
+  // Stores action output result for [Custom Action - carregarFiltros] action in BuscaProdutoPage widget.
+  List<ListaPadraoStruct>? listaMarca;
   // State field(s) for BuscaProdutoField widget.
   FocusNode? buscaProdutoFieldFocusNode;
   TextEditingController? buscaProdutoFieldTextController;
@@ -47,14 +59,20 @@ class BuscaProdutoPageModel extends FlutterFlowModel<BuscaProdutoPageWidget> {
       buscaProdutoFieldTextControllerValidator;
   // Stores action output result for [Custom Action - buscaProduto] action in BuscaProdutoField widget.
   List<ProdutoResultStruct>? resultadoBusca;
-  // Model for DropDown component.
-  late DropDownModel dropDownModel;
+  // Model for FiltroLinha.
+  late DropDownModel filtroLinhaModel;
   // Model for FiltroGrupo.
   late DropDownModel filtroGrupoModel;
   // Model for FiltroFabricante.
   late DropDownModel filtroFabricanteModel;
   // Model for FiltroMarca.
   late DropDownModel filtroMarcaModel;
+  // Model for FiltroDataEnt.
+  late DropDownModel filtroDataEntModel;
+  // State field(s) for CheckboxPromo widget.
+  bool? checkboxPromoValue;
+  // State field(s) for CheckboxEstoque widget.
+  bool? checkboxEstoqueValue;
   // Model for Loading component.
   late LoadingModel loadingModel1;
   // Model for Loading component.
@@ -62,10 +80,11 @@ class BuscaProdutoPageModel extends FlutterFlowModel<BuscaProdutoPageWidget> {
 
   @override
   void initState(BuildContext context) {
-    dropDownModel = createModel(context, () => DropDownModel());
+    filtroLinhaModel = createModel(context, () => DropDownModel());
     filtroGrupoModel = createModel(context, () => DropDownModel());
     filtroFabricanteModel = createModel(context, () => DropDownModel());
     filtroMarcaModel = createModel(context, () => DropDownModel());
+    filtroDataEntModel = createModel(context, () => DropDownModel());
     loadingModel1 = createModel(context, () => LoadingModel());
     loadingModel2 = createModel(context, () => LoadingModel());
   }
@@ -75,10 +94,11 @@ class BuscaProdutoPageModel extends FlutterFlowModel<BuscaProdutoPageWidget> {
     buscaProdutoFieldFocusNode?.dispose();
     buscaProdutoFieldTextController?.dispose();
 
-    dropDownModel.dispose();
+    filtroLinhaModel.dispose();
     filtroGrupoModel.dispose();
     filtroFabricanteModel.dispose();
     filtroMarcaModel.dispose();
+    filtroDataEntModel.dispose();
     loadingModel1.dispose();
     loadingModel2.dispose();
   }

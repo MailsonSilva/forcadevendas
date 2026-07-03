@@ -19,6 +19,7 @@ Future<List<ProdutoResultStruct>> buscaProduto(
   bool? apenasEstoque,
   bool? apenasPromocao,
   int? codFilial,
+  String? dataEntrada,
 ) async {
   try {
     final dbPath = join(await getDatabasesPath(), 'dbforcacad001.db');
@@ -55,11 +56,12 @@ Future<List<ProdutoResultStruct>> buscaProduto(
     final String fab = filtroFabricante ?? '';
     final String marca = filtroMarca ?? '';
     final bool estoqueOpt = apenasEstoque ?? false;
+    final String dataEnt = dataEntrada ?? 'Todas';
 
     final int filial = (codFilial == null || codFilial == 0) ? 1 : codFilial;
 
     print(
-        'DIAGNOSTICO: Parametros de busca -> busca: "$busca", linha: "$linha", grupo: "$grupo", filial: $filial');
+        'DIAGNOSTICO: Parametros de busca -> busca: "$busca", linha: "$linha", grupo: "$grupo", filial: $filial, dataEntrada: "$dataEnt", promo: $apenasPromocao, estoque: $estoqueOpt');
 
     List<String> condicoes = [];
     List<dynamic> whereBinds = [];
@@ -98,6 +100,31 @@ Future<List<ProdutoResultStruct>> buscaProduto(
           '(COALESCE(e.pro00_qtdest, 0) - COALESCE(e.pro00_qtdpen, 0)) > 0');
     }
 
+    if (dataEnt != 'Todas') {
+      DateTime targetDate;
+      final now = DateTime.now();
+      if (dataEnt == 'Hoje') {
+        targetDate = DateTime(now.year, now.month, now.day);
+      } else if (dataEnt == 'Ontem') {
+        targetDate = DateTime(now.year, now.month, now.day)
+            .subtract(const Duration(days: 1));
+      } else {
+        targetDate = DateTime(now.year, now.month, now.day)
+            .subtract(const Duration(days: 7));
+      }
+      final dateStr =
+          "${targetDate.year}-${targetDate.month.toString().padLeft(2, '0')}-${targetDate.day.toString().padLeft(2, '0')}";
+      condicoes.add('d.pro00_entdat >= ?');
+      whereBinds.add(dateStr);
+    }
+
+    if (apenasPromocao ?? false) {
+      final dateStr =
+          "${DateTime.now().year}-${DateTime.now().month.toString().padLeft(2, '0')}-${DateTime.now().day.toString().padLeft(2, '0')}";
+      condicoes.add('? BETWEEN prm.pro00_prmini AND prm.pro00_prmfim');
+      whereBinds.add(dateStr);
+    }
+
     String whereClause =
         condicoes.isNotEmpty ? 'WHERE ' + condicoes.join(' AND ') : '';
 
@@ -112,6 +139,8 @@ Future<List<ProdutoResultStruct>> buscaProduto(
         "FROM cadpro00 p "
         "LEFT JOIN estpcopro00 t ON t.pro00_codpro = p.pro00_codigo "
         "LEFT JOIN estpro00 e ON e.pro00_codpro = p.pro00_codigo AND e.pro00_codfil = ? "
+        "LEFT JOIN estprodat00 d ON d.pro00_codpro = p.pro00_codigo "
+        "LEFT JOIN estprmreg00 prm ON prm.pro00_codpro = p.pro00_codigo "
         " $whereClause "
         "ORDER BY p.pro00_descri "
         "LIMIT 100 OFFSET ?";
