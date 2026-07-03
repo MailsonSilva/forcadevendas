@@ -2,6 +2,7 @@ import '/backend/schema/structs/index.dart';
 import '/components/drop_down/drop_down_widget.dart';
 import '/components/loading/loading_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/form_field_controller.dart';
 import 'busca_produto_page_widget.dart' show BuscaProdutoPageWidget;
 import 'package:flutter/material.dart';
 
@@ -67,8 +68,9 @@ class BuscaProdutoPageModel extends FlutterFlowModel<BuscaProdutoPageWidget> {
   late DropDownModel filtroFabricanteModel;
   // Model for FiltroMarca.
   late DropDownModel filtroMarcaModel;
-  // Model for FiltroDataEnt.
-  late DropDownModel filtroDataEntModel;
+  // State field(s) for DdDataEnt widget.
+  String? ddDataEntValue;
+  FormFieldController<String>? ddDataEntValueController;
   // State field(s) for CheckboxPromo widget.
   bool? checkboxPromoValue;
   // State field(s) for CheckboxEstoque widget.
@@ -84,7 +86,6 @@ class BuscaProdutoPageModel extends FlutterFlowModel<BuscaProdutoPageWidget> {
     filtroGrupoModel = createModel(context, () => DropDownModel());
     filtroFabricanteModel = createModel(context, () => DropDownModel());
     filtroMarcaModel = createModel(context, () => DropDownModel());
-    filtroDataEntModel = createModel(context, () => DropDownModel());
     loadingModel = createModel(context, () => LoadingModel());
   }
 
@@ -97,7 +98,6 @@ class BuscaProdutoPageModel extends FlutterFlowModel<BuscaProdutoPageWidget> {
     filtroGrupoModel.dispose();
     filtroFabricanteModel.dispose();
     filtroMarcaModel.dispose();
-    filtroDataEntModel.dispose();
     loadingModel.dispose();
   }
 }
