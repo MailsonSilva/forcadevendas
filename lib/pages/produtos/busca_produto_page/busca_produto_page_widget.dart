@@ -41,16 +41,16 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       _model.listaLinha = await actions.carregarFiltros(
-        'linha',
+        'linhas',
       );
       _model.listaGrupo = await actions.carregarFiltros(
-        'grupo',
+        'grupos',
       );
       _model.listaFab = await actions.carregarFiltros(
-        'fornecedor',
+        'fabricantes',
       );
       _model.listaMarca = await actions.carregarFiltros(
-        'marca',
+        'marcas',
       );
       _model.resultadoOnLoad = await actions.buscaProduto(
         '',
@@ -898,7 +898,7 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                                           elevation: 2.0,
                                           borderColor:
                                               FlutterFlowTheme.of(context)
-                                                  .secondaryText,
+                                                  .secondary,
                                           borderWidth: 1.0,
                                           borderRadius: 8.0,
                                           margin:
@@ -1101,7 +1101,7 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                                                 iconColor: Colors.white,
                                                 color:
                                                     FlutterFlowTheme.of(context)
-                                                        .alternate,
+                                                        .secondary,
                                                 textStyle: TextStyle(
                                                   color: Colors.white,
                                                 ),

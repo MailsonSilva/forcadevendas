@@ -143,7 +143,7 @@ Future<List<ProdutoResultStruct>> buscaProduto(
         "LEFT JOIN estprmreg00 prm ON prm.pro00_codpro = p.pro00_codigo "
         " $whereClause "
         "ORDER BY p.pro00_descri "
-        "LIMIT 100 OFFSET ?";
+        "LIMIT 500 OFFSET ?";
 
     print('DIAGNOSTICO: Executando query com binds: ' + finalBinds.toString());
     final results = await db.rawQuery(query, finalBinds);
