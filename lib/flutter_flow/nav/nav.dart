@@ -123,6 +123,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ParamType.String,
             ),
           ),
+        ),
+        FFRoute(
+          name: FerramentasPageWidget.routeName,
+          path: FerramentasPageWidget.routePath,
+          builder: (context, params) => FerramentasPageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

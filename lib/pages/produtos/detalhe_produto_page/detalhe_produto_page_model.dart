@@ -1,6 +1,6 @@
 import '/backend/schema/structs/index.dart';
-import '/components/classification_row2_widget.dart';
-import '/components/inventory_stat2_widget.dart';
+import '/components/classification_row2/classification_row2_widget.dart';
+import '/components/inventory_stat2/inventory_stat2_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'detalhe_produto_page_widget.dart' show DetalheProdutoPageWidget;
 import 'package:flutter/material.dart';

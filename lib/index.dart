@@ -13,3 +13,5 @@ export '/pages/configuracao_page/configuracao_page_widget.dart'
     show ConfiguracaoPageWidget;
 export '/pages/produtos/detalhe_produto_page/detalhe_produto_page_widget.dart'
     show DetalheProdutoPageWidget;
+export '/pages/ferramentas/ferramentas_page/ferramentas_page_widget.dart'
+    show FerramentasPageWidget;

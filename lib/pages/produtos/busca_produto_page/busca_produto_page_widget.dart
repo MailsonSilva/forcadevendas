@@ -464,7 +464,7 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                                           borderColor:
                                               FlutterFlowTheme.of(context)
                                                   .secondary,
-                                          borderWidth: 0.0,
+                                          borderWidth: 1.0,
                                           borderRadius: 8.0,
                                           margin:
                                               EdgeInsetsDirectional.fromSTEB(
@@ -573,7 +573,7 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                                           borderColor:
                                               FlutterFlowTheme.of(context)
                                                   .secondary,
-                                          borderWidth: 0.0,
+                                          borderWidth: 1.0,
                                           borderRadius: 8.0,
                                           margin:
                                               EdgeInsetsDirectional.fromSTEB(
@@ -682,7 +682,7 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                                           borderColor:
                                               FlutterFlowTheme.of(context)
                                                   .secondary,
-                                          borderWidth: 0.0,
+                                          borderWidth: 1.0,
                                           borderRadius: 8.0,
                                           margin:
                                               EdgeInsetsDirectional.fromSTEB(
@@ -791,7 +791,7 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                                           borderColor:
                                               FlutterFlowTheme.of(context)
                                                   .secondary,
-                                          borderWidth: 0.0,
+                                          borderWidth: 1.0,
                                           borderRadius: 8.0,
                                           margin:
                                               EdgeInsetsDirectional.fromSTEB(

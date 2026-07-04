@@ -1,8 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'classification_row_widget.dart' show ClassificationRowWidget;
+import 'ferramentas_page_widget.dart' show FerramentasPageWidget;
 import 'package:flutter/material.dart';
 
-class ClassificationRowModel extends FlutterFlowModel<ClassificationRowWidget> {
+class FerramentasPageModel extends FlutterFlowModel<FerramentasPageWidget> {
   @override
   void initState(BuildContext context) {}
 

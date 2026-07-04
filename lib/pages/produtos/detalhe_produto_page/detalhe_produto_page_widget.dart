@@ -1,5 +1,5 @@
-import '/components/classification_row2_widget.dart';
-import '/components/inventory_stat2_widget.dart';
+import '/components/classification_row2/classification_row2_widget.dart';
+import '/components/inventory_stat2/inventory_stat2_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
