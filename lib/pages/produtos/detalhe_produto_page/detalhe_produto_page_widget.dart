@@ -747,8 +747,7 @@ class _DetalheProdutoPageWidgetState extends State<DetalheProdutoPageWidget> {
                                             Text(
                                               valueOrDefault<String>(
                                                 formatNumber(
-                                                  _model.produtoResult
-                                                      ?.precoCusto,
+                                                  _model.produtoResult?.preco,
                                                   formatType:
                                                       FormatType.decimal,
                                                   decimalType:

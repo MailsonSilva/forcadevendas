@@ -50,8 +50,8 @@ Future<ProdutoResultStruct?> carregarProdutoDetalhe(
         COALESCE(e.pro00_qtdpen, 0) AS estoque_pendente, 
         (COALESCE(e.pro00_qtdest, 0) - COALESCE(e.pro00_qtdpen, 0)) AS saldo 
       FROM cadpro00 p 
-      LEFT JOIN estpcopro00 t ON t.pro00_codpro = p.pro00_codigo 
-      LEFT JOIN estpro00 e ON e.pro00_codpro = p.pro00_codigo 
+      LEFT JOIN estpcopro00 t ON CAST(t.pro00_codpro AS TEXT) = CAST(p.pro00_codigo AS TEXT)
+      LEFT JOIN estpro00 e ON CAST(e.pro00_codpro AS TEXT) = CAST(p.pro00_codigo AS TEXT)
       WHERE p.pro00_codigo = ?
       LIMIT 1
     ''';

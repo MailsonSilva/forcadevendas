@@ -748,6 +748,34 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                                             _model.filtroFabricante =
                                                 _model.ddFiltroMarcaValue!;
                                             safeSetState(() {});
+                                            safeSetState(() {
+                                              _model
+                                                  .ddFiltroLinhaValueController
+                                                  ?.value = _model.filtroLinha;
+                                              _model.ddFiltroLinhaValue =
+                                                  _model.filtroLinha;
+                                            });
+                                            safeSetState(() {
+                                              _model.ddFiltroFabricanteValueController
+                                                      ?.value =
+                                                  _model.filtroFabricante;
+                                              _model.ddFiltroFabricanteValue =
+                                                  _model.filtroFabricante;
+                                            });
+                                            safeSetState(() {
+                                              _model
+                                                  .ddFiltroMarcaValueController
+                                                  ?.value = _model.filtroMarca;
+                                              _model.ddFiltroMarcaValue =
+                                                  _model.filtroMarca;
+                                            });
+                                            safeSetState(() {
+                                              _model
+                                                  .ddFiltroGrupoValueController
+                                                  ?.value = _model.filtroGrupo;
+                                              _model.ddFiltroGrupoValue =
+                                                  _model.filtroGrupo;
+                                            });
                                           },
                                           width: 200.0,
                                           height: 40.0,
@@ -1136,6 +1164,8 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                                                     .toList()
                                                     .cast<
                                                         ProdutoResultStruct>();
+                                                safeSetState(() {});
+                                                _model.isFiltroExpanded = false;
                                                 safeSetState(() {});
 
                                                 safeSetState(() {});
