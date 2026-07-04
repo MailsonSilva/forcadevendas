@@ -45,6 +45,7 @@ Future<ProdutoResultStruct?> carregarProdutoDetalhe(
         p.pro00_codgrp,
         p.pro00_codfab,
         p.pro00_codmar,
+        p.pro00_codbar,
         COALESCE(t.pro00_pcosub, 0) AS preco_venda, 
         COALESCE(e.pro00_qtdest, 0) AS estoque_atual, 
         COALESCE(e.pro00_qtdpen, 0) AS estoque_pendente, 
@@ -81,6 +82,7 @@ Future<ProdutoResultStruct?> carregarProdutoDetalhe(
         grupo: m['pro00_codgrp']?.toString() ?? '',
         fabricante: m['pro00_codfab']?.toString() ?? '',
         marca: m['pro00_codmar']?.toString() ?? '',
+        codbar: m['pro00_codbar']?.toString() ?? '',
       );
     }
 

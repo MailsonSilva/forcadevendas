@@ -31,6 +31,7 @@ class ProdutoResultStruct extends BaseStruct {
     String? grupo,
     String? fabricante,
     String? marca,
+    String? codbar,
   })  : _codigo = codigo,
         _descricao = descricao,
         _unidade = unidade,
@@ -42,7 +43,8 @@ class ProdutoResultStruct extends BaseStruct {
         _linha = linha,
         _grupo = grupo,
         _fabricante = fabricante,
-        _marca = marca;
+        _marca = marca,
+        _codbar = codbar;
 
   // "codigo" field.
   String? _codigo;
@@ -141,6 +143,13 @@ class ProdutoResultStruct extends BaseStruct {
 
   bool hasMarca() => _marca != null;
 
+  // "codbar" field.
+  String? _codbar;
+  String get codbar => _codbar ?? '';
+  set codbar(String? val) => _codbar = val;
+
+  bool hasCodbar() => _codbar != null;
+
   static ProdutoResultStruct fromMap(Map<String, dynamic> data) =>
       ProdutoResultStruct(
         codigo: data['codigo'] as String?,
@@ -155,6 +164,7 @@ class ProdutoResultStruct extends BaseStruct {
         grupo: data['grupo'] as String?,
         fabricante: data['fabricante'] as String?,
         marca: data['marca'] as String?,
+        codbar: data['codbar'] as String?,
       );
 
   static ProdutoResultStruct? maybeFromMap(dynamic data) => data is Map
@@ -174,6 +184,7 @@ class ProdutoResultStruct extends BaseStruct {
         'grupo': _grupo,
         'fabricante': _fabricante,
         'marca': _marca,
+        'codbar': _codbar,
       }.withoutNulls;
 
   @override
@@ -224,6 +235,10 @@ class ProdutoResultStruct extends BaseStruct {
         ),
         'marca': serializeParam(
           _marca,
+          ParamType.String,
+        ),
+        'codbar': serializeParam(
+          _codbar,
           ParamType.String,
         ),
       }.withoutNulls;
@@ -290,6 +305,11 @@ class ProdutoResultStruct extends BaseStruct {
           ParamType.String,
           false,
         ),
+        codbar: deserializeParam(
+          data['codbar'],
+          ParamType.String,
+          false,
+        ),
       );
 
   @override
@@ -309,7 +329,8 @@ class ProdutoResultStruct extends BaseStruct {
         linha == other.linha &&
         grupo == other.grupo &&
         fabricante == other.fabricante &&
-        marca == other.marca;
+        marca == other.marca &&
+        codbar == other.codbar;
   }
 
   @override
@@ -325,7 +346,8 @@ class ProdutoResultStruct extends BaseStruct {
         linha,
         grupo,
         fabricante,
-        marca
+        marca,
+        codbar
       ]);
 }
 
@@ -342,6 +364,7 @@ ProdutoResultStruct createProdutoResultStruct({
   String? grupo,
   String? fabricante,
   String? marca,
+  String? codbar,
 }) =>
     ProdutoResultStruct(
       codigo: codigo,
@@ -356,4 +379,5 @@ ProdutoResultStruct createProdutoResultStruct({
       grupo: grupo,
       fabricante: fabricante,
       marca: marca,
+      codbar: codbar,
     );
