@@ -1,8 +1,8 @@
 import '/backend/schema/structs/index.dart';
-import '/components/drop_down/drop_down_widget.dart';
 import '/components/loading/loading_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
+import '/index.dart';
 import 'busca_produto_page_widget.dart' show BuscaProdutoPageWidget;
 import 'package:flutter/material.dart';
 
@@ -60,14 +60,18 @@ class BuscaProdutoPageModel extends FlutterFlowModel<BuscaProdutoPageWidget> {
       buscaProdutoFieldTextControllerValidator;
   // Stores action output result for [Custom Action - buscaProduto] action in BuscaProdutoField widget.
   List<ProdutoResultStruct>? resultadoBusca;
-  // Model for FiltroLinha.
-  late DropDownModel filtroLinhaModel;
-  // Model for FiltroGrupo.
-  late DropDownModel filtroGrupoModel;
-  // Model for FiltroFabricante.
-  late DropDownModel filtroFabricanteModel;
-  // Model for FiltroMarca.
-  late DropDownModel filtroMarcaModel;
+  // State field(s) for DdFiltroLinha widget.
+  String? ddFiltroLinhaValue;
+  FormFieldController<String>? ddFiltroLinhaValueController;
+  // State field(s) for DdFiltroGrupo widget.
+  String? ddFiltroGrupoValue;
+  FormFieldController<String>? ddFiltroGrupoValueController;
+  // State field(s) for DdFiltroFabricante widget.
+  String? ddFiltroFabricanteValue;
+  FormFieldController<String>? ddFiltroFabricanteValueController;
+  // State field(s) for DdFiltroMarca widget.
+  String? ddFiltroMarcaValue;
+  FormFieldController<String>? ddFiltroMarcaValueController;
   // State field(s) for DdDataEnt widget.
   String? ddDataEntValue;
   FormFieldController<String>? ddDataEntValueController;
@@ -82,10 +86,6 @@ class BuscaProdutoPageModel extends FlutterFlowModel<BuscaProdutoPageWidget> {
 
   @override
   void initState(BuildContext context) {
-    filtroLinhaModel = createModel(context, () => DropDownModel());
-    filtroGrupoModel = createModel(context, () => DropDownModel());
-    filtroFabricanteModel = createModel(context, () => DropDownModel());
-    filtroMarcaModel = createModel(context, () => DropDownModel());
     loadingModel = createModel(context, () => LoadingModel());
   }
 
@@ -94,10 +94,6 @@ class BuscaProdutoPageModel extends FlutterFlowModel<BuscaProdutoPageWidget> {
     buscaProdutoFieldFocusNode?.dispose();
     buscaProdutoFieldTextController?.dispose();
 
-    filtroLinhaModel.dispose();
-    filtroGrupoModel.dispose();
-    filtroFabricanteModel.dispose();
-    filtroMarcaModel.dispose();
     loadingModel.dispose();
   }
 }

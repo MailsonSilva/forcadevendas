@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '/backend/schema/structs/index.dart';
 
 import '/main.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
 import '/index.dart';
@@ -39,7 +40,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       errorBuilder: (context, state) => appStateNotifier.showSplashImage
           ? Builder(
               builder: (context) => Container(
-                color: Colors.transparent,
+                color: FlutterFlowTheme.of(context).primaryBackground,
                 child: Center(
                   child: Image.asset(
                     'assets/images/DentixIA_Logo_(500_x_500_px).png',
@@ -57,7 +58,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, _) => appStateNotifier.showSplashImage
               ? Builder(
                   builder: (context) => Container(
-                    color: Colors.transparent,
+                    color: FlutterFlowTheme.of(context).primaryBackground,
                     child: Center(
                       child: Image.asset(
                         'assets/images/DentixIA_Logo_(500_x_500_px).png',
