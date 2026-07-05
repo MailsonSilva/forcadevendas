@@ -7,6 +7,8 @@ class AtualizarCargaModel extends FlutterFlowModel<AtualizarCargaWidget> {
 
   // Stores action output result for [Custom Action - sincronizarImagens] action in BtnBaixar widget.
   dynamic dados;
+  // Stores action output result for [Custom Action - sincronizarImagens] action in BtnSubir widget.
+  dynamic dadosTotais;
 
   @override
   void initState(BuildContext context) {}

@@ -9,7 +9,16 @@ import 'atualizar_carga_model.dart';
 export 'atualizar_carga_model.dart';
 
 class AtualizarCargaWidget extends StatefulWidget {
-  const AtualizarCargaWidget({super.key});
+  const AtualizarCargaWidget({
+    super.key,
+    required this.titulo,
+    required this.descricao,
+    required this.tipo,
+  });
+
+  final String? titulo;
+  final String? descricao;
+  final String? tipo;
 
   @override
   State<AtualizarCargaWidget> createState() => _AtualizarCargaWidgetState();
@@ -72,7 +81,10 @@ class _AtualizarCargaWidgetState extends State<AtualizarCargaWidget> {
                   ),
                   Expanded(
                     child: Text(
-                      'Texto Principal',
+                      valueOrDefault<String>(
+                        widget.titulo,
+                        'Título',
+                      ),
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                             font: GoogleFonts.inter(
                               fontWeight: FontWeight.w600,
@@ -110,7 +122,10 @@ class _AtualizarCargaWidgetState extends State<AtualizarCargaWidget> {
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 18.0),
                   child: Text(
-                    'Descrição',
+                    valueOrDefault<String>(
+                      widget.descricao,
+                      'Descrição',
+                    ),
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           font: GoogleFonts.inter(
                             fontWeight: FlutterFlowTheme.of(context)
@@ -133,35 +148,38 @@ class _AtualizarCargaWidgetState extends State<AtualizarCargaWidget> {
               ),
               FFButtonWidget(
                 onPressed: () async {
-                  _model.dados = await actions.sincronizarImagens(
-                    'parcial',
-                  );
-                  await showDialog(
-                    context: context,
-                    builder: (alertDialogContext) {
-                      return AlertDialog(
-                        title: Text('Atualizando'),
-                        content:
-                            Text('\"Sinconização concluída: \"${getJsonField(
-                          _model.dados,
-                          r'''$.ok''',
-                        ).toString()}\" de \"${getJsonField(
-                          _model.dados,
-                          r'''$.total''',
-                        ).toString()}'),
-                        actions: [
-                          TextButton(
-                            onPressed: () => Navigator.pop(alertDialogContext),
-                            child: Text('Ok'),
-                          ),
-                        ],
-                      );
-                    },
-                  );
+                  if (widget.tipo == 'imagens') {
+                    _model.dados = await actions.sincronizarImagens(
+                      'parcial',
+                    );
+                    await showDialog(
+                      context: context,
+                      builder: (alertDialogContext) {
+                        return AlertDialog(
+                          title: Text('Atualizando'),
+                          content:
+                              Text('\"Sinconização concluída: \"${getJsonField(
+                            _model.dados,
+                            r'''$.ok''',
+                          ).toString()}\" de \"${getJsonField(
+                            _model.dados,
+                            r'''$.total''',
+                          ).toString()}'),
+                          actions: [
+                            TextButton(
+                              onPressed: () =>
+                                  Navigator.pop(alertDialogContext),
+                              child: Text('Ok'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  }
 
                   safeSetState(() {});
                 },
-                text: 'Baixar',
+                text: widget.tipo == 'imagens' ? 'Imgens' : 'Dados',
                 icon: Icon(
                   Icons.cloud_download_outlined,
                   size: 24.0,
@@ -193,8 +211,37 @@ class _AtualizarCargaWidgetState extends State<AtualizarCargaWidget> {
                 ),
               ),
               FFButtonWidget(
-                onPressed: () {
-                  print('BtnSubir pressed ...');
+                onPressed: () async {
+                  if (widget.tipo == 'imagens') {
+                    _model.dadosTotais = await actions.sincronizarImagens(
+                      'total',
+                    );
+                    await showDialog(
+                      context: context,
+                      builder: (alertDialogContext) {
+                        return AlertDialog(
+                          title: Text('Atualizando'),
+                          content:
+                              Text('\"Sinconização concluída: \"${getJsonField(
+                            _model.dadosTotais,
+                            r'''$.ok''',
+                          ).toString()}\" de \"${getJsonField(
+                            _model.dadosTotais,
+                            r'''$.total''',
+                          ).toString()}'),
+                          actions: [
+                            TextButton(
+                              onPressed: () =>
+                                  Navigator.pop(alertDialogContext),
+                              child: Text('Ok'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  }
+
+                  safeSetState(() {});
                 },
                 text: 'Subir',
                 icon: Icon(
