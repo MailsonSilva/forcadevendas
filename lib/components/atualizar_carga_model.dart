@@ -3,6 +3,10 @@ import 'atualizar_carga_widget.dart' show AtualizarCargaWidget;
 import 'package:flutter/material.dart';
 
 class AtualizarCargaModel extends FlutterFlowModel<AtualizarCargaWidget> {
+  ///  Local state fields for this component.
+
+  String? tipocargaImagen;
+
   ///  State fields for stateful widgets in this component.
 
   // Stores action output result for [Custom Action - sincronizarImagens] action in BtnBaixar widget.

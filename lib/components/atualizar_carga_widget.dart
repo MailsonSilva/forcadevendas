@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 import 'atualizar_carga_model.dart';
 export 'atualizar_carga_model.dart';
 
@@ -52,6 +53,7 @@ class _AtualizarCargaWidgetState extends State<AtualizarCargaWidget> {
       padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
       child: Container(
         width: double.infinity,
+        height: 230.0,
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).secondaryBackground,
           boxShadow: [
@@ -105,11 +107,11 @@ class _AtualizarCargaWidgetState extends State<AtualizarCargaWidget> {
                     borderColor: Color(0xFFE0E3E7),
                     borderRadius: 12.0,
                     borderWidth: 1.0,
-                    buttonSize: 32.0,
+                    buttonSize: 36.0,
                     icon: Icon(
                       Icons.close_rounded,
                       color: Color(0xFF14181B),
-                      size: 16.0,
+                      size: 18.0,
                     ),
                     onPressed: () async {
                       Navigator.pop(context);
@@ -126,6 +128,7 @@ class _AtualizarCargaWidgetState extends State<AtualizarCargaWidget> {
                       widget.descricao,
                       'Descrição',
                     ),
+                    maxLines: 2,
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           font: GoogleFonts.inter(
                             fontWeight: FlutterFlowTheme.of(context)
@@ -152,6 +155,8 @@ class _AtualizarCargaWidgetState extends State<AtualizarCargaWidget> {
                     _model.dados = await actions.sincronizarImagens(
                       'parcial',
                     );
+                    _model.tipocargaImagen = 'parcial';
+                    safeSetState(() {});
                     await showDialog(
                       context: context,
                       builder: (alertDialogContext) {
@@ -216,6 +221,8 @@ class _AtualizarCargaWidgetState extends State<AtualizarCargaWidget> {
                     _model.dadosTotais = await actions.sincronizarImagens(
                       'total',
                     );
+                    _model.tipocargaImagen = 'total';
+                    safeSetState(() {});
                     await showDialog(
                       context: context,
                       builder: (alertDialogContext) {
@@ -276,6 +283,61 @@ class _AtualizarCargaWidgetState extends State<AtualizarCargaWidget> {
                     width: 2.0,
                   ),
                   borderRadius: BorderRadius.circular(8.0),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
+                child: LinearPercentIndicator(
+                  percent: _model.tipocargaImagen == 'parcial'
+                      ? getJsonField(
+                          _model.dados,
+                          r'''$.ok''',
+                        )
+                      : getJsonField(
+                          _model.dadosTotais,
+                          r'''$.ok''',
+                        ),
+                  width: 120.0,
+                  lineHeight: 16.0,
+                  animation: true,
+                  animateFromLastPercent: true,
+                  progressColor: FlutterFlowTheme.of(context).primary,
+                  backgroundColor: FlutterFlowTheme.of(context).accent4,
+                  center: Text(
+                    valueOrDefault<String>(
+                      (_model.tipocargaImagen == 'parcial'
+                              ? getJsonField(
+                                  _model.dados,
+                                  r'''$.ok''',
+                                )
+                              : getJsonField(
+                                  _model.dadosTotais,
+                                  r'''$.ok''',
+                                ))
+                          .toString(),
+                      '00',
+                    ),
+                    style: FlutterFlowTheme.of(context).headlineSmall.override(
+                          font: GoogleFonts.plusJakartaSans(
+                            fontWeight: FlutterFlowTheme.of(context)
+                                .headlineSmall
+                                .fontWeight,
+                            fontStyle: FlutterFlowTheme.of(context)
+                                .headlineSmall
+                                .fontStyle,
+                          ),
+                          fontSize: 10.0,
+                          letterSpacing: 0.0,
+                          fontWeight: FlutterFlowTheme.of(context)
+                              .headlineSmall
+                              .fontWeight,
+                          fontStyle: FlutterFlowTheme.of(context)
+                              .headlineSmall
+                              .fontStyle,
+                        ),
+                  ),
+                  barRadius: Radius.circular(8.0),
+                  padding: EdgeInsets.zero,
                 ),
               ),
             ].divide(SizedBox(height: 8.0)),
