@@ -1,6 +1,10 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+<<<<<<< HEAD
+=======
+import 'dart:ui';
+>>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
 import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -85,7 +89,11 @@ class _QuantityModalWidgetState extends State<QuantityModalWidget> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
+<<<<<<< HEAD
                   widget.descricaoProduto!,
+=======
+                  widget!.descricaoProduto!,
+>>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                   maxLines: 2,
                   style: FlutterFlowTheme.of(context).titleMedium.override(
                         font: GoogleFonts.plusJakartaSans(
@@ -132,7 +140,11 @@ class _QuantityModalWidgetState extends State<QuantityModalWidget> {
                           ),
                     ),
                     Text(
+<<<<<<< HEAD
                       widget.codigoProduto!,
+=======
+                      widget!.codigoProduto!,
+>>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                       style: FlutterFlowTheme.of(context).bodySmall.override(
                             font: GoogleFonts.inter(
                               fontWeight: FlutterFlowTheme.of(context)
@@ -174,7 +186,11 @@ class _QuantityModalWidgetState extends State<QuantityModalWidget> {
                           ),
                     ),
                     Text(
+<<<<<<< HEAD
                       widget.unidadeProduto!,
+=======
+                      widget!.unidadeProduto!,
+>>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                       style: FlutterFlowTheme.of(context).bodySmall.override(
                             font: GoogleFonts.inter(
                               fontWeight: FlutterFlowTheme.of(context)
@@ -240,7 +256,11 @@ class _QuantityModalWidgetState extends State<QuantityModalWidget> {
                               ),
                         ),
                         Text(
+<<<<<<< HEAD
                           widget.precoUnitario!.toString(),
+=======
+                          widget!.precoUnitario!.toString(),
+>>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                           style:
                               FlutterFlowTheme.of(context).titleMedium.override(
                                     font: GoogleFonts.plusJakartaSans(
@@ -293,7 +313,11 @@ class _QuantityModalWidgetState extends State<QuantityModalWidget> {
                               ),
                         ),
                         Text(
+<<<<<<< HEAD
                           widget.saldoDisponivel!.toString(),
+=======
+                          widget!.saldoDisponivel!.toString(),
+>>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                           style: FlutterFlowTheme.of(context)
                               .bodyMedium
                               .override(
@@ -447,11 +471,19 @@ class _QuantityModalWidgetState extends State<QuantityModalWidget> {
                 FFAppState().is_loading = true;
                 safeSetState(() {});
                 _model.itemSalvo = await actions.salvarItemPedido(
+<<<<<<< HEAD
                   widget.codigoProduto,
                   widget.descricaoProduto,
                   widget.unidadeProduto,
                   FFAppState().quantidade_item.toString(),
                   widget.precoUnitario,
+=======
+                  widget!.codigoProduto,
+                  widget!.descricaoProduto,
+                  widget!.unidadeProduto,
+                  FFAppState().quantidade_item.toString(),
+                  widget!.precoUnitario,
+>>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                 );
                 FFAppState().is_loading = false;
                 safeSetState(() {});

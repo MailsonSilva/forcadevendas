@@ -14,3 +14,7 @@ export '/action_code/busca_produto.dart' show buscaProduto;
 export '/action_code/carregar_filtros.dart' show carregarFiltros;
 export '/action_code/carregar_produto_detalhe.dart' show carregarProdutoDetalhe;
 export '/custom_code/actions/sincronizar_imagens.dart' show sincronizarImagens;
+<<<<<<< HEAD
+=======
+export '/action_code/upload_database_to_ftp.dart' show uploadDatabaseToFtp;
+>>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)

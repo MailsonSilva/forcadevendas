@@ -1,13 +1,25 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
+=======
+import 'package:go_router/go_router.dart';
+import 'package:page_transition/page_transition.dart';
+>>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
 import 'package:provider/provider.dart';
 
 import '/backend/schema/structs/index.dart';
 
 import '/main.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
+<<<<<<< HEAD
 import '/flutter_flow/flutter_flow_util.dart';
+=======
+import '/flutter_flow/lat_lng.dart';
+import '/flutter_flow/place.dart';
+import '/flutter_flow/flutter_flow_util.dart';
+import 'serialization_util.dart';
+>>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
 
 import '/index.dart';
 
@@ -101,6 +113,29 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: FormClientesPageWidget.routeName,
           path: FormClientesPageWidget.routePath,
           builder: (context, params) => FormClientesPageWidget(
+<<<<<<< HEAD
+=======
+            codigoCliente: params.getParam(
+              'codigoCliente',
+              ParamType.int,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: DetalheClientePageWidget.routeName,
+          path: DetalheClientePageWidget.routePath,
+          builder: (context, params) => DetalheClientePageWidget(
+            codigoCliente: params.getParam(
+              'codigoCliente',
+              ParamType.int,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: ExtratoClientePageWidget.routeName,
+          path: ExtratoClientePageWidget.routePath,
+          builder: (context, params) => ExtratoClientePageWidget(
+>>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
             clienteCodigo: params.getParam(
               'clienteCodigo',
               ParamType.String,
@@ -138,6 +173,10 @@ extension NavParamExtensions on Map<String, String?> {
             .where((e) => e.value != null)
             .map((e) => MapEntry(e.key, e.value!)),
       );
+<<<<<<< HEAD
+=======
+  Map<String, String> get cleanNulls => withoutNulls;
+>>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
 }
 
 extension NavigationExtensions on BuildContext {
