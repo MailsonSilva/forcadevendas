@@ -1,8 +1,16 @@
 import '/components/text_field/text_field_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+<<<<<<< HEAD
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+=======
+import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:ui';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+>>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
 import 'form_field_model.dart';
 export 'form_field_model.dart';
 
@@ -55,7 +63,11 @@ class _FormFieldWidgetState extends State<FormFieldWidget> {
       children: [
         Text(
           valueOrDefault<String>(
+<<<<<<< HEAD
             widget.label,
+=======
+            widget!.label,
+>>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
             'Razão Social',
           ),
           style: FlutterFlowTheme.of(context).labelMedium.override(
@@ -82,7 +94,11 @@ class _FormFieldWidgetState extends State<FormFieldWidget> {
             leadingIconPresent: false,
             trailingIconPresent: false,
             hint: valueOrDefault<String>(
+<<<<<<< HEAD
               widget.hint,
+=======
+              widget!.hint,
+>>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
               'Razão Social',
             ),
             value: '',

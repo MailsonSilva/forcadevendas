@@ -1,7 +1,15 @@
 // Automatic FlutterFlow imports
 import '/backend/schema/structs/index.dart';
+<<<<<<< HEAD
 // Imports other custom actions
 // Imports custom functions
+=======
+import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/flutter_flow_util.dart';
+import '/custom_code/actions/index.dart'; // Imports other custom actions
+import '/flutter_flow/custom_functions.dart'; // Imports custom functions
+import 'package:flutter/material.dart';
+>>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
@@ -65,6 +73,7 @@ Future<FirstAccessResultStruct> downloadDatabaseFromFtp(
     }
 
     final carga = '$nomeArquivoDb$vendedor.crg';
+<<<<<<< HEAD
     await ftp.cwd(pastaDownload);
     final dbBytes = await ftp.retr(carga);
 
@@ -72,6 +81,129 @@ Future<FirstAccessResultStruct> downloadDatabaseFromFtp(
     final dbFile = File(p.join(databasesPath, 'dbforcacad001.db'));
     await dbFile.parent.create(recursive: true);
     await dbFile.writeAsBytes(dbBytes, flush: true);
+=======
+    // 1. Volta para a raiz absoluta do servidor
+    await ftp.cwd('/');
+
+    // 2. Navegação progressiva (Bulletproof para FTPs restritos)
+    final pastas = pastaDownload.split('/').where((p) => p.trim().isNotEmpty);
+    for (String pasta in pastas) {
+      await ftp.cwd(pasta.trim());
+    }
+
+    final dbBytes = await ftp.retr(carga);
+
+    final databasesPath = await getDatabasesPath();
+    final tempCrgFile = File(p.join(databasesPath, 'temp_carga.crg'));
+    final tempDbFile = File(p.join(databasesPath, 'temp_db.db'));
+    final dbFile = File(p.join(databasesPath, 'dbforcacad001.db'));
+
+    await tempCrgFile.parent.create(recursive: true);
+    await tempCrgFile.writeAsBytes(dbBytes, flush: true);
+
+    List<int> sqliteBuffer = [];
+
+    // --- INÍCIO DA EXTRAÇÃO MULTICAMADA ---
+    try {
+      final compressedBytes = await tempCrgFile.readAsBytes();
+
+      if (compressedBytes.length < 5) {
+        throw Exception('Arquivo muito pequeno: ${compressedBytes.length} bytes');
+      }
+
+      // 1. Pula a primeira assinatura/cabeçalho de 4 bytes
+      final camada1 = compressedBytes.sublist(4);
+
+      // 2. Primeiro Inflate (Camada 1)
+      List<int> descompactado1 = zlib.decode(camada1);
+
+      // 3. Checa o cabeçalho para ver se já é o banco SQLite puro
+      final header1 =
+          utf8.decode(descompactado1.take(16).toList(), allowMalformed: true);
+
+      if (header1.contains('SQLite format 3')) {
+        sqliteBuffer = descompactado1;
+      } else {
+        // 4. Se não for, pula os próximos 4 bytes do cabeçalho da segunda camada
+        if (descompactado1.length < 5) {
+          throw Exception('Segunda camada muito pequena.');
+        }
+        final camada2 = descompactado1.sublist(4);
+
+        // 5. Segundo Inflate (Camada 2)
+        sqliteBuffer = zlib.decode(camada2);
+      }
+
+      // 6. Validação final para garantir que o resultado é um SQLite válido
+      final finalHeader =
+          utf8.decode(sqliteBuffer.take(16).toList(), allowMalformed: true);
+      if (!finalHeader.contains('SQLite format 3')) {
+        throw Exception('Banco SQLite final invalido ou corrompido.');
+      }
+    } catch (e) {
+      if (await tempCrgFile.exists()) {
+        await tempCrgFile.delete();
+      }
+      if (await tempDbFile.exists()) {
+        await tempDbFile.delete();
+      }
+      return FirstAccessResultStruct.fromMap({
+        'success': false,
+        'message': 'Falha na descompressao do .crg: ${e.toString()}',
+      });
+    }
+
+    // Escreve no temp_db.db
+    await tempDbFile.writeAsBytes(sqliteBuffer, flush: true);
+
+    // Validação da tabela cadrep00 no tempDb
+    Database? testDb;
+    try {
+      testDb = await openDatabase(tempDbFile.path, readOnly: true);
+      final testRows = await testDb.rawQuery('SELECT COUNT(*) FROM cadrep00');
+      if (testRows.isEmpty) {
+        throw Exception('A query de validacao retornou vazia.');
+      }
+    } catch (e) {
+      if (testDb != null && testDb.isOpen) {
+        await testDb.close();
+      }
+      if (await tempCrgFile.exists()) {
+        await tempCrgFile.delete();
+      }
+      if (await tempDbFile.exists()) {
+        await tempDbFile.delete();
+      }
+      return FirstAccessResultStruct.fromMap({
+        'success': false,
+        'message': 'Falha ao validar a tabela cadrep00 no banco temporario: $e',
+      });
+    } finally {
+      if (testDb != null && testDb.isOpen) {
+        await testDb.close();
+      }
+    }
+
+    // Se passou na validação, substitui o final
+    try {
+      if (await dbFile.exists()) {
+        await dbFile.delete();
+      }
+      await tempDbFile.rename(dbFile.path);
+    } catch (e) {
+      return FirstAccessResultStruct.fromMap({
+        'success': false,
+        'message': 'Erro ao substituir o arquivo do banco de dados: $e',
+      });
+    } finally {
+      if (await tempCrgFile.exists()) {
+        await tempCrgFile.delete();
+      }
+      if (await tempDbFile.exists()) {
+        await tempDbFile.delete();
+      }
+    }
+>>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
 
     final result = {
       'success': true,

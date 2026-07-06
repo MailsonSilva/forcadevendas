@@ -15,3 +15,14 @@ export '/pages/produtos/detalhe_produto_page/detalhe_produto_page_widget.dart'
     show DetalheProdutoPageWidget;
 export '/pages/ferramentas/ferramentas_page/ferramentas_page_widget.dart'
     show FerramentasPageWidget;
+<<<<<<< HEAD
+=======
+export '/components/opc_clientes_modal/opc_clientes_modal_widget.dart'
+    show OpcClientesModalWidget;
+export '/pages/cliente/detalhe_cliente_page/detalhe_cliente_page_widget.dart'
+    show DetalheClientePageWidget;
+export '/pages/cliente/extrato_cliente_page/extrato_cliente_page_widget.dart'
+    show ExtratoClientePageWidget;
+
+
+>>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)

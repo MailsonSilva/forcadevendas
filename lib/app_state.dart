@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:shared_preferences/shared_preferences.dart';
+=======
+import '/backend/schema/structs/index.dart';
+import '/backend/api_requests/api_manager.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'flutter_flow/flutter_flow_util.dart';
+>>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
 
 class FFAppState extends ChangeNotifier {
   static FFAppState _instance = FFAppState._internal();
@@ -19,6 +26,12 @@ class FFAppState extends ChangeNotifier {
     _safeInit(() {
       _vendedor_codigo = prefs.getInt('ff_vendedor_codigo') ?? _vendedor_codigo;
     });
+<<<<<<< HEAD
+=======
+    _safeInit(() {
+      _empresa_codigo = prefs.getString('ff_empresa_codigo') ?? _empresa_codigo;
+    });
+>>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
   }
 
   void update(VoidCallback callback) {
@@ -48,6 +61,10 @@ class FFAppState extends ChangeNotifier {
   String get empresa_codigo => _empresa_codigo;
   set empresa_codigo(String value) {
     _empresa_codigo = value;
+<<<<<<< HEAD
+=======
+    prefs.setString('ff_empresa_codigo', value);
+>>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
   }
 
   /// DSL app state is_first_access

@@ -196,7 +196,11 @@ class _FlutterFlowDropDownState<T> extends State<FlutterFlowDropDown<T>> {
 
   Widget _buildLegacyDropdown() {
     return DropdownButtonFormField<T>(
+<<<<<<< HEAD
       initialValue: currentValue,
+=======
+      value: currentValue,
+>>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
       hint: _createHintText(),
       items: _createMenuItems(),
       elevation: widget.elevation.toInt(),

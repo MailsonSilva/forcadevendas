@@ -1,6 +1,11 @@
 import '/components/botao_menu_home/botao_menu_home_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+<<<<<<< HEAD
+=======
+import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:ui';
+>>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -159,7 +164,15 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               hoverColor: Colors.transparent,
                               highlightColor: Colors.transparent,
                               onTap: () async {
+<<<<<<< HEAD
                                 context.pushNamed(ClientesPageWidget.routeName);
+=======
+                                await showModalBottomSheet(
+                                  context: context,
+                                  backgroundColor: Colors.transparent,
+                                  builder: (context) => const OpcClientesModalWidget(),
+                                );
+>>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                               },
                               child: wrapWithModel(
                                 model: _model.botaoMenuHomeModel2,

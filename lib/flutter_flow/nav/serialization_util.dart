@@ -1,6 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
+=======
+import 'package:from_css_color/from_css_color.dart';
+>>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
 
 import '/backend/schema/structs/index.dart';
 

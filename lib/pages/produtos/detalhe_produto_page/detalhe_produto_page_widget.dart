@@ -1,13 +1,26 @@
+<<<<<<< HEAD
+=======
+import '/backend/schema/structs/index.dart';
+>>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
 import '/components/classification_row2/classification_row2_widget.dart';
 import '/components/inventory_stat2/inventory_stat2_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+<<<<<<< HEAD
+=======
+import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:ui';
+>>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
 import '/custom_code/actions/index.dart' as actions;
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
+<<<<<<< HEAD
+=======
+import 'package:provider/provider.dart';
+>>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
 import 'detalhe_produto_page_model.dart';
 export 'detalhe_produto_page_model.dart';
 
@@ -40,7 +53,11 @@ class _DetalheProdutoPageWidgetState extends State<DetalheProdutoPageWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       _model.resultadoBanco = await actions.carregarProdutoDetalhe(
+<<<<<<< HEAD
         widget.produtoRef,
+=======
+        widget!.produtoRef,
+>>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
       );
       _model.produtoResult = _model.resultadoBanco;
       safeSetState(() {});
@@ -159,7 +176,11 @@ class _DetalheProdutoPageWidgetState extends State<DetalheProdutoPageWidget> {
                                               builder: (context) {
                                                 final itemFoto = _model
                                                         .resultadoBanco?.fotoUrl
+<<<<<<< HEAD
                                                         .toList() ??
+=======
+                                                        ?.toList() ??
+>>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                                                     [];
 
                                                 return ListView.separated(
@@ -182,8 +203,12 @@ class _DetalheProdutoPageWidgetState extends State<DetalheProdutoPageWidget> {
                                                         width: 120.0,
                                                         height: 120.0,
                                                         caminhoArquivo:
+<<<<<<< HEAD
                                                             itemFotoIndex
                                                                 .toString(),
+=======
+                                                            itemFotoItem,
+>>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                                                       ),
                                                     );
                                                   },
@@ -583,7 +608,11 @@ class _DetalheProdutoPageWidgetState extends State<DetalheProdutoPageWidget> {
                                                   value: valueOrDefault<String>(
                                                     _model.produtoResult
                                                         ?.estoqueAtual
+<<<<<<< HEAD
                                                         .toString(),
+=======
+                                                        ?.toString(),
+>>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                                                     '0',
                                                   ),
                                                   bg: Color(0x1A10B981),
@@ -610,7 +639,11 @@ class _DetalheProdutoPageWidgetState extends State<DetalheProdutoPageWidget> {
                                                   value: valueOrDefault<String>(
                                                     _model.produtoResult
                                                         ?.estoquePendente
+<<<<<<< HEAD
                                                         .toString(),
+=======
+                                                        ?.toString(),
+>>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                                                     '0',
                                                   ),
                                                   bg: Color(0x1A10B981),
@@ -637,7 +670,11 @@ class _DetalheProdutoPageWidgetState extends State<DetalheProdutoPageWidget> {
                                                   value: valueOrDefault<String>(
                                                     _model.produtoResult
                                                         ?.saldoEstoque
+<<<<<<< HEAD
                                                         .toString(),
+=======
+                                                        ?.toString(),
+>>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                                                     '0',
                                                   ),
                                                   bg: Color(0x1A10B981),
