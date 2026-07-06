@@ -32,6 +32,7 @@ class ProdutoResultStruct extends BaseStruct {
     String? fabricante,
     String? marca,
     String? codbar,
+    List<String>? fotoUrl,
   })  : _codigo = codigo,
         _descricao = descricao,
         _unidade = unidade,
@@ -44,7 +45,8 @@ class ProdutoResultStruct extends BaseStruct {
         _grupo = grupo,
         _fabricante = fabricante,
         _marca = marca,
-        _codbar = codbar;
+        _codbar = codbar,
+        _fotoUrl = fotoUrl;
 
   // "codigo" field.
   String? _codigo;
@@ -150,6 +152,17 @@ class ProdutoResultStruct extends BaseStruct {
 
   bool hasCodbar() => _codbar != null;
 
+  // "fotoUrl" field.
+  List<String>? _fotoUrl;
+  List<String> get fotoUrl => _fotoUrl ?? const [];
+  set fotoUrl(List<String>? val) => _fotoUrl = val;
+
+  void updateFotoUrl(Function(List<String>) updateFn) {
+    updateFn(_fotoUrl ??= []);
+  }
+
+  bool hasFotoUrl() => _fotoUrl != null;
+
   static ProdutoResultStruct fromMap(Map<String, dynamic> data) =>
       ProdutoResultStruct(
         codigo: data['codigo'] as String?,
@@ -165,6 +178,7 @@ class ProdutoResultStruct extends BaseStruct {
         fabricante: data['fabricante'] as String?,
         marca: data['marca'] as String?,
         codbar: data['codbar'] as String?,
+        fotoUrl: getDataList(data['fotoUrl']),
       );
 
   static ProdutoResultStruct? maybeFromMap(dynamic data) => data is Map
@@ -185,6 +199,7 @@ class ProdutoResultStruct extends BaseStruct {
         'fabricante': _fabricante,
         'marca': _marca,
         'codbar': _codbar,
+        'fotoUrl': _fotoUrl,
       }.withoutNulls;
 
   @override
@@ -240,6 +255,11 @@ class ProdutoResultStruct extends BaseStruct {
         'codbar': serializeParam(
           _codbar,
           ParamType.String,
+        ),
+        'fotoUrl': serializeParam(
+          _fotoUrl,
+          ParamType.String,
+          isList: true,
         ),
       }.withoutNulls;
 
@@ -310,6 +330,11 @@ class ProdutoResultStruct extends BaseStruct {
           ParamType.String,
           false,
         ),
+        fotoUrl: deserializeParam<String>(
+          data['fotoUrl'],
+          ParamType.String,
+          true,
+        ),
       );
 
   @override
@@ -317,6 +342,7 @@ class ProdutoResultStruct extends BaseStruct {
 
   @override
   bool operator ==(Object other) {
+    const listEquality = ListEquality();
     return other is ProdutoResultStruct &&
         codigo == other.codigo &&
         descricao == other.descricao &&
@@ -330,7 +356,8 @@ class ProdutoResultStruct extends BaseStruct {
         grupo == other.grupo &&
         fabricante == other.fabricante &&
         marca == other.marca &&
-        codbar == other.codbar;
+        codbar == other.codbar &&
+        listEquality.equals(fotoUrl, other.fotoUrl);
   }
 
   @override
@@ -347,7 +374,8 @@ class ProdutoResultStruct extends BaseStruct {
         grupo,
         fabricante,
         marca,
-        codbar
+        codbar,
+        fotoUrl
       ]);
 }
 

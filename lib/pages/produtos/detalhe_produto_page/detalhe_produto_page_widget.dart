@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/custom_code/actions/index.dart' as actions;
+import '/custom_code/widgets/index.dart' as custom_widgets;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -148,20 +149,47 @@ class _DetalheProdutoPageWidgetState extends State<DetalheProdutoPageWidget> {
                                           CrossAxisAlignment.center,
                                       children: [
                                         Container(
-                                          width: 160.0,
-                                          height: 160.0,
-                                          decoration: BoxDecoration(
-                                            color: Color(0x80F1F3F9),
-                                            borderRadius:
-                                                BorderRadius.circular(16.0),
-                                            shape: BoxShape.rectangle,
-                                          ),
-                                          alignment:
-                                              AlignmentDirectional(0.0, 0.0),
-                                          child: Icon(
-                                            Icons.image_outlined,
-                                            color: Color(0xFF64748B),
-                                            size: 64.0,
+                                          width: double.infinity,
+                                          height: 140.0,
+                                          decoration: BoxDecoration(),
+                                          child: Align(
+                                            alignment:
+                                                AlignmentDirectional(0.0, 0.0),
+                                            child: Builder(
+                                              builder: (context) {
+                                                final itemFoto = _model
+                                                        .resultadoBanco?.fotoUrl
+                                                        .toList() ??
+                                                    [];
+
+                                                return ListView.separated(
+                                                  padding: EdgeInsets.zero,
+                                                  shrinkWrap: true,
+                                                  scrollDirection:
+                                                      Axis.horizontal,
+                                                  itemCount: itemFoto.length,
+                                                  separatorBuilder: (_, __) =>
+                                                      SizedBox(width: 16.0),
+                                                  itemBuilder:
+                                                      (context, itemFotoIndex) {
+                                                    final itemFotoItem =
+                                                        itemFoto[itemFotoIndex];
+                                                    return Container(
+                                                      width: 120.0,
+                                                      height: 120.0,
+                                                      child: custom_widgets
+                                                          .ImagemLocalWidget(
+                                                        width: 120.0,
+                                                        height: 120.0,
+                                                        caminhoArquivo:
+                                                            itemFotoIndex
+                                                                .toString(),
+                                                      ),
+                                                    );
+                                                  },
+                                                );
+                                              },
+                                            ),
                                           ),
                                         ),
                                         Text(

@@ -156,6 +156,7 @@ class _AtualizarCargaWidgetState extends State<AtualizarCargaWidget> {
                       'parcial',
                     );
                     _model.tipocargaImagen = 'parcial';
+                    _model.carregando = true;
                     safeSetState(() {});
                     await showDialog(
                       context: context,
@@ -222,6 +223,7 @@ class _AtualizarCargaWidgetState extends State<AtualizarCargaWidget> {
                       'total',
                     );
                     _model.tipocargaImagen = 'total';
+                    _model.carregando = true;
                     safeSetState(() {});
                     await showDialog(
                       context: context,
@@ -246,6 +248,8 @@ class _AtualizarCargaWidgetState extends State<AtualizarCargaWidget> {
                         );
                       },
                     );
+                    _model.carregando = false;
+                    safeSetState(() {});
                   }
 
                   safeSetState(() {});
@@ -285,61 +289,63 @@ class _AtualizarCargaWidgetState extends State<AtualizarCargaWidget> {
                   borderRadius: BorderRadius.circular(8.0),
                 ),
               ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
-                child: LinearPercentIndicator(
-                  percent: _model.tipocargaImagen == 'parcial'
-                      ? getJsonField(
-                          _model.dados,
-                          r'''$.ok''',
-                        )
-                      : getJsonField(
-                          _model.dadosTotais,
-                          r'''$.ok''',
-                        ),
-                  width: 120.0,
-                  lineHeight: 16.0,
-                  animation: true,
-                  animateFromLastPercent: true,
-                  progressColor: FlutterFlowTheme.of(context).primary,
-                  backgroundColor: FlutterFlowTheme.of(context).accent4,
-                  center: Text(
-                    valueOrDefault<String>(
-                      (_model.tipocargaImagen == 'parcial'
-                              ? getJsonField(
-                                  _model.dados,
-                                  r'''$.ok''',
-                                )
-                              : getJsonField(
-                                  _model.dadosTotais,
-                                  r'''$.ok''',
-                                ))
-                          .toString(),
-                      '00',
-                    ),
-                    style: FlutterFlowTheme.of(context).headlineSmall.override(
-                          font: GoogleFonts.plusJakartaSans(
-                            fontWeight: FlutterFlowTheme.of(context)
-                                .headlineSmall
-                                .fontWeight,
-                            fontStyle: FlutterFlowTheme.of(context)
-                                .headlineSmall
-                                .fontStyle,
+              if (_model.carregando)
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
+                  child: LinearPercentIndicator(
+                    percent: _model.tipocargaImagen == 'parcial'
+                        ? getJsonField(
+                            _model.dados,
+                            r'''$.ok''',
+                          )
+                        : getJsonField(
+                            _model.dadosTotais,
+                            r'''$.ok''',
                           ),
-                          fontSize: 10.0,
-                          letterSpacing: 0.0,
-                          fontWeight: FlutterFlowTheme.of(context)
-                              .headlineSmall
-                              .fontWeight,
-                          fontStyle: FlutterFlowTheme.of(context)
-                              .headlineSmall
-                              .fontStyle,
-                        ),
+                    width: 120.0,
+                    lineHeight: 16.0,
+                    animation: true,
+                    animateFromLastPercent: true,
+                    progressColor: FlutterFlowTheme.of(context).primary,
+                    backgroundColor: FlutterFlowTheme.of(context).accent4,
+                    center: Text(
+                      valueOrDefault<String>(
+                        (_model.tipocargaImagen == 'parcial'
+                                ? getJsonField(
+                                    _model.dados,
+                                    r'''$.ok''',
+                                  )
+                                : getJsonField(
+                                    _model.dadosTotais,
+                                    r'''$.ok''',
+                                  ))
+                            .toString(),
+                        '00',
+                      ),
+                      style:
+                          FlutterFlowTheme.of(context).headlineSmall.override(
+                                font: GoogleFonts.plusJakartaSans(
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .headlineSmall
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .headlineSmall
+                                      .fontStyle,
+                                ),
+                                fontSize: 10.0,
+                                letterSpacing: 0.0,
+                                fontWeight: FlutterFlowTheme.of(context)
+                                    .headlineSmall
+                                    .fontWeight,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .headlineSmall
+                                    .fontStyle,
+                              ),
+                    ),
+                    barRadius: Radius.circular(8.0),
+                    padding: EdgeInsets.zero,
                   ),
-                  barRadius: Radius.circular(8.0),
-                  padding: EdgeInsets.zero,
                 ),
-              ),
             ].divide(SizedBox(height: 8.0)),
           ),
         ),
