@@ -160,6 +160,8 @@ class _DetalheProdutoPageWidgetState extends State<DetalheProdutoPageWidget> {
                                                 final listaDeImagens = _model
                                                         .resultadoBanco
                                                         ?.fotosProduto
+                                                        .map((e) => e)
+                                                        .toList()
                                                         .toList() ??
                                                     [];
 
@@ -185,8 +187,7 @@ class _DetalheProdutoPageWidgetState extends State<DetalheProdutoPageWidget> {
                                                         width: 140.0,
                                                         height: 140.0,
                                                         caminhoArquivo:
-                                                            listaDeImagensIndex
-                                                                .toString(),
+                                                            listaDeImagensItem,
                                                       ),
                                                     );
                                                   },
