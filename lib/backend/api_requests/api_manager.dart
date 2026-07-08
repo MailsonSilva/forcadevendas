@@ -1,16 +1,8 @@
 // ignore_for_file: constant_identifier_names, depend_on_referenced_packages, prefer_final_fields
 
-<<<<<<< HEAD
 import 'dart:convert';
 import 'dart:core';
 import 'dart:io';
-=======
-import 'dart:async';
-import 'dart:convert';
-import 'dart:core';
-import 'dart:io';
-import 'dart:typed_data';
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
 
 import 'package:collection/collection.dart';
 import 'package:http/http.dart' as http;

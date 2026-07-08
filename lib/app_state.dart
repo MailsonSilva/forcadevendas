@@ -1,12 +1,5 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
 import 'package:shared_preferences/shared_preferences.dart';
-=======
-import '/backend/schema/structs/index.dart';
-import '/backend/api_requests/api_manager.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'flutter_flow/flutter_flow_util.dart';
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
 
 class FFAppState extends ChangeNotifier {
   static FFAppState _instance = FFAppState._internal();
@@ -26,12 +19,16 @@ class FFAppState extends ChangeNotifier {
     _safeInit(() {
       _vendedor_codigo = prefs.getInt('ff_vendedor_codigo') ?? _vendedor_codigo;
     });
-<<<<<<< HEAD
-=======
     _safeInit(() {
-      _empresa_codigo = prefs.getString('ff_empresa_codigo') ?? _empresa_codigo;
+      _imgSyncStatus = prefs.getString('ff_imgSyncStatus') ?? _imgSyncStatus;
     });
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
+    _safeInit(() {
+      _imgSyncProgress =
+          prefs.getDouble('ff_imgSyncProgress') ?? _imgSyncProgress;
+    });
+    _safeInit(() {
+      _imgSyncText = prefs.getString('ff_imgSyncText') ?? _imgSyncText;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -61,10 +58,6 @@ class FFAppState extends ChangeNotifier {
   String get empresa_codigo => _empresa_codigo;
   set empresa_codigo(String value) {
     _empresa_codigo = value;
-<<<<<<< HEAD
-=======
-    prefs.setString('ff_empresa_codigo', value);
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
   }
 
   /// DSL app state is_first_access
@@ -142,6 +135,31 @@ class FFAppState extends ChangeNotifier {
   double get produto_selecionado_saldo => _produto_selecionado_saldo;
   set produto_selecionado_saldo(double value) {
     _produto_selecionado_saldo = value;
+  }
+
+  /// Controla se está parado (idle), baixando (baixando), concluído (complete)
+  /// ou com erro (error).
+  String _imgSyncStatus = 'idle';
+  String get imgSyncStatus => _imgSyncStatus;
+  set imgSyncStatus(String value) {
+    _imgSyncStatus = value;
+    prefs.setString('ff_imgSyncStatus', value);
+  }
+
+  /// Armazena o valor do progresso de 0.0 a 1.0 para a barra de carregamento.
+  double _imgSyncProgress = 0.0;
+  double get imgSyncProgress => _imgSyncProgress;
+  set imgSyncProgress(double value) {
+    _imgSyncProgress = value;
+    prefs.setDouble('ff_imgSyncProgress', value);
+  }
+
+  /// Texto descritivo (ex: "Baixando 5 de 42...").
+  String _imgSyncText = '';
+  String get imgSyncText => _imgSyncText;
+  set imgSyncText(String value) {
+    _imgSyncText = value;
+    prefs.setString('ff_imgSyncText', value);
   }
 }
 

@@ -1,15 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-<<<<<<< HEAD
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-=======
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
 import 'classification_row2_model.dart';
 export 'classification_row2_model.dart';
 
@@ -67,11 +59,7 @@ class _ClassificationRow2WidgetState extends State<ClassificationRow2Widget> {
             children: [
               Text(
                 valueOrDefault<String>(
-<<<<<<< HEAD
                   widget.label,
-=======
-                  widget!.label,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                   'Linha',
                 ),
                 style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -94,11 +82,7 @@ class _ClassificationRow2WidgetState extends State<ClassificationRow2Widget> {
                 flex: 1,
                 child: Text(
                   valueOrDefault<String>(
-<<<<<<< HEAD
                     widget.value,
-=======
-                    widget!.value,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                     'LINHA GERAL',
                   ),
                   textAlign: TextAlign.end,

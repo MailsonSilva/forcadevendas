@@ -2,10 +2,6 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
-<<<<<<< HEAD
-=======
-import 'flutter_flow_util.dart';
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
 
 Widget wrapWithModel<T extends FlutterFlowModel>({
   required T model,

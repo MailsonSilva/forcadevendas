@@ -1,15 +1,7 @@
 // Automatic FlutterFlow imports
 import '/backend/schema/structs/index.dart';
-<<<<<<< HEAD
 // Imports other custom actions
 // Imports custom functions
-=======
-import '/flutter_flow/flutter_flow_theme.dart';
-import '/flutter_flow/flutter_flow_util.dart';
-import '/custom_code/actions/index.dart'; // Imports other custom actions
-import '/flutter_flow/custom_functions.dart'; // Imports custom functions
-import 'package:flutter/material.dart';
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
@@ -24,82 +16,48 @@ Future<ProdutoResultStruct?> carregarProdutoDetalhe(
   String? produtoRef,
 ) async {
   try {
-    // 1. Abre o banco utilizando o arquivo local correto
     final dbPath = join(await getDatabasesPath(), 'dbforcacad001.db');
-    final exists = await File(dbPath).exists();
-
-    if (!exists) {
-      print('DIAGNOSTICO DETALHE: Arquivo do banco de dados nao encontrado.');
-      return null;
-    }
+    if (!await File(dbPath).exists()) return null;
 
     final db = await openDatabase(dbPath);
-    final String codigoBusca = produtoRef ?? '';
+    final String codigoBusca = (produtoRef ?? '').trim();
+    if (codigoBusca.isEmpty) return null;
 
-    if (codigoBusca.trim().isEmpty) {
-      await db.close();
-      return null;
-    }
+    final List<Map<String, dynamic>> maps = await db.rawQuery(
+        'SELECT * FROM cadpro00 WHERE TRIM(pro00_codigo) = ? OR CAST(pro00_codigo AS INTEGER) = ?',
+        [codigoBusca, int.tryParse(codigoBusca) ?? -1]);
 
-    // 2. Query estruturada para obter os dados do produto
-    final String query = '''
-      SELECT DISTINCT 
-        p.pro00_codigo, 
-        p.pro00_descri, 
-        p.pro00_unidad,
-        p.pro00_codlin,
-        p.pro00_codgrp,
-        p.pro00_codfab,
-        p.pro00_codmar,
-        p.pro00_codbar,
-        COALESCE(t.pro00_pcosub, 0) AS preco_venda, 
-        COALESCE(e.pro00_qtdest, 0) AS estoque_atual, 
-        COALESCE(e.pro00_qtdpen, 0) AS estoque_pendente, 
-        (COALESCE(e.pro00_qtdest, 0) - COALESCE(e.pro00_qtdpen, 0)) AS saldo 
-      FROM cadpro00 p 
-      LEFT JOIN estpcopro00 t ON CAST(t.pro00_codpro AS TEXT) = CAST(p.pro00_codigo AS TEXT)
-      LEFT JOIN estpro00 e ON CAST(e.pro00_codpro AS TEXT) = CAST(p.pro00_codigo AS TEXT)
-      WHERE p.pro00_codigo = ?
-      LIMIT 1
-    ''';
-
-    final results = await db.rawQuery(query, [codigoBusca.trim()]);
-    await db.close();
-
-    double parseDouble(dynamic val) {
-      if (val == null) return 0.0;
-      if (val is num) return val.toDouble();
-      return double.tryParse(val.toString()) ?? 0.0;
-    }
-
-    // 3. Se o produto existir, faz o mapeamento e a busca de múltiplas imagens
-    if (results.isNotEmpty) {
-      final m = results.first;
-      final String codigoProd = m['pro00_codigo']?.toString() ?? '';
+    if (maps.isNotEmpty) {
+      final m = maps.first;
+      String codigoProd = m['pro00_codigo']?.toString().trim() ?? codigoBusca;
+      String baseImgCode = int.tryParse(codigoProd)?.toString() ?? codigoProd;
 
       final directory = await getApplicationDocumentsDirectory();
-      final String pastaImagensPath =
-          "${directory.path}/images/catalogo_imagens";
 
-      // Cria a lista para armazenar os caminhos das imagens que existem de fato
       List<String> fotosEncontradas = [];
-
-      // Monta os candidatos exatamente no formato: codigo.jpg, codigo_1.jpg, codigo_2.jpg...
-      List<String> sufixos = [
-        '',
-        '_1',
-        '_2',
-        '_3',
-        '_4',
-        '_5'
-      ]; // Alinhado com img03.txt
+      List<String> sufixos = ['', '_1', '_2', '_3', '_4', '_5'];
 
       for (String sufixo in sufixos) {
-        final String caminhoArquivo =
-            "$pastaImagensPath/$codigoProd$sufixo.jpg";
-        if (await File(caminhoArquivo).exists()) {
-          fotosEncontradas.add(caminhoArquivo);
+        String nomeDoArquivo = "$baseImgCode$sufixo.jpg";
+
+        // Caminho relativo amigável para o seu ImagemLocalWidget
+        String caminhoRelativo = "images/catalogo_imagens/$nomeDoArquivo";
+        String caminhoFisicoParaTeste = "${directory.path}/$caminhoRelativo";
+
+        if (await File(caminhoFisicoParaTeste).exists()) {
+          fotosEncontradas.add(caminhoRelativo);
         }
+      }
+
+      if (fotosEncontradas.isEmpty) {
+        fotosEncontradas.add("$baseImgCode.jpg");
+      }
+
+      double parseDouble(dynamic value) {
+        if (value == null) return 0.0;
+        if (value is num) return value.toDouble();
+        if (value is String) return double.tryParse(value) ?? 0.0;
+        return 0.0;
       }
 
       return ProdutoResultStruct(
@@ -114,15 +72,11 @@ Future<ProdutoResultStruct?> carregarProdutoDetalhe(
         grupo: m['pro00_codgrp']?.toString() ?? '',
         fabricante: m['pro00_codfab']?.toString() ?? '',
         marca: m['pro00_codmar']?.toString() ?? '',
-        codbar: m['pro00_codbar']?.toString() ?? '',
-        fotoUrl: fotosEncontradas, // Agora passa a lista gerada dinamicamente
+        fotosProduto: fotosEncontradas,
       );
     }
-
-    return null;
   } catch (e) {
-    print('DIAGNOSTICO DETALHE: Erro fatal na busca de detalhes: ' +
-        e.toString());
-    return null;
+    print('Erro: $e');
   }
+  return null;
 }

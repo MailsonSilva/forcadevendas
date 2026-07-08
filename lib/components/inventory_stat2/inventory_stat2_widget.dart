@@ -1,15 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-<<<<<<< HEAD
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-=======
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
 import 'inventory_stat2_model.dart';
 export 'inventory_stat2_model.dart';
 
@@ -67,11 +59,7 @@ class _InventoryStat2WidgetState extends State<InventoryStat2Widget> {
     return Container(
       decoration: BoxDecoration(
         color: valueOrDefault<Color>(
-<<<<<<< HEAD
           widget.bgTint,
-=======
-          widget!.bgTint,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
           FlutterFlowTheme.of(context).primary,
         ),
         borderRadius: BorderRadius.circular(12.0),
@@ -87,11 +75,7 @@ class _InventoryStat2WidgetState extends State<InventoryStat2Widget> {
             children: [
               Text(
                 valueOrDefault<String>(
-<<<<<<< HEAD
                   widget.label,
-=======
-                  widget!.label,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                   'Atual',
                 ),
                 style: FlutterFlowTheme.of(context).labelSmall.override(
@@ -112,11 +96,7 @@ class _InventoryStat2WidgetState extends State<InventoryStat2Widget> {
               ),
               Text(
                 valueOrDefault<String>(
-<<<<<<< HEAD
                   widget.value,
-=======
-                  widget!.value,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                   '1',
                 ),
                 style: FlutterFlowTheme.of(context).titleLarge.override(
@@ -126,11 +106,7 @@ class _InventoryStat2WidgetState extends State<InventoryStat2Widget> {
                             FlutterFlowTheme.of(context).titleLarge.fontStyle,
                       ),
                       color: valueOrDefault<Color>(
-<<<<<<< HEAD
                         widget.textColor,
-=======
-                        widget!.textColor,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                         Color(0x00000000),
                       ),
                       letterSpacing: 0.0,

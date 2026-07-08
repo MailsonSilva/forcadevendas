@@ -1,16 +1,7 @@
 import 'dart:convert';
-<<<<<<< HEAD
 
 import 'package:flutter/foundation.dart';
 
-=======
-import 'dart:typed_data';
-import '../schema/structs/index.dart';
-
-import 'package:flutter/foundation.dart';
-
-import '/flutter_flow/flutter_flow_util.dart';
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
 import 'api_manager.dart';
 
 export 'api_manager.dart' show ApiCallResponse;

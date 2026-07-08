@@ -1,17 +1,8 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-<<<<<<< HEAD
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-=======
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:percent_indicator/percent_indicator.dart';
-import 'package:provider/provider.dart';
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
 import 'button_model.dart';
 export 'button_model.dart';
 
@@ -25,7 +16,6 @@ class ButtonWidget extends StatefulWidget {
     String? content,
     String? variant,
     String? size,
-    bool? fullWidth,
     bool? loading,
     bool? disabled,
   })  : this.iconPresent = iconPresent ?? true,
@@ -33,7 +23,6 @@ class ButtonWidget extends StatefulWidget {
         this.content = content ?? 'SALVAR',
         this.variant = variant ?? 'secondary',
         this.size = size ?? 'small',
-        this.fullWidth = fullWidth ?? false,
         this.loading = loading ?? false,
         this.disabled = disabled ?? false;
 
@@ -44,7 +33,6 @@ class ButtonWidget extends StatefulWidget {
   final String content;
   final String variant;
   final String size;
-  final bool fullWidth;
   final bool loading;
   final bool disabled;
 
@@ -79,11 +67,7 @@ class _ButtonWidgetState extends State<ButtonWidget> {
     return Opacity(
       opacity: valueOrDefault<double>(
         valueOrDefault<bool>(
-<<<<<<< HEAD
           widget.disabled,
-=======
-          widget!.disabled,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
           false,
         )
             ? 0.55
@@ -95,41 +79,25 @@ class _ButtonWidgetState extends State<ButtonWidget> {
           color: valueOrDefault<Color>(
             () {
               if (valueOrDefault<String>(
-<<<<<<< HEAD
                     widget.variant,
-=======
-                    widget!.variant,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                     'secondary',
                   ) ==
                   'secondary') {
                 return FlutterFlowTheme.of(context).secondary;
               } else if (valueOrDefault<String>(
-<<<<<<< HEAD
                     widget.variant,
-=======
-                    widget!.variant,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                     'secondary',
                   ) ==
                   'outline') {
                 return Colors.transparent;
               } else if (valueOrDefault<String>(
-<<<<<<< HEAD
                     widget.variant,
-=======
-                    widget!.variant,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                     'secondary',
                   ) ==
                   'ghost') {
                 return Colors.transparent;
               } else if (valueOrDefault<String>(
-<<<<<<< HEAD
                     widget.variant,
-=======
-                    widget!.variant,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                     'secondary',
                   ) ==
                   'destructive') {
@@ -144,21 +112,13 @@ class _ButtonWidgetState extends State<ButtonWidget> {
             topLeft: Radius.circular(valueOrDefault<double>(
               () {
                 if (valueOrDefault<String>(
-<<<<<<< HEAD
                       widget.size,
-=======
-                      widget!.size,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                       'small',
                     ) ==
                     'small') {
                   return 4.0;
                 } else if (valueOrDefault<String>(
-<<<<<<< HEAD
                       widget.size,
-=======
-                      widget!.size,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                       'small',
                     ) ==
                     'large') {
@@ -172,21 +132,13 @@ class _ButtonWidgetState extends State<ButtonWidget> {
             topRight: Radius.circular(valueOrDefault<double>(
               () {
                 if (valueOrDefault<String>(
-<<<<<<< HEAD
                       widget.size,
-=======
-                      widget!.size,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                       'small',
                     ) ==
                     'small') {
                   return 4.0;
                 } else if (valueOrDefault<String>(
-<<<<<<< HEAD
                       widget.size,
-=======
-                      widget!.size,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                       'small',
                     ) ==
                     'large') {
@@ -200,21 +152,13 @@ class _ButtonWidgetState extends State<ButtonWidget> {
             bottomLeft: Radius.circular(valueOrDefault<double>(
               () {
                 if (valueOrDefault<String>(
-<<<<<<< HEAD
                       widget.size,
-=======
-                      widget!.size,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                       'small',
                     ) ==
                     'small') {
                   return 4.0;
                 } else if (valueOrDefault<String>(
-<<<<<<< HEAD
                       widget.size,
-=======
-                      widget!.size,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                       'small',
                     ) ==
                     'large') {
@@ -228,21 +172,13 @@ class _ButtonWidgetState extends State<ButtonWidget> {
             bottomRight: Radius.circular(valueOrDefault<double>(
               () {
                 if (valueOrDefault<String>(
-<<<<<<< HEAD
                       widget.size,
-=======
-                      widget!.size,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                       'small',
                     ) ==
                     'small') {
                   return 4.0;
                 } else if (valueOrDefault<String>(
-<<<<<<< HEAD
                       widget.size,
-=======
-                      widget!.size,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                       'small',
                     ) ==
                     'large') {
@@ -258,11 +194,7 @@ class _ButtonWidgetState extends State<ButtonWidget> {
           border: Border.all(
             color: valueOrDefault<Color>(
               valueOrDefault<String>(
-<<<<<<< HEAD
                         widget.variant,
-=======
-                        widget!.variant,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                         'secondary',
                       ) ==
                       'outline'
@@ -272,11 +204,7 @@ class _ButtonWidgetState extends State<ButtonWidget> {
             ),
             width: valueOrDefault<double>(
               valueOrDefault<String>(
-<<<<<<< HEAD
                         widget.variant,
-=======
-                        widget!.variant,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                         'secondary',
                       ) ==
                       'outline'
@@ -292,11 +220,7 @@ class _ButtonWidgetState extends State<ButtonWidget> {
             Opacity(
               opacity: valueOrDefault<double>(
                 valueOrDefault<bool>(
-<<<<<<< HEAD
                   widget.loading,
-=======
-                  widget!.loading,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                   false,
                 )
                     ? 0.0
@@ -308,21 +232,13 @@ class _ButtonWidgetState extends State<ButtonWidget> {
                     valueOrDefault<double>(
                       () {
                         if (valueOrDefault<String>(
-<<<<<<< HEAD
                               widget.size,
-=======
-                              widget!.size,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                               'small',
                             ) ==
                             'small') {
                           return 16.0;
                         } else if (valueOrDefault<String>(
-<<<<<<< HEAD
                               widget.size,
-=======
-                              widget!.size,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                               'small',
                             ) ==
                             'large') {
@@ -336,21 +252,13 @@ class _ButtonWidgetState extends State<ButtonWidget> {
                     valueOrDefault<double>(
                       () {
                         if (valueOrDefault<String>(
-<<<<<<< HEAD
                               widget.size,
-=======
-                              widget!.size,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                               'small',
                             ) ==
                             'small') {
                           return 4.0;
                         } else if (valueOrDefault<String>(
-<<<<<<< HEAD
                               widget.size,
-=======
-                              widget!.size,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                               'small',
                             ) ==
                             'large') {
@@ -364,21 +272,13 @@ class _ButtonWidgetState extends State<ButtonWidget> {
                     valueOrDefault<double>(
                       () {
                         if (valueOrDefault<String>(
-<<<<<<< HEAD
                               widget.size,
-=======
-                              widget!.size,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                               'small',
                             ) ==
                             'small') {
                           return 16.0;
                         } else if (valueOrDefault<String>(
-<<<<<<< HEAD
                               widget.size,
-=======
-                              widget!.size,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                               'small',
                             ) ==
                             'large') {
@@ -392,21 +292,13 @@ class _ButtonWidgetState extends State<ButtonWidget> {
                     valueOrDefault<double>(
                       () {
                         if (valueOrDefault<String>(
-<<<<<<< HEAD
                               widget.size,
-=======
-                              widget!.size,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                               'small',
                             ) ==
                             'small') {
                           return 4.0;
                         } else if (valueOrDefault<String>(
-<<<<<<< HEAD
                               widget.size,
-=======
-                              widget!.size,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                               'small',
                             ) ==
                             'large') {
@@ -423,7 +315,6 @@ class _ButtonWidgetState extends State<ButtonWidget> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     if (valueOrDefault<bool>(
-<<<<<<< HEAD
                       widget.iconPresent,
                       true,
                     ))
@@ -431,15 +322,6 @@ class _ButtonWidgetState extends State<ButtonWidget> {
                     Text(
                       valueOrDefault<String>(
                         widget.content,
-=======
-                      widget!.iconPresent,
-                      true,
-                    ))
-                      widget!.icon!,
-                    Text(
-                      valueOrDefault<String>(
-                        widget!.content,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                         'SALVAR',
                       ),
                       maxLines: 1,
@@ -455,43 +337,27 @@ class _ButtonWidgetState extends State<ButtonWidget> {
                             color: valueOrDefault<Color>(
                               () {
                                 if (valueOrDefault<String>(
-<<<<<<< HEAD
                                       widget.variant,
-=======
-                                      widget!.variant,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                                       'secondary',
                                     ) ==
                                     'secondary') {
                                   return FlutterFlowTheme.of(context)
                                       .onSecondary;
                                 } else if (valueOrDefault<String>(
-<<<<<<< HEAD
                                       widget.variant,
-=======
-                                      widget!.variant,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                                       'secondary',
                                     ) ==
                                     'outline') {
                                   return FlutterFlowTheme.of(context)
                                       .primaryText;
                                 } else if (valueOrDefault<String>(
-<<<<<<< HEAD
                                       widget.variant,
-=======
-                                      widget!.variant,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                                       'secondary',
                                     ) ==
                                     'ghost') {
                                   return FlutterFlowTheme.of(context).primary;
                                 } else if (valueOrDefault<String>(
-<<<<<<< HEAD
                                       widget.variant,
-=======
-                                      widget!.variant,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                                       'secondary',
                                     ) ==
                                     'destructive') {
@@ -514,28 +380,17 @@ class _ButtonWidgetState extends State<ButtonWidget> {
                       overflow: TextOverflow.clip,
                     ),
                     if (valueOrDefault<bool>(
-<<<<<<< HEAD
                       widget.iconEndPresent,
                       false,
                     ))
                       widget.iconEnd!,
-=======
-                      widget!.iconEndPresent,
-                      false,
-                    ))
-                      widget!.iconEnd!,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                   ].divide(SizedBox(width: 8.0)),
                 ),
               ),
             ),
             if (valueOrDefault<bool>(
               valueOrDefault<bool>(
-<<<<<<< HEAD
                 widget.loading,
-=======
-                widget!.loading,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                 false,
               )
                   ? true
@@ -551,41 +406,25 @@ class _ButtonWidgetState extends State<ButtonWidget> {
                 progressColor: valueOrDefault<Color>(
                   () {
                     if (valueOrDefault<String>(
-<<<<<<< HEAD
                           widget.variant,
-=======
-                          widget!.variant,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                           'secondary',
                         ) ==
                         'secondary') {
                       return FlutterFlowTheme.of(context).onSecondary;
                     } else if (valueOrDefault<String>(
-<<<<<<< HEAD
                           widget.variant,
-=======
-                          widget!.variant,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                           'secondary',
                         ) ==
                         'outline') {
                       return FlutterFlowTheme.of(context).primaryText;
                     } else if (valueOrDefault<String>(
-<<<<<<< HEAD
                           widget.variant,
-=======
-                          widget!.variant,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                           'secondary',
                         ) ==
                         'ghost') {
                       return FlutterFlowTheme.of(context).primary;
                     } else if (valueOrDefault<String>(
-<<<<<<< HEAD
                           widget.variant,
-=======
-                          widget!.variant,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                           'secondary',
                         ) ==
                         'destructive') {

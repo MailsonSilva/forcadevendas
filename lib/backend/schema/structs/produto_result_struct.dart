@@ -32,7 +32,7 @@ class ProdutoResultStruct extends BaseStruct {
     String? fabricante,
     String? marca,
     String? codbar,
-    List<String>? fotoUrl,
+    List<String>? fotosProduto,
   })  : _codigo = codigo,
         _descricao = descricao,
         _unidade = unidade,
@@ -46,7 +46,7 @@ class ProdutoResultStruct extends BaseStruct {
         _fabricante = fabricante,
         _marca = marca,
         _codbar = codbar,
-        _fotoUrl = fotoUrl;
+        _fotosProduto = fotosProduto;
 
   // "codigo" field.
   String? _codigo;
@@ -152,16 +152,16 @@ class ProdutoResultStruct extends BaseStruct {
 
   bool hasCodbar() => _codbar != null;
 
-  // "fotoUrl" field.
-  List<String>? _fotoUrl;
-  List<String> get fotoUrl => _fotoUrl ?? const [];
-  set fotoUrl(List<String>? val) => _fotoUrl = val;
+  // "fotosProduto" field.
+  List<String>? _fotosProduto;
+  List<String> get fotosProduto => _fotosProduto ?? const [];
+  set fotosProduto(List<String>? val) => _fotosProduto = val;
 
-  void updateFotoUrl(Function(List<String>) updateFn) {
-    updateFn(_fotoUrl ??= []);
+  void updateFotosProduto(Function(List<String>) updateFn) {
+    updateFn(_fotosProduto ??= []);
   }
 
-  bool hasFotoUrl() => _fotoUrl != null;
+  bool hasFotosProduto() => _fotosProduto != null;
 
   static ProdutoResultStruct fromMap(Map<String, dynamic> data) =>
       ProdutoResultStruct(
@@ -178,7 +178,7 @@ class ProdutoResultStruct extends BaseStruct {
         fabricante: data['fabricante'] as String?,
         marca: data['marca'] as String?,
         codbar: data['codbar'] as String?,
-        fotoUrl: getDataList(data['fotoUrl']),
+        fotosProduto: getDataList(data['fotosProduto']),
       );
 
   static ProdutoResultStruct? maybeFromMap(dynamic data) => data is Map
@@ -199,7 +199,7 @@ class ProdutoResultStruct extends BaseStruct {
         'fabricante': _fabricante,
         'marca': _marca,
         'codbar': _codbar,
-        'fotoUrl': _fotoUrl,
+        'fotosProduto': _fotosProduto,
       }.withoutNulls;
 
   @override
@@ -256,8 +256,8 @@ class ProdutoResultStruct extends BaseStruct {
           _codbar,
           ParamType.String,
         ),
-        'fotoUrl': serializeParam(
-          _fotoUrl,
+        'fotosProduto': serializeParam(
+          _fotosProduto,
           ParamType.String,
           isList: true,
         ),
@@ -330,8 +330,8 @@ class ProdutoResultStruct extends BaseStruct {
           ParamType.String,
           false,
         ),
-        fotoUrl: deserializeParam<String>(
-          data['fotoUrl'],
+        fotosProduto: deserializeParam<String>(
+          data['fotosProduto'],
           ParamType.String,
           true,
         ),
@@ -357,7 +357,7 @@ class ProdutoResultStruct extends BaseStruct {
         fabricante == other.fabricante &&
         marca == other.marca &&
         codbar == other.codbar &&
-        listEquality.equals(fotoUrl, other.fotoUrl);
+        listEquality.equals(fotosProduto, other.fotosProduto);
   }
 
   @override
@@ -375,7 +375,7 @@ class ProdutoResultStruct extends BaseStruct {
         fabricante,
         marca,
         codbar,
-        fotoUrl
+        fotosProduto
       ]);
 }
 

@@ -43,11 +43,6 @@ subprojects {
     project.evaluationDependsOn(':app')
 }
 
-<<<<<<< HEAD
 task clean(type: Delete) {
     delete rootProject.buildDir
-=======
-tasks.register("clean", Delete) {
-    delete rootProject.layout.buildDirectory
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
 }

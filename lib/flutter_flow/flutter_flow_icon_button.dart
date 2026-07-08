@@ -83,15 +83,9 @@ class _FlutterFlowIconButtonState extends State<FlutterFlowIconButton> {
   @override
   Widget build(BuildContext context) {
     ButtonStyle style = ButtonStyle(
-<<<<<<< HEAD
       shape: WidgetStateProperty.resolveWith<OutlinedBorder>(
         (states) {
           if (states.contains(WidgetState.hovered)) {
-=======
-      shape: MaterialStateProperty.resolveWith<OutlinedBorder>(
-        (states) {
-          if (states.contains(MaterialState.hovered)) {
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
             return RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(widget.borderRadius ?? 0),
               side: BorderSide(
@@ -119,7 +113,6 @@ class _FlutterFlowIconButtonState extends State<FlutterFlowIconButton> {
           );
         },
       ),
-<<<<<<< HEAD
       iconColor: WidgetStateProperty.resolveWith<Color?>(
         (states) {
           if (states.contains(WidgetState.disabled) &&
@@ -127,22 +120,12 @@ class _FlutterFlowIconButtonState extends State<FlutterFlowIconButton> {
             return widget.disabledIconColor;
           }
           if (states.contains(WidgetState.hovered) &&
-=======
-      iconColor: MaterialStateProperty.resolveWith<Color?>(
-        (states) {
-          if (states.contains(MaterialState.disabled) &&
-              widget.disabledIconColor != null) {
-            return widget.disabledIconColor;
-          }
-          if (states.contains(MaterialState.hovered) &&
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
               widget.hoverIconColor != null) {
             return widget.hoverIconColor;
           }
           return iconColor;
         },
       ),
-<<<<<<< HEAD
       backgroundColor: WidgetStateProperty.resolveWith<Color?>(
         (states) {
           if (states.contains(WidgetState.disabled) &&
@@ -150,15 +133,6 @@ class _FlutterFlowIconButtonState extends State<FlutterFlowIconButton> {
             return widget.disabledColor;
           }
           if (states.contains(WidgetState.hovered) &&
-=======
-      backgroundColor: MaterialStateProperty.resolveWith<Color?>(
-        (states) {
-          if (states.contains(MaterialState.disabled) &&
-              widget.disabledColor != null) {
-            return widget.disabledColor;
-          }
-          if (states.contains(MaterialState.hovered) &&
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
               widget.hoverColor != null) {
             return widget.hoverColor;
           }
@@ -166,13 +140,8 @@ class _FlutterFlowIconButtonState extends State<FlutterFlowIconButton> {
           return widget.fillColor;
         },
       ),
-<<<<<<< HEAD
       overlayColor: WidgetStateProperty.resolveWith<Color?>((states) {
         if (states.contains(WidgetState.pressed)) {
-=======
-      overlayColor: MaterialStateProperty.resolveWith<Color?>((states) {
-        if (states.contains(MaterialState.pressed)) {
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
           return null;
         }
         return widget.hoverColor == null ? null : Colors.transparent;

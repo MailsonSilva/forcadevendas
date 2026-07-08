@@ -1,15 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-<<<<<<< HEAD
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-=======
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
 import 'checkbox_model.dart';
 export 'checkbox_model.dart';
 
@@ -67,11 +59,7 @@ class _CheckboxWidgetState extends State<CheckboxWidget> {
     return Opacity(
       opacity: valueOrDefault<double>(
         valueOrDefault<bool>(
-<<<<<<< HEAD
           widget.disabled,
-=======
-          widget!.disabled,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
           false,
         )
             ? 0.55
@@ -92,11 +80,7 @@ class _CheckboxWidgetState extends State<CheckboxWidget> {
                     padding: EdgeInsetsDirectional.fromSTEB(
                         valueOrDefault<double>(
                           valueOrDefault<bool>(
-<<<<<<< HEAD
                             widget.hasSubtitle,
-=======
-                            widget!.hasSubtitle,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                             false,
                           )
                               ? 0.0
@@ -105,11 +89,7 @@ class _CheckboxWidgetState extends State<CheckboxWidget> {
                         ),
                         valueOrDefault<double>(
                           valueOrDefault<bool>(
-<<<<<<< HEAD
                             widget.hasSubtitle,
-=======
-                            widget!.hasSubtitle,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                             false,
                           )
                               ? 3.0
@@ -118,11 +98,7 @@ class _CheckboxWidgetState extends State<CheckboxWidget> {
                         ),
                         valueOrDefault<double>(
                           valueOrDefault<bool>(
-<<<<<<< HEAD
                             widget.hasSubtitle,
-=======
-                            widget!.hasSubtitle,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                             false,
                           )
                               ? 0.0
@@ -131,11 +107,7 @@ class _CheckboxWidgetState extends State<CheckboxWidget> {
                         ),
                         valueOrDefault<double>(
                           valueOrDefault<bool>(
-<<<<<<< HEAD
                             widget.hasSubtitle,
-=======
-                            widget!.hasSubtitle,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                             false,
                           )
                               ? 0.0
@@ -149,11 +121,7 @@ class _CheckboxWidgetState extends State<CheckboxWidget> {
                         decoration: BoxDecoration(
                           color: valueOrDefault<Color>(
                             valueOrDefault<bool>(
-<<<<<<< HEAD
                               widget.isChecked,
-=======
-                              widget!.isChecked,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                               false,
                             )
                                 ? Color(0x00000000)
@@ -171,11 +139,7 @@ class _CheckboxWidgetState extends State<CheckboxWidget> {
                         child: Visibility(
                           visible: valueOrDefault<bool>(
                             valueOrDefault<bool>(
-<<<<<<< HEAD
                               widget.isChecked,
-=======
-                              widget!.isChecked,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                               false,
                             )
                                 ? true
@@ -200,11 +164,7 @@ class _CheckboxWidgetState extends State<CheckboxWidget> {
                       children: [
                         Text(
                           valueOrDefault<String>(
-<<<<<<< HEAD
                             widget.label,
-=======
-                            widget!.label,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                             'Usar Endereço de Entrega',
                           ),
                           maxLines: 1,
@@ -233,11 +193,7 @@ class _CheckboxWidgetState extends State<CheckboxWidget> {
                         ),
                         if (valueOrDefault<bool>(
                           valueOrDefault<bool>(
-<<<<<<< HEAD
                             widget.hasSubtitle,
-=======
-                            widget!.hasSubtitle,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                             false,
                           )
                               ? true
@@ -248,11 +204,7 @@ class _CheckboxWidgetState extends State<CheckboxWidget> {
                             child: Container(
                               child: Text(
                                 valueOrDefault<String>(
-<<<<<<< HEAD
                                   widget.subtitle,
-=======
-                                  widget!.subtitle,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                                   'Receive weekly updates',
                                 ),
                                 maxLines: 3,

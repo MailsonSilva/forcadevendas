@@ -1,17 +1,9 @@
-import '/components/atualizar_carga_widget.dart';
+import '/components/atualizar_carga/atualizar_carga_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-<<<<<<< HEAD
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-=======
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
 import 'ferramentas_page_model.dart';
 export 'ferramentas_page_model.dart';
 
@@ -141,13 +133,13 @@ class _FerramentasPageWidgetState extends State<FerramentasPageWidget> {
                                         ?.unfocus();
                                   },
                                   child: AtualizarCargaWidget(
-<<<<<<< HEAD
-                                    titulo: 'Imagens',
-                                    descricao: 'Atualize',
+                                    titulo: 'Imagens dos Produtos',
+                                    descricao:
+                                        'Parcial: atualização rápida. Total: baixa tudo e atualiza todas as imagens.',
                                     tipo: 'imagens',
-=======
-                                    tipoAtualizacao: 'imagens',
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
+                                    icon: Icon(
+                                      Icons.image_outlined,
+                                    ),
                                   ),
                                 ),
                               );
@@ -286,13 +278,13 @@ class _FerramentasPageWidgetState extends State<FerramentasPageWidget> {
                                         ?.unfocus();
                                   },
                                   child: AtualizarCargaWidget(
-<<<<<<< HEAD
-                                    titulo: 'Dados',
-                                    descricao: 'Atualize dados',
+                                    titulo: 'Carga de Dados',
+                                    descricao:
+                                        'Sincronizaçã de dadoos com o servidor.',
                                     tipo: 'dados',
-=======
-                                    tipoAtualizacao: 'carga',
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
+                                    icon: Icon(
+                                      Icons.storage_sharp,
+                                    ),
                                   ),
                                 ),
                               );

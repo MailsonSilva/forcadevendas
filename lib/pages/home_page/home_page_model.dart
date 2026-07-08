@@ -1,20 +1,8 @@
 import '/components/botao_menu_home/botao_menu_home_widget.dart';
-<<<<<<< HEAD
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
 import 'home_page_widget.dart' show HomePageWidget;
 import 'package:flutter/material.dart';
-=======
-import '/flutter_flow/flutter_flow_theme.dart';
-import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
-import '/index.dart';
-import 'home_page_widget.dart' show HomePageWidget;
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
 
 class HomePageModel extends FlutterFlowModel<HomePageWidget> {
   ///  State fields for stateful widgets in this page.

@@ -1,15 +1,13 @@
 // Automatic FlutterFlow imports
 import '/backend/schema/structs/index.dart';
-<<<<<<< HEAD
 // Imports other custom actions
 // Imports custom functions
-=======
-import '/flutter_flow/flutter_flow_theme.dart';
-import '/flutter_flow/flutter_flow_util.dart';
-import '/custom_code/actions/index.dart'; // Imports other custom actions
-import '/flutter_flow/custom_functions.dart'; // Imports custom functions
-import 'package:flutter/material.dart';
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
+// Begin custom action code
+// DO NOT REMOVE OR MODIFY THE CODE ABOVE!
+
+// Automatic FlutterFlow imports
+// Imports other custom actions
+// Imports custom functions
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
@@ -73,15 +71,6 @@ Future<FirstAccessResultStruct> downloadDatabaseFromFtp(
     }
 
     final carga = '$nomeArquivoDb$vendedor.crg';
-<<<<<<< HEAD
-    await ftp.cwd(pastaDownload);
-    final dbBytes = await ftp.retr(carga);
-
-    final databasesPath = await getDatabasesPath();
-    final dbFile = File(p.join(databasesPath, 'dbforcacad001.db'));
-    await dbFile.parent.create(recursive: true);
-    await dbFile.writeAsBytes(dbBytes, flush: true);
-=======
     // 1. Volta para a raiz absoluta do servidor
     await ftp.cwd('/');
 
@@ -108,7 +97,8 @@ Future<FirstAccessResultStruct> downloadDatabaseFromFtp(
       final compressedBytes = await tempCrgFile.readAsBytes();
 
       if (compressedBytes.length < 5) {
-        throw Exception('Arquivo muito pequeno: ${compressedBytes.length} bytes');
+        throw Exception(
+            'Arquivo muito pequeno: ${compressedBytes.length} bytes');
       }
 
       // 1. Pula a primeira assinatura/cabeçalho de 4 bytes
@@ -203,7 +193,6 @@ Future<FirstAccessResultStruct> downloadDatabaseFromFtp(
         await tempDbFile.delete();
       }
     }
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
 
     final result = {
       'success': true,

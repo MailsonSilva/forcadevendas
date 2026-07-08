@@ -13,15 +13,12 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../main.dart';
 
-<<<<<<< HEAD
-=======
-import 'lat_lng.dart';
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
 
 export 'lat_lng.dart';
 export 'place.dart';
 export 'uploaded_file.dart';
 export '../app_state.dart';
+export '../app_constants.dart';
 export 'flutter_flow_model.dart';
 export 'dart:math' show min, max;
 export 'dart:typed_data' show Uint8List;
@@ -332,10 +329,6 @@ extension MapFilterExtensions<T> on Map<String, T?> {
             .where((e) => e.value != null)
             .map((e) => MapEntry(e.key, e.value as T)),
       );
-<<<<<<< HEAD
-=======
-  Map<String, T> get cleanNulls => withoutNulls;
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
 }
 
 extension MapListContainsExt on List<dynamic> {

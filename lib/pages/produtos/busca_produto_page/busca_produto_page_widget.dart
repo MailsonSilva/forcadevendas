@@ -6,18 +6,10 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
-<<<<<<< HEAD
 import '/custom_code/actions/index.dart' as actions;
-import '/flutter_flow/custom_functions.dart' as functions;
-import '/index.dart';
-=======
-import 'dart:ui';
-import '/custom_code/actions/index.dart' as actions;
-import '/flutter_flow/custom_functions.dart' as functions;
 import '/custom_code/widgets/index.dart' as custom_widgets;
+import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
-import 'package:cached_network_image/cached_network_image.dart';
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -975,11 +967,7 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-<<<<<<< HEAD
                                                                 .secondaryText,
-=======
-                                                                .secondaryText!,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                                                       )
                                                     : null,
                                                 activeColor:
@@ -1045,11 +1033,7 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-<<<<<<< HEAD
                                                                 .secondaryText,
-=======
-                                                                .secondaryText!,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                                                       )
                                                     : null,
                                                 activeColor:
@@ -1281,19 +1265,16 @@ class _BuscaProdutoPageWidgetState extends State<BuscaProdutoPageWidget> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.center,
                                               children: [
-<<<<<<< HEAD
-                                                Image.asset(
-                                                  'assets/images/sem_image.png',
-                                                  width: 70.0,
-                                                  height: 70.0,
-                                                  fit: BoxFit.cover,
-=======
-                                                custom_widgets.ImagemLocalWidget(
-                                                  width: 70.0,
-                                                  height: 70.0,
-                                                  caminhoArquivo:
-                                                      'images/catalogo_imagens/${listaProdutoItem.codigo}.jpg',
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
+                                                Container(
+                                                  width: 80.0,
+                                                  height: 80.0,
+                                                  child: custom_widgets
+                                                      .ImagemLocalWidget(
+                                                    width: 80.0,
+                                                    height: 80.0,
+                                                    caminhoArquivo:
+                                                        listaProdutoItem.codigo,
+                                                  ),
                                                 ),
                                                 Expanded(
                                                   flex: 1,

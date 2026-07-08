@@ -1,18 +1,6 @@
-<<<<<<< HEAD
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-=======
-import '/backend/schema/structs/index.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
-import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
-import 'dart:io';
-import 'package:path/path.dart' as p;
-import 'package:sqflite/sqflite.dart';
-import 'package:shared_preferences/shared_preferences.dart';
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
 import '/custom_code/actions/index.dart' as actions;
 import '/index.dart';
 import 'package:flutter/material.dart';
@@ -49,39 +37,6 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
       _model.dbExists = await actions.checkDatabaseExists();
       FFAppState().is_first_access = !_model.dbExists!;
       safeSetState(() {});
-<<<<<<< HEAD
-=======
-
-      try {
-        final prefs = await SharedPreferences.getInstance();
-        dynamic vendedorCodigoSalvo = prefs.get('ff_vendedor_codigo') ?? prefs.get('@vendedor_codigo');
-        if (vendedorCodigoSalvo != null && vendedorCodigoSalvo.toString().isNotEmpty) {
-          final int codVenNum = int.parse(vendedorCodigoSalvo.toString());
-          if (_model.dbExists == true) {
-            final databasesPath = await getDatabasesPath();
-            final dbPath = p.join(databasesPath, 'dbforcacad001.db');
-            final db = await openDatabase(dbPath, readOnly: true);
-            final rows = await db.rawQuery(
-              'SELECT * FROM cadrep00 WHERE ven00_codigo = ?',
-              [codVenNum],
-            );
-            await db.close();
-            if (rows.isNotEmpty) {
-              final row = rows.first;
-              FFAppState().vendedor_codigo = codVenNum;
-              FFAppState().vendedor_nome = row['ven00_descri']?.toString() ?? '';
-              final String empresaSalva = prefs.getString('ff_empresa_codigo') ?? '';
-              if (empresaSalva.isNotEmpty) {
-                FFAppState().empresa_codigo = empresaSalva;
-              }
-              context.pushNamed(HomePageWidget.routeName);
-            }
-          }
-        }
-      } catch (e) {
-        // Silent catch to prevent startup lock
-      }
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
     });
 
     _model.empresaCodigoFieldTextController ??= TextEditingController();
@@ -150,10 +105,10 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(8.0),
                                       child: Image.asset(
-                                        'assets/images/logo_sistema.png',
-                                        width: 200.0,
-                                        height: 70.7,
-                                        fit: BoxFit.contain,
+                                        'assets/images/DentixIA_Logo_(500_x_500_px).png',
+                                        width: 260.0,
+                                        height: 94.6,
+                                        fit: BoxFit.cover,
                                       ),
                                     ),
                                   ),

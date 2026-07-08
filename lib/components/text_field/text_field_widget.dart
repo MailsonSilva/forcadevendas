@@ -1,15 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-<<<<<<< HEAD
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-=======
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
 import 'text_field_model.dart';
 export 'text_field_model.dart';
 
@@ -26,8 +18,6 @@ class TextFieldWidget extends StatefulWidget {
     bool? trailingIconPresent,
     String? hint,
     String? value,
-    String? onChange,
-    String? onSubmit,
     String? variant,
     bool? error,
   })  : this.label = label ?? '',
@@ -38,8 +28,6 @@ class TextFieldWidget extends StatefulWidget {
         this.trailingIconPresent = trailingIconPresent ?? false,
         this.hint = hint ?? 'SlotValue(\$hint)',
         this.value = value ?? '',
-        this.onChange = onChange ?? '',
-        this.onSubmit = onSubmit ?? '',
         this.variant = variant ?? 'outlined',
         this.error = error ?? false;
 
@@ -53,8 +41,6 @@ class TextFieldWidget extends StatefulWidget {
   final bool trailingIconPresent;
   final String hint;
   final String value;
-  final String onChange;
-  final String onSubmit;
   final String variant;
   final bool error;
 
@@ -76,11 +62,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
     super.initState();
     _model = createModel(context, () => TextFieldModel());
 
-<<<<<<< HEAD
     _model.inputTextController ??= TextEditingController(text: widget.value);
-=======
-    _model.inputTextController ??= TextEditingController(text: widget!.value);
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
     _model.inputFocusNode ??= FocusNode();
   }
 
@@ -100,19 +82,11 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           if (valueOrDefault<bool>(
-<<<<<<< HEAD
             widget.labelPresent,
             false,
           ))
             Text(
               widget.label,
-=======
-            widget!.labelPresent,
-            false,
-          ))
-            Text(
-              widget!.label,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
               style: FlutterFlowTheme.of(context).labelMedium.override(
                     font: GoogleFonts.inter(
                       fontWeight:
@@ -122,11 +96,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
                     ),
                     color: valueOrDefault<Color>(
                       valueOrDefault<bool>(
-<<<<<<< HEAD
                         widget.error,
-=======
-                        widget!.error,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                         false,
                       )
                           ? FlutterFlowTheme.of(context).error
@@ -147,21 +117,13 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
               color: valueOrDefault<Color>(
                 () {
                   if (valueOrDefault<String>(
-<<<<<<< HEAD
                         widget.variant,
-=======
-                        widget!.variant,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                         'outlined',
                       ) ==
                       'filled') {
                     return FlutterFlowTheme.of(context).secondaryBackground;
                   } else if (valueOrDefault<String>(
-<<<<<<< HEAD
                         widget.variant,
-=======
-                        widget!.variant,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                         'outlined',
                       ) ==
                       'ghost') {
@@ -176,21 +138,13 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
                 topLeft: Radius.circular(valueOrDefault<double>(
                   () {
                     if (valueOrDefault<String>(
-<<<<<<< HEAD
                           widget.variant,
-=======
-                          widget!.variant,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                           'outlined',
                         ) ==
                         'filled') {
                       return 4.0;
                     } else if (valueOrDefault<String>(
-<<<<<<< HEAD
                           widget.variant,
-=======
-                          widget!.variant,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                           'outlined',
                         ) ==
                         'ghost') {
@@ -204,21 +158,13 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
                 topRight: Radius.circular(valueOrDefault<double>(
                   () {
                     if (valueOrDefault<String>(
-<<<<<<< HEAD
                           widget.variant,
-=======
-                          widget!.variant,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                           'outlined',
                         ) ==
                         'filled') {
                       return 4.0;
                     } else if (valueOrDefault<String>(
-<<<<<<< HEAD
                           widget.variant,
-=======
-                          widget!.variant,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                           'outlined',
                         ) ==
                         'ghost') {
@@ -232,21 +178,13 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
                 bottomLeft: Radius.circular(valueOrDefault<double>(
                   () {
                     if (valueOrDefault<String>(
-<<<<<<< HEAD
                           widget.variant,
-=======
-                          widget!.variant,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                           'outlined',
                         ) ==
                         'filled') {
                       return 4.0;
                     } else if (valueOrDefault<String>(
-<<<<<<< HEAD
                           widget.variant,
-=======
-                          widget!.variant,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                           'outlined',
                         ) ==
                         'ghost') {
@@ -260,21 +198,13 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
                 bottomRight: Radius.circular(valueOrDefault<double>(
                   () {
                     if (valueOrDefault<String>(
-<<<<<<< HEAD
                           widget.variant,
-=======
-                          widget!.variant,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                           'outlined',
                         ) ==
                         'filled') {
                       return 4.0;
                     } else if (valueOrDefault<String>(
-<<<<<<< HEAD
                           widget.variant,
-=======
-                          widget!.variant,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                           'outlined',
                         ) ==
                         'ghost') {
@@ -291,30 +221,18 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
                 color: valueOrDefault<Color>(
                   () {
                     if (valueOrDefault<bool>(
-<<<<<<< HEAD
                       widget.error,
-=======
-                      widget!.error,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                       false,
                     )) {
                       return FlutterFlowTheme.of(context).error;
                     } else if (valueOrDefault<String>(
-<<<<<<< HEAD
                           widget.variant,
-=======
-                          widget!.variant,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                           'outlined',
                         ) ==
                         'filled') {
                       return Colors.transparent;
                     } else if (valueOrDefault<String>(
-<<<<<<< HEAD
                           widget.variant,
-=======
-                          widget!.variant,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                           'outlined',
                         ) ==
                         'ghost') {
@@ -328,30 +246,18 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
                 width: valueOrDefault<double>(
                   () {
                     if (valueOrDefault<bool>(
-<<<<<<< HEAD
                       widget.error,
-=======
-                      widget!.error,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                       false,
                     )) {
                       return 1.0;
                     } else if (valueOrDefault<String>(
-<<<<<<< HEAD
                           widget.variant,
-=======
-                          widget!.variant,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                           'outlined',
                         ) ==
                         'filled') {
                       return 1.0;
                     } else if (valueOrDefault<String>(
-<<<<<<< HEAD
                           widget.variant,
-=======
-                          widget!.variant,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                           'outlined',
                         ) ==
                         'ghost') {
@@ -369,21 +275,13 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
                   valueOrDefault<double>(
                     () {
                       if (valueOrDefault<String>(
-<<<<<<< HEAD
                             widget.variant,
-=======
-                            widget!.variant,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                             'outlined',
                           ) ==
                           'filled') {
                         return 8.0;
                       } else if (valueOrDefault<String>(
-<<<<<<< HEAD
                             widget.variant,
-=======
-                            widget!.variant,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                             'outlined',
                           ) ==
                           'ghost') {
@@ -397,21 +295,13 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
                   valueOrDefault<double>(
                     () {
                       if (valueOrDefault<String>(
-<<<<<<< HEAD
                             widget.variant,
-=======
-                            widget!.variant,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                             'outlined',
                           ) ==
                           'filled') {
                         return 8.0;
                       } else if (valueOrDefault<String>(
-<<<<<<< HEAD
                             widget.variant,
-=======
-                            widget!.variant,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                             'outlined',
                           ) ==
                           'ghost') {
@@ -425,21 +315,13 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
                   valueOrDefault<double>(
                     () {
                       if (valueOrDefault<String>(
-<<<<<<< HEAD
                             widget.variant,
-=======
-                            widget!.variant,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                             'outlined',
                           ) ==
                           'filled') {
                         return 8.0;
                       } else if (valueOrDefault<String>(
-<<<<<<< HEAD
                             widget.variant,
-=======
-                            widget!.variant,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                             'outlined',
                           ) ==
                           'ghost') {
@@ -453,21 +335,13 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
                   valueOrDefault<double>(
                     () {
                       if (valueOrDefault<String>(
-<<<<<<< HEAD
                             widget.variant,
-=======
-                            widget!.variant,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                             'outlined',
                           ) ==
                           'filled') {
                         return 8.0;
                       } else if (valueOrDefault<String>(
-<<<<<<< HEAD
                             widget.variant,
-=======
-                            widget!.variant,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                             'outlined',
                           ) ==
                           'ghost') {
@@ -484,17 +358,10 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   if (valueOrDefault<bool>(
-<<<<<<< HEAD
                     widget.leadingIconPresent,
                     false,
                   ))
                     widget.leadingIcon!,
-=======
-                    widget!.leadingIconPresent,
-                    false,
-                  ))
-                    widget!.leadingIcon!,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                   Expanded(
                     flex: 1,
                     child: TextFormField(
@@ -504,11 +371,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
                       decoration: InputDecoration(
                         isDense: true,
                         hintText: valueOrDefault<String>(
-<<<<<<< HEAD
                           widget.hint,
-=======
-                          widget!.hint,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                           'SlotValue(\$hint)',
                         ),
                         hintStyle: FlutterFlowTheme.of(context)
@@ -525,21 +388,13 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
                               color: valueOrDefault<Color>(
                                 () {
                                   if (valueOrDefault<String>(
-<<<<<<< HEAD
                                         widget.variant,
-=======
-                                        widget!.variant,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                                         'outlined',
                                       ) ==
                                       'filled') {
                                     return FlutterFlowTheme.of(context).accent3;
                                   } else if (valueOrDefault<String>(
-<<<<<<< HEAD
                                         widget.variant,
-=======
-                                        widget!.variant,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                                         'outlined',
                                       ) ==
                                       'ghost') {
@@ -576,22 +431,14 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
                             color: valueOrDefault<Color>(
                               () {
                                 if (valueOrDefault<String>(
-<<<<<<< HEAD
                                       widget.variant,
-=======
-                                      widget!.variant,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                                       'outlined',
                                     ) ==
                                     'filled') {
                                   return FlutterFlowTheme.of(context)
                                       .primaryText;
                                 } else if (valueOrDefault<String>(
-<<<<<<< HEAD
                                       widget.variant,
-=======
-                                      widget!.variant,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                                       'outlined',
                                     ) ==
                                     'ghost') {
@@ -618,35 +465,20 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
                     ),
                   ),
                   if (valueOrDefault<bool>(
-<<<<<<< HEAD
                     widget.trailingIconPresent,
                     false,
                   ))
                     widget.trailingIcon!,
-=======
-                    widget!.trailingIconPresent,
-                    false,
-                  ))
-                    widget!.trailingIcon!,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                 ],
               ),
             ),
           ),
           if (valueOrDefault<bool>(
-<<<<<<< HEAD
             widget.helperPresent,
             false,
           ))
             Text(
               widget.helper,
-=======
-            widget!.helperPresent,
-            false,
-          ))
-            Text(
-              widget!.helper,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
               style: FlutterFlowTheme.of(context).bodySmall.override(
                     font: GoogleFonts.inter(
                       fontWeight:
@@ -656,11 +488,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
                     ),
                     color: valueOrDefault<Color>(
                       valueOrDefault<bool>(
-<<<<<<< HEAD
                         widget.error,
-=======
-                        widget!.error,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                         false,
                       )
                           ? FlutterFlowTheme.of(context).error

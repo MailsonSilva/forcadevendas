@@ -1,14 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-<<<<<<< HEAD
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-=======
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
 import 'tab_item_model.dart';
 export 'tab_item_model.dart';
 
@@ -55,11 +48,7 @@ class _TabItemWidgetState extends State<TabItemWidget> {
       decoration: BoxDecoration(
         color: valueOrDefault<Color>(
           valueOrDefault<bool>(
-<<<<<<< HEAD
             widget.selected,
-=======
-            widget!.selected,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
             false,
           )
               ? FlutterFlowTheme.of(context).secondary20
@@ -69,11 +58,7 @@ class _TabItemWidgetState extends State<TabItemWidget> {
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(valueOrDefault<double>(
             valueOrDefault<bool>(
-<<<<<<< HEAD
               widget.selected,
-=======
-              widget!.selected,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
               false,
             )
                 ? 4.0
@@ -82,11 +67,7 @@ class _TabItemWidgetState extends State<TabItemWidget> {
           )),
           topRight: Radius.circular(valueOrDefault<double>(
             valueOrDefault<bool>(
-<<<<<<< HEAD
               widget.selected,
-=======
-              widget!.selected,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
               false,
             )
                 ? 4.0
@@ -95,11 +76,7 @@ class _TabItemWidgetState extends State<TabItemWidget> {
           )),
           bottomLeft: Radius.circular(valueOrDefault<double>(
             valueOrDefault<bool>(
-<<<<<<< HEAD
               widget.selected,
-=======
-              widget!.selected,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
               false,
             )
                 ? 4.0
@@ -108,11 +85,7 @@ class _TabItemWidgetState extends State<TabItemWidget> {
           )),
           bottomRight: Radius.circular(valueOrDefault<double>(
             valueOrDefault<bool>(
-<<<<<<< HEAD
               widget.selected,
-=======
-              widget!.selected,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
               false,
             )
                 ? 4.0
@@ -133,11 +106,7 @@ class _TabItemWidgetState extends State<TabItemWidget> {
             alignment: AlignmentDirectional(0.0, 0.0),
             child: Text(
               valueOrDefault<String>(
-<<<<<<< HEAD
                 widget.label,
-=======
-                widget!.label,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                 'Principal',
               ),
               textAlign: TextAlign.center,
@@ -150,11 +119,7 @@ class _TabItemWidgetState extends State<TabItemWidget> {
                     ),
                     color: valueOrDefault<Color>(
                       valueOrDefault<bool>(
-<<<<<<< HEAD
                         widget.selected,
-=======
-                        widget!.selected,
->>>>>>> f06b5de (fix: sincronizacao de banco de dados e correcao de duplicados)
                         false,
                       )
                           ? FlutterFlowTheme.of(context).onSurface
