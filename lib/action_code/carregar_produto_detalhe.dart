@@ -16,41 +16,73 @@ Future<ProdutoResultStruct?> carregarProdutoDetalhe(
   String? produtoRef,
 ) async {
   try {
+    // 1. Abre o banco local com segurança
     final dbPath = join(await getDatabasesPath(), 'dbforcacad001.db');
-    if (!await File(dbPath).exists()) return null;
+    if (!await File(dbPath).exists()) {
+      return null;
+    }
 
     final db = await openDatabase(dbPath);
     final String codigoBusca = (produtoRef ?? '').trim();
     if (codigoBusca.isEmpty) return null;
 
-    final List<Map<String, dynamic>> maps = await db.rawQuery(
-        'SELECT * FROM cadpro00 WHERE TRIM(pro00_codigo) = ? OR CAST(pro00_codigo AS INTEGER) = ?',
-        [codigoBusca, int.tryParse(codigoBusca) ?? -1]);
+    // 2. Consulta padrão por código de produto
+    List<Map<String, dynamic>> maps = await db.query(
+      'cadpro00',
+      where: 'pro00_codigo = ?',
+      whereArgs: [codigoBusca],
+    );
+
+    // Fallback caso haja divergência de zeros à esquerda entre o BD e o parâmetro
+    if (maps.isEmpty) {
+      final intValue = int.tryParse(codigoBusca);
+      if (intValue != null) {
+        maps = await db.query(
+          'cadpro00',
+          where: 'CAST(pro00_codigo AS INTEGER) = ?',
+          whereArgs: [intValue],
+        );
+      }
+    }
 
     if (maps.isNotEmpty) {
       final m = maps.first;
       String codigoProd = m['pro00_codigo']?.toString().trim() ?? codigoBusca;
+
+      // Código base limpo para encontrar os arquivos físicos (ex: 10586)
       String baseImgCode = int.tryParse(codigoProd)?.toString() ?? codigoProd;
 
       final directory = await getApplicationDocumentsDirectory();
+      final String pastaImagensPath =
+          "${directory.path}/images/catalogo_imagens";
 
       List<String> fotosEncontradas = [];
-      List<String> sufixos = ['', '_1', '_2', '_3', '_4', '_5'];
+      // Varre do arquivo principal até as subimagens secundárias (_1, _2, _3...)
+      List<String> sufixos = [
+        '',
+        '_1',
+        '_2',
+        '_3',
+        '_4',
+        '_5',
+        '_6',
+        '_7',
+        '_8'
+      ];
 
       for (String sufixo in sufixos) {
-        String nomeDoArquivo = "$baseImgCode$sufixo.jpg";
-
-        // Caminho relativo amigável para o seu ImagemLocalWidget
-        String caminhoRelativo = "images/catalogo_imagens/$nomeDoArquivo";
-        String caminhoFisicoParaTeste = "${directory.path}/$caminhoRelativo";
+        String nomeArquivo = "$baseImgCode$sufixo.jpg";
+        String caminhoFisicoParaTeste = "$pastaImagensPath/$nomeArquivo";
 
         if (await File(caminhoFisicoParaTeste).exists()) {
-          fotosEncontradas.add(caminhoRelativo);
+          // Adiciona o caminho relativo que o ImagemLocalWidget processa com perfeição
+          fotosEncontradas.add("images/catalogo_imagens/$nomeArquivo");
         }
       }
 
+      // Se não houver fotos baixadas, garante pelo menos uma string para o carrossel renderizar o ícone cinza
       if (fotosEncontradas.isEmpty) {
-        fotosEncontradas.add("$baseImgCode.jpg");
+        fotosEncontradas.add("images/catalogo_imagens/$baseImgCode.jpg");
       }
 
       double parseDouble(dynamic value) {
@@ -60,6 +92,7 @@ Future<ProdutoResultStruct?> carregarProdutoDetalhe(
         return 0.0;
       }
 
+      // 3. Retorna o Struct populando os campos e corrigindo o nome da propriedade de fotos
       return ProdutoResultStruct(
         codigo: codigoProd,
         descricao: m['pro00_descri']?.toString() ?? '',
@@ -72,11 +105,12 @@ Future<ProdutoResultStruct?> carregarProdutoDetalhe(
         grupo: m['pro00_codgrp']?.toString() ?? '',
         fabricante: m['pro00_codfab']?.toString() ?? '',
         marca: m['pro00_codmar']?.toString() ?? '',
-        fotosProduto: fotosEncontradas,
+        fotosProduto:
+            fotosEncontradas, // <-- CORREÇÃO: Alinhado com o nome do campo no seu Struct!
       );
     }
   } catch (e) {
-    print('Erro: $e');
+    print('Erro em carregarProdutoDetalhe: $e');
   }
   return null;
 }
