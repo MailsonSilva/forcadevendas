@@ -76,11 +76,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => LoginPageWidget(),
         ),
         FFRoute(
-          name: ClientesPageWidget.routeName,
-          path: ClientesPageWidget.routePath,
-          builder: (context, params) => ClientesPageWidget(),
-        ),
-        FFRoute(
           name: PedidosRascunhosPageWidget.routeName,
           path: PedidosRascunhosPageWidget.routePath,
           builder: (context, params) => PedidosRascunhosPageWidget(),
@@ -96,7 +91,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => FormClientesPageWidget(
             clienteCodigo: params.getParam(
               'clienteCodigo',
-              ParamType.String,
+              ParamType.int,
             ),
           ),
         ),
@@ -123,16 +118,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => FerramentasPageWidget(),
         ),
         FFRoute(
-          name: DetalheClientePageWidget.routeName,
-          path: DetalheClientePageWidget.routePath,
-          builder: (context, params) => DetalheClientePageWidget(
-            codigoCliente: params.getParam(
-              'codigoCliente',
-              ParamType.String,
-            ),
-          ),
-        ),
-        FFRoute(
           name: ExtratoClientePageWidget.routeName,
           path: ExtratoClientePageWidget.routePath,
           builder: (context, params) => ExtratoClientePageWidget(
@@ -141,6 +126,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ParamType.String,
             ),
           ),
+        ),
+        FFRoute(
+          name: ClientePageWidget.routeName,
+          path: ClientePageWidget.routePath,
+          builder: (context, params) => ClientePageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

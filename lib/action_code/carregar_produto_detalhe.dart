@@ -26,38 +26,30 @@ Future<ProdutoResultStruct?> carregarProdutoDetalhe(
     final String codigoBusca = (produtoRef ?? '').trim();
     if (codigoBusca.isEmpty) return null;
 
-    // 2. QUERY BLINDADA CONTRA ESPAÇOS EM BRANCO NO BANCO DE DADOS
-    // O comando TRIM no LEFT JOIN garante que "10586 " cruze perfeitamente com "10586"
-    final String query = '''
-      SELECT DISTINCT 
-        p.pro00_codigo, 
-        p.pro00_descri, 
-        p.pro00_unidad,
-        p.pro00_codlin,
-        p.pro00_codgrp,
-        p.pro00_codfab,
-        p.pro00_codmar,
-        p.pro00_codbar,
-        COALESCE(t.pro00_pcosub, 0) AS preco_venda, 
-        COALESCE(e.pro00_qtdest, 0) AS estoque_atual, 
-        COALESCE(e.pro00_qtdpen, 0) AS estoque_pendente, 
-        (COALESCE(e.pro00_qtdest, 0) - COALESCE(e.pro00_qtdpen, 0)) AS saldo 
-      FROM cadpro00 p 
-      LEFT JOIN estpcopro00 t ON TRIM(CAST(t.pro00_codpro AS TEXT)) = TRIM(CAST(p.pro00_codigo AS TEXT))
-      LEFT JOIN estpro00 e ON TRIM(CAST(e.pro00_codpro AS TEXT)) = TRIM(CAST(p.pro00_codigo AS TEXT))
-      WHERE TRIM(p.pro00_codigo) = ? OR CAST(p.pro00_codigo AS INTEGER) = ?
-      LIMIT 1
-    ''';
+    // 2. Consulta padrão por código de produto
+    List<Map<String, dynamic>> maps = await db.query(
+      'cadpro00',
+      where: 'pro00_codigo = ?',
+      whereArgs: [codigoBusca],
+    );
 
-    final intValue = int.tryParse(codigoBusca) ?? -1;
-    final results = await db.rawQuery(query, [codigoBusca, intValue]);
-    await db.close();
+    // Fallback caso haja divergência de zeros à esquerda entre o BD e o parâmetro
+    if (maps.isEmpty) {
+      final intValue = int.tryParse(codigoBusca);
+      if (intValue != null) {
+        maps = await db.query(
+          'cadpro00',
+          where: 'CAST(pro00_codigo AS INTEGER) = ?',
+          whereArgs: [intValue],
+        );
+      }
+    }
 
-    if (results.isNotEmpty) {
-      final m = results.first;
+    if (maps.isNotEmpty) {
+      final m = maps.first;
       String codigoProd = m['pro00_codigo']?.toString().trim() ?? codigoBusca;
 
-      // Código base limpo para encontrar os arquivos físicos
+      // Código base limpo para encontrar os arquivos físicos (ex: 10586)
       String baseImgCode = int.tryParse(codigoProd)?.toString() ?? codigoProd;
 
       final directory = await getApplicationDocumentsDirectory();
@@ -65,6 +57,7 @@ Future<ProdutoResultStruct?> carregarProdutoDetalhe(
           "${directory.path}/images/catalogo_imagens";
 
       List<String> fotosEncontradas = [];
+      // Varre do arquivo principal até as subimagens secundárias (_1, _2, _3...)
       List<String> sufixos = [
         '',
         '_1',
@@ -82,11 +75,12 @@ Future<ProdutoResultStruct?> carregarProdutoDetalhe(
         String caminhoFisicoParaTeste = "$pastaImagensPath/$nomeArquivo";
 
         if (await File(caminhoFisicoParaTeste).exists()) {
-          // Passa o caminho exato que o widget sabe ler
+          // Adiciona o caminho relativo que o ImagemLocalWidget processa com perfeição
           fotosEncontradas.add("images/catalogo_imagens/$nomeArquivo");
         }
       }
 
+      // Se não houver fotos baixadas, garante pelo menos uma string para o carrossel renderizar o ícone cinza
       if (fotosEncontradas.isEmpty) {
         fotosEncontradas.add("images/catalogo_imagens/$baseImgCode.jpg");
       }
@@ -94,12 +88,11 @@ Future<ProdutoResultStruct?> carregarProdutoDetalhe(
       double parseDouble(dynamic value) {
         if (value == null) return 0.0;
         if (value is num) return value.toDouble();
-        if (value is String)
-          return double.tryParse(value.replaceAll(',', '.')) ?? 0.0;
+        if (value is String) return double.tryParse(value) ?? 0.0;
         return 0.0;
       }
 
-      // 3. Retorna populando a propriedade correta (fotosProduto)
+      // 3. Retorna o Struct populando os campos e corrigindo o nome da propriedade de fotos
       return ProdutoResultStruct(
         codigo: codigoProd,
         descricao: m['pro00_descri']?.toString() ?? '',
@@ -112,8 +105,8 @@ Future<ProdutoResultStruct?> carregarProdutoDetalhe(
         grupo: m['pro00_codgrp']?.toString() ?? '',
         fabricante: m['pro00_codfab']?.toString() ?? '',
         marca: m['pro00_codmar']?.toString() ?? '',
-        codbar: m['pro00_codbar']?.toString() ?? '',
-        fotosProduto: fotosEncontradas,
+        fotosProduto:
+            fotosEncontradas, // <-- CORREÇÃO: Alinhado com o nome do campo no seu Struct!
       );
     }
   } catch (e) {

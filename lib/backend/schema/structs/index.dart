@@ -1,5 +1,6 @@
 export '/backend/schema/util/schema_util.dart';
 
+export 'banco_info_struct_struct.dart';
 export 'cliente_result_struct.dart';
 export 'first_access_result_struct.dart';
 export 'item_pedido_struct.dart';

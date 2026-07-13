@@ -213,6 +213,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                         .vendedorCodigoFieldTextController,
                                     focusNode:
                                         _model.vendedorCodigoFieldFocusNode,
+                                    textInputAction: TextInputAction.go,
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       labelText: 'Código do Vendedor',
